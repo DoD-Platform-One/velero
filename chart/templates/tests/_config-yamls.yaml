@@ -1,0 +1,64 @@
+{{- define "test-manifest" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Chart.Name }}-backup-restore-test"
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      volumes:
+        - name: nginx-logs
+          persistentVolumeClaim:
+            claimName: nginx-logs
+      imagePullSecrets:
+        - name: private-registry
+      containers:
+        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.20.0
+          name: nginx
+          ports:
+          - containerPort: 80
+          volumeMounts:
+            - mountPath: "/var/log/nginx"
+              name: nginx-logs
+              readOnly: false
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nginx-logs
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: nginx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx
+  name: my-nginx
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: nginx
+{{- end }}

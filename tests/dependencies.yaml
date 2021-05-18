@@ -1,0 +1,11 @@
+miniooperator:
+  git:
+    repo: "https://repo1.dso.mil/platform-one/big-bang/apps/application-utilities/minio-operator.git"
+    tag: "2.0.9-bb.1"
+  namespace: "minio-operator"
+
+minio:
+  git:
+    repo: "https://repo1.dso.mil/platform-one/big-bang/apps/application-utilities/minio.git"
+    tag: "2.0.9-bb.1"
+  namespace: minio
