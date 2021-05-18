@@ -1,35 +1,33 @@
 installCRDs: true
 
 imagePullSecrets:
-- name: private-registry-mil
+  - name: private-registry
 
-# Set provider name and backup storage location bucket name
-configuration:
-  provider: aws
-  backupStorageLocation:
-    bucket: velero
-    config:
-      region: us-west-1
-      profile: test
-  volumeSnapshotLocation:
-    provider: aws
-    config:
-      bucket: velero
-      region: us-west-1
-
-# Default to AWS Plugin, update to others as they are supported
 plugins:
   - aws
 
-schedules:
-  mybackup:
-    labels:
-      myenv: foo
-    schedule: "0 0 * * *"
-    template:
-      ttl: "240h"
-      includedNamespaces:
-      - foo
+configuration:
+  # minio uses s3 provider
+  provider: aws
+  backupStorageLocation:
+    bucket: velero
+    config: &minio-config
+      region: velero
+      insecureSkipTLSVerify: "true"
+      s3ForcePathStyle: "true"
+      s3Url: &minio-address http://minio-service.minio.svc:9000
+  volumeSnapshotLocation:
+    provider: aws
+    config:
+      region: velero
+
+credentials:
+  useSecret: true
+  secretContents:
+    cloud: |
+      [default]
+      aws_access_key_id = minio
+      aws_secret_access_key = minio123
 
 # Set a service account so that the CRD clean up job has proper permissions to delete CRDs
 serviceAccount:
@@ -41,3 +39,29 @@ serviceAccount:
 # Backup data in object storage will _not_ be deleted, however Backup instances in the Kubernetes API will.
 # Always clean up CRDs in CI.
 cleanUpCRDs: true
+
+bbtests:
+  scripts:
+    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.5.3
+    additionalVolumes:
+      - name: transfer-kubectl
+        emptyDir: {}
+      - name: &yamlVolName yaml-configs
+        configMap:
+          name: "{{ .Chart.Name }}-backup-restore-files-config"
+    additionalVolumeMounts:
+      - name: transfer-kubectl
+        mountPath: /usr/local/bin/kubectl
+        subPath: kubectl
+      - name: *yamlVolName
+        mountPath: &yamlMountPath /yaml
+    envs:
+      MINIO_HOST: *minio-address
+      TEST_YAML_DIR: *yamlMountPath
+      MINIO_USER: minio
+      MINIO_PASS: minio123
+    secretEnvs:
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace

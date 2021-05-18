@@ -1,20 +1,24 @@
 apiVersion: v1
 appVersion: 1.5.3
-description: A Helm chart for velero
+description: A Helm chart for velero, a tool to automate backups of Kubernetes datastores
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 maintainers:
-- email: ashisham@vmware.com
-  name: ashish-amarnath
-- email: carlisiac@vmware.com
-  name: carlisia
-- email: ctadeu@gmail.com
-  name: cpanato
-- email: brubakern@vmware.com
-  name: nrb
-- email: krisss@vmware.com
-  name: skriss
+  - email: ashisham@vmware.com
+    name: ashish-amarnath
+  - email: carlisiac@vmware.com
+    name: carlisia
+  - email: ctadeu@gmail.com
+    name: cpanato
+  - email: brubakern@vmware.com
+    name: nrb
+  - email: krisss@vmware.com
+    name: skriss
 name: velero
 sources:
-- https://github.com/vmware-tanzu/velero
+  - https://github.com/vmware-tanzu/velero
 version: 2.14.8-bb.0
+dependencies:
+  - name: bb-test-lib
+    version: "0.5.0"
+    repository: "oci://registry.dso.mil/platform-one/big-bang/pipeline-templates/pipeline-templates"
