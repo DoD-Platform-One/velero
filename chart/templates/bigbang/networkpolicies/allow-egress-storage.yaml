@@ -1,0 +1,24 @@
+{{- if .Values.networkPolicies.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-storage
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector: 
+    matchLabels:
+      app.kubernetes.io/name: {{ include "velero.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+      helm.sh/chart: {{ include "velero.chart" . }}       
+  egress:
+  #ideally, this should be whitelisted to region specific IPs that can be obtained here https://aws.amazon.com/premiumsupport/knowledge-center/s3-find-ip-address-ranges/
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        # ONLY Block requests to AWS metadata IP
+        except:
+        - 169.254.169.254/32
+  policyTypes:
+  - Egress
+{{- end }}
