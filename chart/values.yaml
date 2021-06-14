@@ -91,6 +91,7 @@ extraVolumeMounts: []
 # Settings for Velero's prometheus metrics. Enabled by default.
 metrics:
   enabled: true
+  port: 8085
   scrapeInterval: 30s
   scrapeTimeout: 10s
 
@@ -368,3 +369,14 @@ configMaps: {}
 ##
 ## End of additional Velero resource settings.
 ##
+
+istio:
+  # Toggle istio integration
+  enabled: false
+
+
+networkPolicies:
+  enabled: false
+  ingressLabels: 
+    app: istio-ingressgateway
+    istio: ingressgateway
