@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+    name: chart
+upstream:
+  type: git
+  git:
+    commit: d706e04e5f7e2c44b7772857845a34e585d643a3
+    repo: https://github.com/vmware-tanzu/helm-charts
+    directory: /charts/velero
+    ref: velero-2.21.1
