@@ -120,6 +120,11 @@ spec:
         {{- end }}
             - name: scratch
               mountPath: /scratch
+        {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+            - name: cacert
+              subPath: ca-bundle.crt
+              mountPath: /etc/ssl/certs/ca-bundle.crt
+        {{- end }}
             {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
@@ -153,6 +158,10 @@ spec:
               value: /credentials/cloud
             {{- end }}
           {{- end }}
+            {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+            - name: AWS_CA_BUNDLE
+              value: /etc/ssl/certs/ca-bundle.crt
+            {{- end }}
           {{- with .Values.configuration.extraEnvVars }}
           {{- range $key, $value := . }}
             - name: {{ default "none" $key }}
@@ -178,6 +187,11 @@ spec:
         - name: cloud-credentials
           secret:
             secretName: {{ include "velero.secretName" . }}
+        {{- end }}
+        {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+        - name: cabundle
+          secret:
+            secretName: {{ include "velero.secretName" . }}-cabundle
         {{- end }}
         - name: plugins
           emptyDir: {}
