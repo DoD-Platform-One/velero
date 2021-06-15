@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.21.1-bb.3]
+### Added
+- ENV for Azure CA Bundle trusting
+
 ## [2.21.1-bb.2]
 ### Added
 - Trusting of custom CA bundle cert for AWS (secret creation, volume mounting, env setup)

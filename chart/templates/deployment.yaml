@@ -159,8 +159,13 @@ spec:
             {{- end }}
           {{- end }}
             {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+            {{- if eq $provider "aws" }}
             - name: AWS_CA_BUNDLE
               value: /etc/ssl/certs/ca-bundle.crt
+            {{- else if eq $provider "azure" }}
+            - name: REQUESTS_CA_BUNDLE
+              value: /etc/ssl/certs/ca-bundle.crt
+            {{- end }}
             {{- end }}
           {{- with .Values.configuration.extraEnvVars }}
           {{- range $key, $value := . }}
