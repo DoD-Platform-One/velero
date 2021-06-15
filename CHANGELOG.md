@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+
+## [2.21.1-bb.2]
+### Added
+- Trusting of custom CA bundle cert for AWS (secret creation, volume mounting, env setup)
+- Note: May only work on AWS due to env name and available upstream docs surrounding this
+
 ## [2.21.1-bb.1]
 ### Added
 - Added Optional network policies
