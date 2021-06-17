@@ -21,10 +21,11 @@ spec:
       labels:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.kubectl.annotations }}
       annotations:
+      {{- with .Values.kubectl.annotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
+        sidecar.istio.io/inject: 'false'
     spec:
     {{- if .Values.image.imagePullSecrets }}
       imagePullSecrets:
