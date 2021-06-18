@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.21.1-bb.5]
+### Added
+- Helm function in API Egress Network Policy Template to avoid crashes when non 0.0.0.0/0 CIDR is specified
+
 ## [2.21.1-bb.4]
 ### Fixed
 - Turned off sidecars for jobs
