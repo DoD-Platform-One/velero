@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.21.1-bb.6]
+### Added
+- Bigbang network policy to allow prometheus scraping of istio envoy sidecar
+- monitoring.enabled to values and scraping net policies to stay in line with bigbang standards
+
 ## [2.21.1-bb.5]
 ### Added
 - Helm function in API Egress Network Policy Template to avoid crashes when non 0.0.0.0/0 CIDR is specified

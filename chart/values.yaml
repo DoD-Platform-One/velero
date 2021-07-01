@@ -374,6 +374,8 @@ istio:
   # Toggle istio integration
   enabled: false
 
+monitoring:
+  enabled: false
 
 networkPolicies:
   enabled: false
