@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.23.3-bb.0]
+### Updated
+- bumped Registry1 Velero image tag to 1.6.1
+### Added
+- Velero plugin for CSI
+
 ## [2.21.1-bb.6]
 ### Added
 - Bigbang network policy to allow prometheus scraping of istio envoy sidecar
@@ -33,7 +39,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [2.21.1-bb.0]
 ### Updated
-- bumped Helm chart version to 2.21.1
 - realigned Helm chart to use `.Values.initContainers` like upstream chart
 - bumped Registry1 Velero image tag to 1.6.0
 

@@ -1,4 +1,5 @@
 {{- range $scheduleName, $schedule := .Values.schedules }}
+{{- if (not $schedule.disabled) }}
 apiVersion: velero.io/v1
 kind: Schedule
 metadata:
@@ -18,10 +19,14 @@ metadata:
       {{- toYaml $schedule.labels | nindent 4 }}
     {{- end }}
 spec:
+{{- if $schedule.useOwnerReferencesInBackup }}
+  useOwnerReferencesInBackup: {{ $schedule.useOwnerReferencesInBackup }}
+{{- end }}
   schedule: {{ $schedule.schedule | quote }}
 {{- with $schedule.template }}
   template:
     {{- toYaml . | nindent 4 }}
 {{- end }}
 ---
+{{- end }}
 {{- end }}

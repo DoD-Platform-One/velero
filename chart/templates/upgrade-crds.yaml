@@ -25,7 +25,6 @@ spec:
       {{- with .Values.kubectl.annotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-        sidecar.istio.io/inject: 'false'
     spec:
     {{- if .Values.image.imagePullSecrets }}
       imagePullSecrets:
