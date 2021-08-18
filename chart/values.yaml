@@ -39,8 +39,8 @@ podLabels: {}
 # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
 resources:
   requests:
-    cpu: 500m
-    memory: 128Mi
+    cpu: 1000m
+    memory: 512Mi
   limits:
     cpu: 1000m
     memory: 512Mi
@@ -57,18 +57,39 @@ initContainers: []
   #   volumeMounts:
   #     - mountPath: /target
   #       name: plugins
+  #   resources:
+  #     requests:
+  #       memory: 512Mi
+  #       cpu: 100m
+  #     limits:
+  #       memory: 512Mi
+  #       cpu: 100m
   # - name: velero-plugin-for-microsoft-azure
   #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.2.0
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
   #       name: plugins
+  #   resources:
+  #     requests:
+  #       memory: 512Mi
+  #       cpu: 100m
+  #     limits:
+  #       memory: 512Mi
+  #       cpu: 100m
   # - name: velero-plugin-for-csi
   #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.1.2
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
   #       name: plugins
+  #   resources:
+  #     requests:
+  #       memory: 512Mi
+  #       cpu: 100m
+  #     limits:
+  #       memory: 512Mi
+  #       cpu: 100m
 
 # SecurityContext to use for the Velero deployment. Optional.
 # Set fsGroup for `AWS IAM Roles for Service Accounts`
@@ -322,8 +343,8 @@ restic:
   # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
   resources:
     requests:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 1000m
+      memory: 1024Mi
     limits:
       cpu: 1000m
       memory: 1024Mi
