@@ -53,6 +53,13 @@ spec:
               kubectl delete volumesnapshotlocation --all;
               kubectl delete podvolumerestore --all;
               kubectl delete crd -l app.kubernetes.io/name=velero;
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 256Mi
+              cpu: 100m
       restartPolicy: OnFailure
       {{- with .Values.nodeSelector }}
       nodeSelector:
