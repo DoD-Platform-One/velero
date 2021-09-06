@@ -21,8 +21,8 @@ spec:
       labels:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      annotations:
       {{- with .Values.kubectl.annotations }}
+      annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:

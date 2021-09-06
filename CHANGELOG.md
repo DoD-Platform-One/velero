@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.23.6-bb.0]
+### Added
+- bumped registry1 velero image tag to 1.6.3
+- bumped upstream chart to velero-2.23.6
 ## [2.23.5-bb.1]
 ### Added
 - Added resource limits and requests to upgrade and cleanup jobs
