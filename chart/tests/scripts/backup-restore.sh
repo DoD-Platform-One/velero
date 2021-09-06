@@ -31,6 +31,8 @@ echo "Pods deployed"
 echo "Test 1: Create backup."
 echo "Cleaning up test backups"
 velero delete backup test-backup -n $NAMESPACE --confirm || true
+echo "Waiting 15 seconds for delete to complete"
+sleep 15
 echo "Creating Backup"
 velero backup create test-backup --namespace $NAMESPACE --wait --selector app=nginx || export BACKUP_FAILED="true"
 if [[ ${BACKUP_FAILED} == "true" ]]; then

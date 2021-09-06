@@ -1,15 +1,17 @@
 apiVersion: v2
-appVersion: 1.6.2
+appVersion: 1.6.3
 description: A Helm chart for velero
 name: velero
-version: 2.23.5-bb.1
+version: 2.23.6-bb.0
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
+sources:
+- https://github.com/vmware-tanzu/velero
 maintainers:
   - name: jenting
     email: jenting.hsiao@suse.com
-  - name: nrb
-    email: brubakern@vmware.com
+  - name: sseago
+    email: sseago@redhat.com
   - name: reasonerjt
     email: jiangd@vmware.com
   - name: ywk253100
@@ -20,4 +22,3 @@ dependencies:
   - name: bb-test-lib
     version: "0.5.0"
     repository: "oci://registry.dso.mil/platform-one/big-bang/pipeline-templates/pipeline-templates"
-
