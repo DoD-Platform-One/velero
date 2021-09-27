@@ -1,0 +1,44 @@
+{
+    "baseBranches": ["main"],
+    "configWarningReuseIssue": false,
+    "dependencyDashboard": true,
+    "dependencyDashboardAutoclose": true,
+    "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
+    "dependencyDashboardTitle": "Renovate: Upgrade Velero Dependencies",
+    "dependencyDashboardLabels": ["velero","renovate","Big Bang Add-Ons","Package Sustainment","kind::chore","team::execution","priority::3"],
+    "draftPR": true,
+    "enabledManagers": ["helm-values", "regex"],
+    "labels": ["velero","renovate"],
+    "ignorePaths": [],
+    "packageRules": [
+        {
+            "matchDatasources": ["docker"],
+            "groupName": "Ironbank"
+        }
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "matchStrings": [
+                "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
+            ],
+            "depNameTemplate": "registry1.dso.mil/ironbank/opensource/velero/velero",
+            "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^chart/values\\.yaml$"],
+            "matchStrings": [
+                "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
+            ],
+            "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^tests/test-values\\.yml$"],
+            "matchStrings": [
+                "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
+            ],
+            "datasourceTemplate": "docker"
+        }
+    ],
+    "separateMajorMinor": false
+}
