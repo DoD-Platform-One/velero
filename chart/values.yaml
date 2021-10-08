@@ -428,3 +428,10 @@ networkPolicies:
     istio: ingressgateway
   # See `kubectl cluster-info` and then resolve to IP
   controlPlaneCidr: 0.0.0.0/0
+
+# -- Velero csi plugin options
+csi:
+  # -- Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com"
+  driver: "ebs.csi.aws.com"
+  # -- Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false"
+  defaultClass: "true"
