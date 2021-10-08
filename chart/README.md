@@ -3,6 +3,7 @@
 Velero is an open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.
 
 Velero has two main components: a CLI, and a server-side Kubernetes deployment.
+ 
 
 ## Installing the Velero CLI
 

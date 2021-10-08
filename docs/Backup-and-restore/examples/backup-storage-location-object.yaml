@@ -1,0 +1,16 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  backupSyncPeriod: 2m0s
+  provider: aws
+  objectStorage:
+    bucket: myBucket
+  credential:
+    name: secret-name
+    key: key-in-secret
+  config:
+    region: us-west-2
+    profile: "default"

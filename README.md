@@ -4,6 +4,10 @@ Velero is an open source tool to safely backup and restore, perform disaster rec
 
 Velero has two main components: a CLI, and a server-side Kubernetes deployment.
 
+For more information on how to use velero in various disaster recovery scenarios please  visit the [backup and recovery section](./docs/Backup-and-restore/background.md) which covers most of the Disaster recovery usecases.
+
+
+
 ## Installing the Velero CLI
 
 See the different options for installing the [Velero CLI](https://velero.io/docs/v1.6/basic-install/#install-the-cli).
