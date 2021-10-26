@@ -5,7 +5,6 @@
     "dependencyDashboardAutoclose": true,
     "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
     "dependencyDashboardTitle": "Renovate: Upgrade Velero Dependencies",
-    "dependencyDashboardLabels": ["velero","renovate","Big Bang Add-Ons","Package Sustainment","kind::chore","team::execution","priority::3"],
     "draftPR": true,
     "enabledManagers": ["helm-values", "regex"],
     "labels": ["velero","renovate"],
