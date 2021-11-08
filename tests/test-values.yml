@@ -26,7 +26,7 @@ configuration:
       region: velero
       insecureSkipTLSVerify: "true"
       s3ForcePathStyle: "true"
-      s3Url: &minio-address http://minio-service.minio.svc:9000
+      s3Url: &minio-address http://minio.minio.svc
   volumeSnapshotLocation:
     provider: aws
     config:
