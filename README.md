@@ -1,124 +1,145 @@
-# Velero
+# velero
 
-Velero is an open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.
+![Version: 2.23.6-bb.2](https://img.shields.io/badge/Version-2.23.6--bb.2-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
 
-Velero has two main components: a CLI, and a server-side Kubernetes deployment.
+A Helm chart for velero
 
-For more information on how to use velero in various disaster recovery scenarios please  visit the [backup and recovery section](./docs/Backup-and-restore/background.md) which covers most of the Disaster recovery usecases.
+## Upstream References
+* <https://github.com/vmware-tanzu/velero>
 
+* <https://github.com/vmware-tanzu/velero>
 
+## Learn More
+* [Application Overview](docs/overview.md)
+* [Other Documentation](docs/)
 
-## Installing the Velero CLI
+## Pre-Requisites
 
-See the different options for installing the [Velero CLI](https://velero.io/docs/v1.6/basic-install/#install-the-cli).
+* Kubernetes Cluster deployed
+* Kubernetes config installed in `~/.kube/config`
+* Helm installed
 
-## Installing the Velero server
+Install Helm
 
-### Velero version
+https://helm.sh/docs/intro/install/
 
-This helm chart installs Velero version v1.6 https://velero.io/docs/v1.6/. See the [#Upgrading](#upgrading) section for information on how to upgrade from other versions.
+## Deployment
 
-### Provider credentials
-
-When installing using the Helm chart, the provider's credential information will need to be appended into your values. The easiest way to do this is with the `--set-file` argument, available in Helm 2.10 and higher. See your cloud provider's documentation for the contents and creation of the `credentials-velero` file.
-
-### Installing
-
-The default configuration values for this chart are listed in values.yaml.
-
-See Velero's full [official documentation](https://velero.io/docs/v1.6/basic-install/). More specifically, find your provider in the Velero list of [supported providers](https://velero.io/docs/v1.6/supported-providers/) for specific configuration information and examples.
-
-#### Set up Helm
-
-See the main [README.md](https://github.com/vmware-tanzu/helm-charts#kubernetes-helm-charts-for-vmware-tanzu).
-
-#### Using Helm 3
-
-##### Option 1) CLI commands
-
-Note: You may add the flag `--set cleanUpCRDs=true` if you want to delete the Velero CRDs after deleting a release.
-Please note that cleaning up CRDs will also delete any CRD instance, such as BackupStorageLocation and VolumeSnapshotLocation, which would have to be reconfigured when reinstalling Velero. The backup data in object storage will not be deleted, even though the backup instances in the cluster will.
-
-Specify the necessary values using the --set key=value[,key=value] argument to helm install. For example,
-
+* Clone down the repository
+* cd into directory
 ```bash
-helm install velero vmware-tanzu/velero \
---namespace <YOUR NAMESPACE> \
---create-namespace \
---set-file credentials.secretContents.cloud=<FULL PATH TO FILE> \
---set configuration.provider=<PROVIDER NAME> \
---set configuration.backupStorageLocation.name=<BACKUP STORAGE LOCATION NAME> \
---set configuration.backupStorageLocation.bucket=<BUCKET NAME> \
---set configuration.backupStorageLocation.config.region=<REGION> \
---set configuration.volumeSnapshotLocation.name=<VOLUME SNAPSHOT LOCATION NAME> \
---set configuration.volumeSnapshotLocation.config.region=<REGION> \
---set initContainers[0].name=velero-plugin-for-<PROVIDER NAME> \
---set initContainers[0].image=velero/velero-plugin-for-<PROVIDER NAME>:<PROVIDER PLUGIN TAG> \
---set initContainers[0].volumeMounts[0].mountPath=/target \
---set initContainers[0].volumeMounts[0].name=plugins
+helm install velero chart/
 ```
 
-Users of zsh might need to put quotes around key/value pairs.
+## Values
 
-##### Option 2) YAML file
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
+| image.tag | string | `"v1.6.3"` |  |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.imagePullSecrets[0] | string | `"private-registry"` |  |
+| annotations | object | `{}` |  |
+| labels | object | `{}` |  |
+| podAnnotations | object | `{}` |  |
+| podLabels | object | `{}` |  |
+| resources.requests.cpu | string | `"1000m"` |  |
+| resources.requests.memory | string | `"512Mi"` |  |
+| resources.limits.cpu | string | `"1000m"` |  |
+| resources.limits.memory | string | `"512Mi"` |  |
+| dnsPolicy | string | `"ClusterFirst"` |  |
+| initContainers | list | `[]` |  |
+| podSecurityContext | object | `{}` |  |
+| containerSecurityContext | object | `{}` |  |
+| priorityClassName | string | `""` |  |
+| tolerations | list | `[]` |  |
+| affinity | object | `{}` |  |
+| nodeSelector | object | `{}` |  |
+| extraVolumes | list | `[]` |  |
+| extraVolumeMounts | list | `[]` |  |
+| metrics.enabled | bool | `true` |  |
+| metrics.port | int | `8085` |  |
+| metrics.scrapeInterval | string | `"30s"` |  |
+| metrics.scrapeTimeout | string | `"10s"` |  |
+| metrics.service.annotations | object | `{}` |  |
+| metrics.service.labels | object | `{}` |  |
+| metrics.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
+| metrics.podAnnotations."prometheus.io/port" | string | `"8085"` |  |
+| metrics.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
+| metrics.serviceMonitor.enabled | bool | `false` |  |
+| metrics.serviceMonitor.additionalLabels | object | `{}` |  |
+| kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl"` |  |
+| kubectl.image.tag | string | `"v1.21.1"` |  |
+| kubectl.annotations."sidecar.istio.io/inject" | string | `"false"` |  |
+| kubectl.labels | object | `{}` |  |
+| upgradeCRDs | bool | `true` |  |
+| cleanUpCRDs | bool | `false` |  |
+| configuration.provider | string | `nil` |  |
+| configuration.backupStorageLocation.name | string | `nil` |  |
+| configuration.backupStorageLocation.provider | string | `nil` |  |
+| configuration.backupStorageLocation.bucket | string | `nil` |  |
+| configuration.backupStorageLocation.caCert | string | `nil` |  |
+| configuration.backupStorageLocation.prefix | string | `nil` |  |
+| configuration.backupStorageLocation.default | string | `nil` |  |
+| configuration.backupStorageLocation.config | object | `{}` |  |
+| configuration.volumeSnapshotLocation.name | string | `nil` |  |
+| configuration.volumeSnapshotLocation.provider | string | `nil` |  |
+| configuration.volumeSnapshotLocation.config | object | `{}` |  |
+| configuration.backupSyncPeriod | string | `nil` |  |
+| configuration.resticTimeout | string | `nil` |  |
+| configuration.restoreResourcePriorities | string | `nil` |  |
+| configuration.restoreOnlyMode | string | `nil` |  |
+| configuration.clientQPS | string | `nil` |  |
+| configuration.clientBurst | string | `nil` |  |
+| configuration.disableControllers | string | `nil` |  |
+| configuration.extraEnvVars | object | `{}` |  |
+| configuration.features | string | `nil` |  |
+| configuration.logLevel | string | `nil` |  |
+| configuration.logFormat | string | `nil` |  |
+| configuration.defaultVolumesToRestic | string | `nil` |  |
+| rbac.create | bool | `true` |  |
+| rbac.clusterAdministrator | bool | `true` |  |
+| serviceAccount.server.create | bool | `true` |  |
+| serviceAccount.server.name | string | `nil` |  |
+| serviceAccount.server.annotations | string | `nil` |  |
+| serviceAccount.server.labels | string | `nil` |  |
+| credentials.useSecret | bool | `true` |  |
+| credentials.name | string | `nil` |  |
+| credentials.existingSecret | string | `nil` |  |
+| credentials.secretContents | object | `{}` |  |
+| credentials.extraEnvVars | object | `{}` |  |
+| credentials.extraSecretRef | string | `""` |  |
+| backupsEnabled | bool | `true` |  |
+| snapshotsEnabled | bool | `true` |  |
+| deployRestic | bool | `false` |  |
+| restic.podVolumePath | string | `"/var/lib/kubelet/pods"` |  |
+| restic.privileged | bool | `false` |  |
+| restic.priorityClassName | string | `""` |  |
+| restic.resources.requests.cpu | string | `"1000m"` |  |
+| restic.resources.requests.memory | string | `"1024Mi"` |  |
+| restic.resources.limits.cpu | string | `"1000m"` |  |
+| restic.resources.limits.memory | string | `"1024Mi"` |  |
+| restic.tolerations | list | `[]` |  |
+| restic.annotations | object | `{}` |  |
+| restic.labels | object | `{}` |  |
+| restic.extraVolumes | list | `[]` |  |
+| restic.extraVolumeMounts | list | `[]` |  |
+| restic.dnsPolicy | string | `"ClusterFirst"` |  |
+| restic.podSecurityContext.runAsUser | int | `0` |  |
+| restic.containerSecurityContext | object | `{}` |  |
+| restic.nodeSelector | object | `{}` |  |
+| schedules | object | `{}` |  |
+| configMaps | object | `{}` |  |
+| istio.enabled | bool | `false` |  |
+| monitoring.enabled | bool | `false` |  |
+| networkPolicies.enabled | bool | `false` |  |
+| networkPolicies.ingressLabels.app | string | `"istio-ingressgateway"` |  |
+| networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
+| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
+| csi | object | `{"defaultClass":"true","driver":"ebs.csi.aws.com"}` | Velero csi plugin options |
+| csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
+| csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 
-Add/update the necessary values by changing the values.yaml from this repository, then run:
+## Contributing
 
-```bash
-helm install vmware-tanzu/velero --namespace <YOUR NAMESPACE> -f values.yaml --generate-name
-```
-##### Upgrade the configuration
-
-If a value needs to be added or changed, you may do so with the `upgrade` command. An example:
-
-```bash
-helm upgrade vmware-tanzu/velero <RELEASE NAME> --namespace <YOUR NAMESPACE> --reuse-values --set configuration.provider=<NEW PROVIDER>
-```
-
-#### Using Helm 2
-
-We're no longer support Helm v2 since it's deprecated in November 2020.
-
-##### Upgrade the configuration
-
-If a value needs to be added or changed, you may do so with the `upgrade` command. An example:
-
-```bash
-helm upgrade vmware-tanzu/velero <RELEASE NAME> --reuse-values --set configuration.provider=<NEW PROVIDER> 
-```
-
-## Upgrading
-
-### Upgrading to v1.6
-
-The [instructions found here](https://velero.io/docs/v1.6/upgrade-to-1.6/) will assist you in upgrading from version v1.5.x to v1.6.
-
-### Upgrading to v1.5
-
-The [instructions found here](https://velero.io/docs/v1.5/upgrade-to-1.5/) will assist you in upgrading from version v1.4.x to v1.5.
-
-### Upgrading to v1.4
-
-The [instructions found here](https://velero.io/docs/v1.4/upgrade-to-1.4/) will assist you in upgrading from version v1.3.x to v1.4.
-
-### Upgrading to v1.3.1
-
-The [instructions found here](https://velero.io/docs/v1.3.1/upgrade-to-1.3/) will assist you in upgrading from version v1.2.0 or v1.3.0 to v1.3.1.
-
-### Upgrading to v1.2.0
-
-The [instructions found here](https://velero.io/docs/v1.2.0/upgrade-to-1.2/) will assist you in upgrading from version v1.0.0 or v1.1.0 to v1.2.0.
-
-### Upgrading to v1.1.0
-
-The [instructions found here](https://velero.io/docs/v1.1.0/upgrade-to-1.1/) will assist you in upgrading from version v1.0.0 to v1.1.0.
-
-## Uninstall Velero
-
-Note: when you uninstall the Velero server, all backups remain untouched.
-
-### Using Helm 3
-
-```bash
-helm uninstall <RELEASE NAME> -n <YOUR NAMESPACE>
-```
+Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
