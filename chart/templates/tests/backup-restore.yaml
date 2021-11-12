@@ -18,7 +18,7 @@ metadata:
     serviceAccountName: {{ include "velero.serverServiceAccount" . }}
     initContainers:
       - name: minio
-        image: registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2021-03-23T05-46-11Z
+        image: registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2021-09-02T09-21-27Z
         command:
           - "/bin/sh"
           - "-c"
@@ -35,7 +35,7 @@ metadata:
           - name: MINIO_PASS
             value: {{ .Values.bbtests.scripts.envs.MINIO_PASS | quote }}
       - name: kubectl
-        image: registry1.dso.mil/ironbank/opensource/kubernetes-1.20/kubectl-1.20:v1.20.6
+        image: registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl:v1.21.5
         command: 
           - "/bin/sh"
           - "-c"

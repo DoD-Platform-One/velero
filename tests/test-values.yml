@@ -4,7 +4,7 @@ image:
 
 initContainers: 
   - name: velero-plugin-for-aws
-    image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.2.0
+    image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.2.1
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
@@ -57,7 +57,7 @@ networkPolicies:
 bbtests:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.6.0
+    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.6.3
     additionalVolumes:
       - name: transfer-kubectl
         emptyDir: {}
@@ -75,8 +75,9 @@ bbtests:
       TEST_YAML_DIR: *yamlMountPath
       MINIO_USER: minio
       MINIO_PASS: minio123
-    secretEnvs:
-      - name: NAMESPACE
-        valueFrom:
-          fieldRef:
-            fieldPath: metadata.namespace
+      NAMESPACE: velero
+    #secretEnvs:
+    #  - name: NAMESPACE
+    #    valueFrom:
+    #      fieldRef:
+    #        fieldPath: metadata.namespace
