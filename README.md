@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.23.6-bb.2](https://img.shields.io/badge/Version-2.23.6--bb.2-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
+![Version: 2.23.6-bb.3](https://img.shields.io/badge/Version-2.23.6--bb.3-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
 
 A Helm chart for velero
 
