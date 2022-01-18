@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.23.6-bb.4]
+### Changed
+- relocated bbtests
+
 ## [2.23.6-bb.3]
 ### Added
 - modify tests to look only in velero NS

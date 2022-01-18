@@ -435,3 +435,31 @@ csi:
   driver: "ebs.csi.aws.com"
   # -- Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false"
   defaultClass: "true"
+
+bbtests:
+  enabled: false
+  scripts:
+    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.6.3
+    additionalVolumes:
+      - name: transfer-kubectl
+        emptyDir: {}
+      - name: &yamlVolName yaml-configs
+        configMap:
+          name: "{{ .Chart.Name }}-backup-restore-files-config"
+    additionalVolumeMounts:
+      - name: transfer-kubectl
+        mountPath: /usr/local/bin/kubectl
+        subPath: kubectl
+      - name: *yamlVolName
+        mountPath: &yamlMountPath /yaml
+    envs:
+      MINIO_HOST: http://minio.minio.svc
+      TEST_YAML_DIR: *yamlMountPath
+      MINIO_USER: minio
+      MINIO_PASS: minio123
+      NAMESPACE: velero
+    #secretEnvs:
+    #  - name: NAMESPACE
+    #    valueFrom:
+    #      fieldRef:
+    #        fieldPath: metadata.namespace
