@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.23.6-bb.4](https://img.shields.io/badge/Version-2.23.6--bb.4-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
+![Version: 2.27.3-bb.0](https://img.shields.io/badge/Version-2.27.3--bb.0-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -36,7 +36,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.6.3"` |  |
+| image.tag | string | `"v1.7.1"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -48,7 +48,7 @@ helm install velero chart/
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |
 | dnsPolicy | string | `"ClusterFirst"` |  |
-| initContainers | list | `[]` |  |
+| initContainers | string | `nil` |  |
 | podSecurityContext | object | `{}` |  |
 | containerSecurityContext | object | `{}` |  |
 | priorityClassName | string | `""` |  |
@@ -69,7 +69,11 @@ helm install velero chart/
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.21.1"` |  |
+| kubectl.image.tag | string | `"v1.21.5"` |  |
+| kubectl.resources.requests.memory | string | `"256Mi"` |  |
+| kubectl.resources.requests.cpu | string | `"100m"` |  |
+| kubectl.resources.limits.memory | string | `"256Mi"` |  |
+| kubectl.resources.limits.cpu | string | `"100m"` |  |
 | kubectl.annotations."sidecar.istio.io/inject" | string | `"false"` |  |
 | kubectl.labels | object | `{}` |  |
 | upgradeCRDs | bool | `true` |  |
@@ -97,6 +101,7 @@ helm install velero chart/
 | configuration.logLevel | string | `nil` |  |
 | configuration.logFormat | string | `nil` |  |
 | configuration.defaultVolumesToRestic | string | `nil` |  |
+| configuration.defaultResticPruneFrequency | string | `nil` |  |
 | rbac.create | bool | `true` |  |
 | rbac.clusterAdministrator | bool | `true` |  |
 | serviceAccount.server.create | bool | `true` |  |
@@ -122,6 +127,7 @@ helm install velero chart/
 | restic.tolerations | list | `[]` |  |
 | restic.annotations | object | `{}` |  |
 | restic.labels | object | `{}` |  |
+| restic.useScratchEmptyDir | bool | `true` |  |
 | restic.extraVolumes | list | `[]` |  |
 | restic.extraVolumeMounts | list | `[]` |  |
 | restic.dnsPolicy | string | `"ClusterFirst"` |  |
@@ -140,7 +146,7 @@ helm install velero chart/
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/velero/velero:v1.6.3"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/velero/velero:v1.7.1"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"transfer-kubectl"` |  |
 | bbtests.scripts.additionalVolumes[0].emptyDir | object | `{}` |  |
 | bbtests.scripts.additionalVolumes[1].name | string | `"yaml-configs"` |  |

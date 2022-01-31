@@ -6,7 +6,7 @@
 # enabling restic). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.6.3
+  tag: v1.7.1
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -50,9 +50,23 @@ resources:
 dnsPolicy: ClusterFirst
 
 # Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
-initContainers: []
+# If the value is a string then it is evaluated as a template.
+initContainers:
+  # - name: velero-plugin-for-csi
+  #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.1.2
+  #   imagePullPolicy: IfNotPresent
+  #   volumeMounts:
+  #     - mountPath: /target
+  #       name: plugins
+  #   resources:
+  #     requests:
+  #       memory: 512Mi
+  #       cpu: 100m
+  #     limits:
+  #       memory: 512Mi
+  #       cpu: 100m
   # - name: velero-plugin-for-aws
-  #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.2.0
+  #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.3.0
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -65,20 +79,7 @@ initContainers: []
   #       memory: 512Mi
   #       cpu: 100m
   # - name: velero-plugin-for-microsoft-azure
-  #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.2.0
-  #   imagePullPolicy: IfNotPresent
-  #   volumeMounts:
-  #     - mountPath: /target
-  #       name: plugins
-  #   resources:
-  #     requests:
-  #       memory: 512Mi
-  #       cpu: 100m
-  #     limits:
-  #       memory: 512Mi
-  #       cpu: 100m
-  # - name: velero-plugin-for-csi
-  #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.1.2
+  #   image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.3.1
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -151,10 +152,21 @@ metrics:
 kubectl:
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl
-    tag: v1.21.1
+    tag: v1.21.5
     # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
     # If used, it will take precedence over the kubectl.image.tag.
     # digest:
+    # kubectl image tag. If used, it will take precedence over the cluster Kubernetes version.
+    # tag: 1.16.15
+  # Resource requests/limits to specify for the upgrade/cleanup job. Optional
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 100m
+
   # Annotations to set for the upgrade/cleanup job. Optional.
   annotations: 
     sidecar.istio.io/inject: 'false'
@@ -259,6 +271,7 @@ configuration:
   extraEnvVars: {}
 
   # Comma separated list of velero feature flags. default: empty
+  # features: EnableCSI
   features:
 
   # Set log-level for Velero pod. Default: info. Other options: debug, warning, error, fatal, panic.
@@ -269,6 +282,9 @@ configuration:
 
   # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.
   defaultVolumesToRestic:
+
+  # How often 'restic prune' is run for restic repositories by default. Default: 168h. Optional.
+  defaultResticPruneFrequency:
 
 ##
 ## End of backup/snapshot location settings.
@@ -297,9 +313,9 @@ serviceAccount:
 # should contain credentials for the cloud provider IAM account you've
 # set up for Velero.
 credentials:
-  # Whether a secret should be used as the source of IAM account
-  # credentials. Set to false if, for example, using kube2iam or
-  # kiam to provide IAM credentials for the Velero pod.
+  # Whether a secret should be used. Set to false if, for examples:
+  # - using kube2iam or kiam to provide AWS IAM credentials instead of providing the key file. (AWS only)
+  # - using workload identity instead of providing the key file. (GCP only)
   useSecret: true
   # Name of the secret to create if `useSecret` is true and `existingSecret` is empty
   name:
@@ -358,6 +374,11 @@ restic:
   # labels to set for the Restic daemonset. Optional.
   labels: {}
 
+  # will map /scratch to emptyDir. Set to false and specify your own volume
+  # via extraVolumes and extraVolumeMounts that maps to /scratch
+  # if you don't want to use emptyDir.
+  useScratchEmptyDir: true
+
   # Extra volumes for the Restic daemonset. Optional.
   extraVolumes: []
 
@@ -407,7 +428,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/restic: RestoreItemAction
 #     data:
-#       image: registry1.dso.mil/ironbank/opensource/velero/velero-restic-restore-helper:v1.6.3
+#       image: velero/velero-restic-restore-helper:v1.7.1
 configMaps: {}
 
 ##
@@ -439,7 +460,7 @@ csi:
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.6.3
+    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.7.1
     additionalVolumes:
       - name: transfer-kubectl
         emptyDir: {}
