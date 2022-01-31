@@ -34,17 +34,24 @@ spec:
     {{- end }}
       serviceAccountName: {{ include "velero.serverServiceAccount" . }}
       initContainers:
-        - name: velero
-          {{- if .Values.image.digest }}
-          image: "{{ .Values.image.repository }}@{{ .Values.image.digest }}"
+        - name: kubectl
+          {{- if .Values.kubectl.image.digest }}
+          image: "{{ .Values.kubectl.image.repository }}@{{ .Values.kubectl.image.digest }}"
+          {{- else if .Values.kubectl.image.tag }}
+          image: "{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
           {{- else }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.kubectl.image.repository }}:{{ template "chart.KubernetesVersion" . }}"
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
             - /bin/sh
+          args:
             - -c
-            - /velero install --crds-only --dry-run -o yaml > /tmp/crds.yaml
+            - cp `which sh` /tmp && cp `which kubectl` /tmp
+          {{- with .Values.kubectl.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /tmp
               name: crds
@@ -56,17 +63,22 @@ spec:
               memory: 256Mi
               cpu: 100m
       containers:
-        - name: kubectl
-          {{- if .Values.kubectl.image.digest }}
-          image: "{{ .Values.kubectl.image.repository }}@{{ .Values.kubectl.image.digest }}"
+        - name: velero
+          {{- if .Values.image.digest }}
+          image: "{{ .Values.image.repository }}@{{ .Values.image.digest }}"
           {{- else }}
-          image: "{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
-            - /bin/sh
+            - /tmp/sh
+          args:
             - -c
-            - kubectl apply -f /tmp/crds.yaml
+            - /velero install --crds-only --dry-run -o yaml | /tmp/kubectl apply -f -
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /tmp
               name: crds
