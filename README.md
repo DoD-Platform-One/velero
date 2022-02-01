@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.27.3-bb.0](https://img.shields.io/badge/Version-2.27.3--bb.0-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
+![Version: 2.27.3-bb.1](https://img.shields.io/badge/Version-2.27.3--bb.1-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -89,7 +89,7 @@ helm install velero chart/
 | configuration.volumeSnapshotLocation.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation.provider | string | `nil` |  |
 | configuration.volumeSnapshotLocation.config | object | `{}` |  |
-| configuration.backupSyncPeriod | string | `nil` |  |
+| configuration.backupSyncPeriod | string | `nil` | ------------------ `velero server` default: 1m |
 | configuration.resticTimeout | string | `nil` |  |
 | configuration.restoreResourcePriorities | string | `nil` |  |
 | configuration.restoreOnlyMode | string | `nil` |  |

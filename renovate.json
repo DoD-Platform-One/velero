@@ -36,6 +36,15 @@
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "matchStrings": [
+                "- Velero:\\s+(?<currentValue>.+)"
+            ],
+            "registryUrlTemplate": "https://registry1.dso.mil",
+            "depNameTemplate": "ironbank/opensource/velero/velero",
+            "datasourceTemplate": "docker"
         }
     ],
     "separateMajorMinor": false
