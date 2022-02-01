@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.27.3-bb.1]
+### Updated
+- Update Chart.yaml to follow new standardization for release automation
+- Added renovate check to update new standardization
+
 ## [2.27.3-bb.0]
 ### Changed
 - Updated to Velero 1.7.1 and latest helm chart
