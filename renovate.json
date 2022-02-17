@@ -45,6 +45,13 @@
             "registryUrlTemplate": "https://registry1.dso.mil",
             "depNameTemplate": "ironbank/opensource/velero/velero",
             "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^tests/images\\.txt$"],
+            "matchStrings": [
+              "s*(?<depName>.+):(?<currentValue>.+)"
+            ],
+            "datasourceTemplate": "docker"
         }
     ],
     "separateMajorMinor": false
