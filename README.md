@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.27.3-bb.1](https://img.shields.io/badge/Version-2.27.3--bb.1-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
+![Version: 2.27.3-bb.2](https://img.shields.io/badge/Version-2.27.3--bb.2-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -68,8 +68,8 @@ helm install velero chart/
 | metrics.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
-| kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.21.5"` |  |
+| kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
+| kubectl.image.tag | string | `"v1.22.2"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
 | kubectl.resources.limits.memory | string | `"256Mi"` |  |
@@ -89,7 +89,7 @@ helm install velero chart/
 | configuration.volumeSnapshotLocation.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation.provider | string | `nil` |  |
 | configuration.volumeSnapshotLocation.config | object | `{}` |  |
-| configuration.backupSyncPeriod | string | `nil` | ------------------ `velero server` default: 1m |
+| configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.resticTimeout | string | `nil` |  |
 | configuration.restoreResourcePriorities | string | `nil` |  |
 | configuration.restoreOnlyMode | string | `nil` |  |

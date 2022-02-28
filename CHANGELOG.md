@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ---
 ## [2.27.3-bb.1]
 ### Updated
+- Updated kubectl image repository to point to registry1.dso.mil/ironbank/opensource/kubernetes
+- Updated kubectl version to 1.22.2
+
+## [2.27.3-bb.1]
+### Updated
 - Update Chart.yaml to follow new standardization for release automation
 - Added renovate check to update new standardization
 
