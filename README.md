@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.27.3-bb.3](https://img.shields.io/badge/Version-2.27.3--bb.3-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
+![Version: 2.28.0-bb.0](https://img.shields.io/badge/Version-2.28.0--bb.0-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -19,6 +19,8 @@ A Helm chart for velero
 * Kubernetes config installed in `~/.kube/config`
 * Helm installed
 
+Kubernetes: `>=1.16.0-0`
+
 Install Helm
 
 https://helm.sh/docs/intro/install/
@@ -36,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.7.1"` |  |
+| image.tag | string | `"v1.8.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -70,6 +72,7 @@ helm install velero chart/
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
 | kubectl.image.tag | string | `"v1.22.2"` |  |
+| kubectl.containerSecurityContext | object | `{}` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
 | kubectl.resources.limits.memory | string | `"256Mi"` |  |
@@ -89,7 +92,7 @@ helm install velero chart/
 | configuration.volumeSnapshotLocation.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation.provider | string | `nil` |  |
 | configuration.volumeSnapshotLocation.config | object | `{}` |  |
-| configuration.backupSyncPeriod | string | `nil` |  |
+| configuration.backupSyncPeriod | string | `nil` | ------------------ `velero server` default: 1m |
 | configuration.resticTimeout | string | `nil` |  |
 | configuration.restoreResourcePriorities | string | `nil` |  |
 | configuration.restoreOnlyMode | string | `nil` |  |
