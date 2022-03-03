@@ -22,7 +22,7 @@ configuration:
   provider: aws
   backupStorageLocation:
     bucket: velero
-    config: &minio-config
+    config:
       region: velero
       insecureSkipTLSVerify: "true"
       s3ForcePathStyle: "true"
