@@ -3,7 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [2.27.3-bb.1]
+## [2.27.3-bb.3]
+### Updated
+- Updates for bb helm tests
+
+## [2.27.3-bb.2]
 ### Updated
 - Updated kubectl image repository to point to registry1.dso.mil/ironbank/opensource/kubernetes
 - Updated kubectl version to 1.22.2

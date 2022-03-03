@@ -16,44 +16,4 @@ metadata:
       app.kubernetes.io/managed-by: {{ .Release.Service }}
   spec:
     serviceAccountName: {{ include "velero.serverServiceAccount" . }}
-    initContainers:
-      - name: minio
-        image: registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2021-09-02T09-21-27Z
-        command:
-          - "/bin/sh"
-          - "-c"
-          - |
-            set -e
-            mc alias set --insecure test ${MINIO_HOST} ${MINIO_USER} ${MINIO_PASS}
-            mc mb --region velero --insecure --ignore-existing test/velero
-            mc policy --insecure set public test/velero
-        env:
-          - name: MINIO_HOST
-            value: {{ .Values.bbtests.scripts.envs.MINIO_HOST | quote }}
-          - name: MINIO_USER
-            value: {{ .Values.bbtests.scripts.envs.MINIO_USER | quote }}
-          - name: MINIO_PASS
-            value: {{ .Values.bbtests.scripts.envs.MINIO_PASS | quote }}
-      - name: kubectl
-        image: registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl:v1.21.5
-        command: 
-          - "/bin/sh"
-          - "-c"
-          - "cp /usr/local/bin/kubectl /transfer/kubectl"
-        volumeMounts:
-          - mountPath: /transfer/
-            name: transfer-kubectl
 {{- end }}
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "{{ .Chart.Name }}-backup-restore-files-config"
-  annotations:
-    sidecar.istio.io/inject: "false"
-  labels:
-    helm-test: enabled
-  namespace: {{ .Release.Namespace }}
-data:
-  config.yaml: |-
-    {{- include "test-manifest" . | nindent 4 }}

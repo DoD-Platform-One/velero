@@ -460,27 +460,13 @@ csi:
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.7.1
-    additionalVolumes:
-      - name: transfer-kubectl
-        emptyDir: {}
-      - name: &yamlVolName yaml-configs
-        configMap:
-          name: "{{ .Chart.Name }}-backup-restore-files-config"
-    additionalVolumeMounts:
-      - name: transfer-kubectl
-        mountPath: /usr/local/bin/kubectl
-        subPath: kubectl
-      - name: *yamlVolName
-        mountPath: &yamlMountPath /yaml
+    image: registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:0.0.1
     envs:
       MINIO_HOST: http://minio.minio.svc
-      TEST_YAML_DIR: *yamlMountPath
       MINIO_USER: minio
       MINIO_PASS: minio123
-      NAMESPACE: velero
-    #secretEnvs:
-    #  - name: NAMESPACE
-    #    valueFrom:
-    #      fieldRef:
-    #        fieldPath: metadata.namespace
+    secretEnvs:
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace

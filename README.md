@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.27.3-bb.2](https://img.shields.io/badge/Version-2.27.3--bb.2-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
+![Version: 2.27.3-bb.3](https://img.shields.io/badge/Version-2.27.3--bb.3-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -146,21 +146,12 @@ helm install velero chart/
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/velero/velero:v1.7.1"` |  |
-| bbtests.scripts.additionalVolumes[0].name | string | `"transfer-kubectl"` |  |
-| bbtests.scripts.additionalVolumes[0].emptyDir | object | `{}` |  |
-| bbtests.scripts.additionalVolumes[1].name | string | `"yaml-configs"` |  |
-| bbtests.scripts.additionalVolumes[1].configMap.name | string | `"{{ .Chart.Name }}-backup-restore-files-config"` |  |
-| bbtests.scripts.additionalVolumeMounts[0].name | string | `"transfer-kubectl"` |  |
-| bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/usr/local/bin/kubectl"` |  |
-| bbtests.scripts.additionalVolumeMounts[0].subPath | string | `"kubectl"` |  |
-| bbtests.scripts.additionalVolumeMounts[1].name | string | `"yaml-configs"` |  |
-| bbtests.scripts.additionalVolumeMounts[1].mountPath | string | `"/yaml"` |  |
+| bbtests.scripts.image | string | `"registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:0.0.1"` |  |
 | bbtests.scripts.envs.MINIO_HOST | string | `"http://minio.minio.svc"` |  |
-| bbtests.scripts.envs.TEST_YAML_DIR | string | `"/yaml"` |  |
 | bbtests.scripts.envs.MINIO_USER | string | `"minio"` |  |
 | bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
-| bbtests.scripts.envs.NAMESPACE | string | `"velero"` |  |
+| bbtests.scripts.secretEnvs[0].name | string | `"NAMESPACE"` |  |
+| bbtests.scripts.secretEnvs[0].valueFrom.fieldRef.fieldPath | string | `"metadata.namespace"` |  |
 
 ## Contributing
 
