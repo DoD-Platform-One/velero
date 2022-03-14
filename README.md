@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.28.0-bb.0](https://img.shields.io/badge/Version-2.28.0--bb.0-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
+![Version: 2.28.0-bb.1](https://img.shields.io/badge/Version-2.28.0--bb.1-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -92,7 +92,7 @@ helm install velero chart/
 | configuration.volumeSnapshotLocation.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation.provider | string | `nil` |  |
 | configuration.volumeSnapshotLocation.config | object | `{}` |  |
-| configuration.backupSyncPeriod | string | `nil` | ------------------ `velero server` default: 1m |
+| configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.resticTimeout | string | `nil` |  |
 | configuration.restoreResourcePriorities | string | `nil` |  |
 | configuration.restoreOnlyMode | string | `nil` |  |
@@ -140,6 +140,8 @@ helm install velero chart/
 | schedules | object | `{}` |  |
 | configMaps | object | `{}` |  |
 | istio.enabled | bool | `false` |  |
+| istio.mtls | object | `{"mode":"STRICT"}` | Default velero peer authentication |
+| istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.ingressLabels.app | string | `"istio-ingressgateway"` |  |
