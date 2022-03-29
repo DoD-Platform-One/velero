@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.28.0-bb.1](https://img.shields.io/badge/Version-2.28.0--bb.1-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
+![Version: 2.29.0-bb.0](https://img.shields.io/badge/Version-2.29.0--bb.0-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.8.0"` |  |
+| image.tag | string | `"v1.8.1"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -59,6 +59,7 @@ helm install velero chart/
 | nodeSelector | object | `{}` |  |
 | extraVolumes | list | `[]` |  |
 | extraVolumeMounts | list | `[]` |  |
+| extraObjects | list | `[]` |  |
 | metrics.enabled | bool | `true` |  |
 | metrics.port | int | `8085` |  |
 | metrics.scrapeInterval | string | `"30s"` |  |

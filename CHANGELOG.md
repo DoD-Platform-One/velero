@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.29.0-bb.0]
+### Updated
+- Bumped chart version to 2.29.0
+- Bumped Velero image tag to v1.8.1
+- Bumped Velero aws image tag to v1.4.1
+- Bumped Velero azure image tag to v1.4.1
+- Bumped Velero helper image tag to v1.8.1
+
 ## [2.28.0-bb.1]
 ### Added
 - Add default PeerAuthentication to enable STRICT mTLS
