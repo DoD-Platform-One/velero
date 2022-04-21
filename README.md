@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.29.0-bb.3](https://img.shields.io/badge/Version-2.29.0--bb.3-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 2.29.0-bb.4](https://img.shields.io/badge/Version-2.29.0--bb.4-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -51,7 +51,8 @@ helm install velero chart/
 | resources.limits.memory | string | `"512Mi"` |  |
 | dnsPolicy | string | `"ClusterFirst"` |  |
 | initContainers | string | `nil` |  |
-| podSecurityContext | object | `{}` |  |
+| podSecurityContext.runAsUser | int | `65534` |  |
+| podSecurityContext.runAsGroup | int | `65534` |  |
 | containerSecurityContext | object | `{}` |  |
 | priorityClassName | string | `""` |  |
 | tolerations | list | `[]` |  |

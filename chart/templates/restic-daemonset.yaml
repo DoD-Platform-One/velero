@@ -104,6 +104,7 @@ spec:
             - name: host-pods
               mountPath: /host_pods
               mountPropagation: HostToContainer
+              readOnly: true
             {{- if .Values.restic.useScratchEmptyDir }}
             - name: scratch
               mountPath: /scratch

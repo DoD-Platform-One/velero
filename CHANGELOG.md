@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.29.0-bb.4]
+### Changed
+- set the runAsUser/runAsGroup to 65534/65534 -- this is the default for the kyverno docker image.
+- set host_pods restic mount to read-only.
+
 ## [2.29.0-bb.3]
 ### Added
 - OSCAL UUID updates
