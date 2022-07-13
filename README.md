@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.29.0-bb.4](https://img.shields.io/badge/Version-2.29.0--bb.4-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 2.30.1-bb.0](https://img.shields.io/badge/Version-2.30.1--bb.0-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.8.1"` |  |
+| image.tag | string | `"v1.9.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -90,11 +90,12 @@ helm install velero chart/
 | configuration.backupStorageLocation.caCert | string | `nil` |  |
 | configuration.backupStorageLocation.prefix | string | `nil` |  |
 | configuration.backupStorageLocation.default | string | `nil` |  |
+| configuration.backupStorageLocation.accessMode | string | `"ReadWrite"` |  |
 | configuration.backupStorageLocation.config | object | `{}` |  |
 | configuration.volumeSnapshotLocation.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation.provider | string | `nil` |  |
 | configuration.volumeSnapshotLocation.config | object | `{}` |  |
-| configuration.backupSyncPeriod | string | `nil` |  |
+| configuration.backupSyncPeriod | string | `nil` | ------------------ `velero server` default: 1m |
 | configuration.resticTimeout | string | `nil` |  |
 | configuration.restoreResourcePriorities | string | `nil` |  |
 | configuration.restoreOnlyMode | string | `nil` |  |
@@ -109,6 +110,7 @@ helm install velero chart/
 | configuration.defaultResticPruneFrequency | string | `nil` |  |
 | rbac.create | bool | `true` |  |
 | rbac.clusterAdministrator | bool | `true` |  |
+| rbac.clusterAdministratorName | string | `"cluster-admin"` |  |
 | serviceAccount.server.create | bool | `true` |  |
 | serviceAccount.server.name | string | `nil` |  |
 | serviceAccount.server.annotations | string | `nil` |  |
@@ -163,3 +165,4 @@ helm install velero chart/
 ## Contributing
 
 Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
+
