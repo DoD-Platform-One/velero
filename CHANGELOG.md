@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.30.1-bb.2]
+### Added
+- Added Grafana dasboard JSON & ConfigMap
+- Original dashboard sourced from: https://grafana.com/grafana/dashboards/11055-kubernetes-addons-velero-stats which has been modified/updated to use non-deprecated metrics APIs. Hence, included version is not publicly available from any source as it is an adaptation.
+
 ## [2.30.1-bb.1]
 ### Fixed
 - API version for CSI snapshot class updated to v1
