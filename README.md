@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.30.1-bb.1](https://img.shields.io/badge/Version-2.30.1--bb.1-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
+![Version: 2.30.1-bb.2](https://img.shields.io/badge/Version-2.30.1--bb.2-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -165,4 +165,3 @@ helm install velero chart/
 ## Contributing
 
 Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
-
