@@ -3,9 +3,9 @@ kind: Kptfile
 metadata:
   name: chart
 upstream:
-  type: git
-  git:
-    commit: e5ce9ec3715dbfb042101232cefc5df5e88b6ab8
-    repo: https://github.com/vmware-tanzu/helm-charts
-    directory: /charts/velero
-    ref: velero-2.30.1
+    type: git
+    git:
+        commit: 97910bed0419e81e5478c520427dfe17e2a620c3
+        repo: https://github.com/vmware-tanzu/helm-charts
+        directory: /charts/velero
+        ref: velero-2.31.3

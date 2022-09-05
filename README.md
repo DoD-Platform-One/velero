@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.30.1-bb.2](https://img.shields.io/badge/Version-2.30.1--bb.2-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
+![Version: 2.31.3-bb.0](https://img.shields.io/badge/Version-2.31.3--bb.0-informational?style=flat-square) ![AppVersion: 1.9.1](https://img.shields.io/badge/AppVersion-1.9.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.9.0"` |  |
+| image.tag | string | `"v1.9.1"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -58,6 +58,7 @@ helm install velero chart/
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
+| dnsConfig | object | `{}` |  |
 | extraVolumes | list | `[]` |  |
 | extraVolumeMounts | list | `[]` |  |
 | extraObjects | list | `[]` |  |
@@ -73,7 +74,7 @@ helm install velero chart/
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.22.2"` |  |
+| kubectl.image.tag | string | `"v1.24.4"` |  |
 | kubectl.containerSecurityContext | object | `{}` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -101,7 +102,9 @@ helm install velero chart/
 | configuration.restoreOnlyMode | string | `nil` |  |
 | configuration.clientQPS | string | `nil` |  |
 | configuration.clientBurst | string | `nil` |  |
+| configuration.clientPageSize | string | `nil` |  |
 | configuration.disableControllers | string | `nil` |  |
+| configuration.storeValidationFrequency | string | `nil` |  |
 | configuration.extraEnvVars | object | `{}` |  |
 | configuration.features | string | `nil` |  |
 | configuration.logLevel | string | `nil` |  |
@@ -137,10 +140,12 @@ helm install velero chart/
 | restic.useScratchEmptyDir | bool | `true` |  |
 | restic.extraVolumes | list | `[]` |  |
 | restic.extraVolumeMounts | list | `[]` |  |
+| restic.extraEnvVars | object | `{}` |  |
 | restic.dnsPolicy | string | `"ClusterFirst"` |  |
 | restic.podSecurityContext.runAsUser | int | `0` |  |
 | restic.containerSecurityContext | object | `{}` |  |
 | restic.nodeSelector | object | `{}` |  |
+| restic.dnsConfig | object | `{}` |  |
 | schedules | object | `{}` |  |
 | configMaps | object | `{}` |  |
 | istio.enabled | bool | `false` |  |

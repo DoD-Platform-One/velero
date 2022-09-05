@@ -6,7 +6,7 @@
 # enabling restic). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.9.0
+  tag: v1.9.1
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -122,6 +122,9 @@ affinity: {}
 # Node selector to use for the Velero deployment. Optional.
 nodeSelector: {}
 
+# DNS configuration to use for the Velero deployment. Optional.
+dnsConfig: {}
+
 # Extra volumes for the Velero deployment. Optional.
 extraVolumes: []
 
@@ -181,7 +184,7 @@ metrics:
 kubectl:
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.22.2
+    tag: v1.24.4
     # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
     # If used, it will take precedence over the kubectl.image.tag.
     # digest:
@@ -299,7 +302,11 @@ configuration:
   # `velero server` default: 30
   clientBurst:
   # `velero server` default: empty
+  clientPageSize:
+  # `velero server` default: empty
   disableControllers:
+  # `velero server` default: 1m
+  storeValidationFrequency:
   #
 
   # additional key/value pairs to be used as environment variables such as "AWS_CLUSTER_NAME: 'yourcluster.domain.tld'"
@@ -422,6 +429,9 @@ restic:
   # Extra volumeMounts for the Restic daemonset. Optional.
   extraVolumeMounts: []
 
+  # Key/value pairs to be used as environment variables for the Restic daemonset. Optional.
+  extraEnvVars: {}
+
   # Configure the dnsPolicy of the Restic daemonset
   # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
   dnsPolicy: ClusterFirst
@@ -439,6 +449,9 @@ restic:
 
   # Node selector to use for the Restic daemonset. Optional.
   nodeSelector: {}
+
+  # DNS configuration to use for the Restic daemonset. Optional.
+  dnsConfig: {}
 
 # Backup schedules to create.
 # Eg:
@@ -465,7 +478,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/restic: RestoreItemAction
 #     data:
-#       image: velero/velero-restic-restore-helper:v1.9.0
+#       image: velero/velero-restic-restore-helper:v1.9.1
 configMaps: {}
 
 ##
