@@ -63,21 +63,6 @@ addons:
         imagePullSecrets:
         - private-registry
 
-      initContainers: 
-        - name: velero-plugin-for-aws
-          image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.5.0
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - mountPath: /target
-              name: plugins
-          resources:
-            requests:
-              memory: 512Mi
-              cpu: 100m
-            limits:
-              memory: 512Mi
-              cpu: 100m
-
       configuration:
         provider: aws
         backupStorageLocation:
