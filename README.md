@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.31.3-bb.0](https://img.shields.io/badge/Version-2.31.3--bb.0-informational?style=flat-square) ![AppVersion: 1.9.1](https://img.shields.io/badge/AppVersion-1.9.1-informational?style=flat-square)
+![Version: 2.31.3-bb.1](https://img.shields.io/badge/Version-2.31.3--bb.1-informational?style=flat-square) ![AppVersion: 1.9.1](https://img.shields.io/badge/AppVersion-1.9.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -53,7 +53,10 @@ helm install velero chart/
 | initContainers | string | `nil` |  |
 | podSecurityContext.runAsUser | int | `65534` |  |
 | podSecurityContext.runAsGroup | int | `65534` |  |
-| containerSecurityContext | object | `{}` |  |
+| containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| containerSecurityContext.capabilities.add | list | `[]` |  |
+| containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | priorityClassName | string | `""` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |

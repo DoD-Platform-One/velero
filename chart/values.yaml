@@ -103,12 +103,12 @@ podSecurityContext:
 
 # Container Level Security Context for the 'velero' container of the Velero deployment. Optional.
 # See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-containerSecurityContext: {}
-  # allowPrivilegeEscalation: false
-  # capabilities:
-  #   drop: ["ALL"]
-  #   add: []
-  # readOnlyRootFilesystem: true
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: 
+      - ALL
+  readOnlyRootFilesystem: true
 
 # Pod priority class name to use for the Velero deployment. Optional.
 priorityClassName: ""
@@ -192,7 +192,10 @@ kubectl:
     # tag: 1.16.15
   # Container Level Security Context for the 'kubectl' container of the crd jobs. Optional.
   # See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-  containerSecurityContext: {}
+  containerSecurityContext: 
+    capabilities:
+      drop: 
+        - ALL
   # Resource requests/limits to specify for the upgrade/cleanup job. Optional
   resources:
     requests:
@@ -445,7 +448,10 @@ restic:
 
   # Container Level Security Context for the 'restic' container of the restic DaemonSet. Optional.
   # See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-  containerSecurityContext: {}
+  containerSecurityContext: 
+    capabilities:
+      drop: 
+        - ALL
 
   # Node selector to use for the Restic daemonset. Optional.
   nodeSelector: {}
@@ -525,3 +531,9 @@ bbtests:
         valueFrom:
           fieldRef:
             fieldPath: metadata.namespace
+    additionalVolumes:
+      - name: minio-volume
+        emptyDir: {}
+    additionalVolumeMounts:
+      - mountPath: /.mc
+        name: minio-volume
