@@ -23,9 +23,16 @@ helm dependency update ./chart
 # Modifications made to upstream
 This is a high-level list of modifitations that Big Bang has made to the upstream helm chart. You can use this as as cross-check to make sure that no modifications were lost during the upgrade process.
 
-```chart/values.yaml```
-- To Do
+## chart/values.yaml
 
+- Added values for `istio`, `networkPolicies`, and `bbtests`
+- Changed image to default to Ironbank image
+- Set default `securityContext`, and `imagePullSecrets`
+- Added commented out values for `serviceMonitor.scheme` and `serviceMonitor.tlsConfig`
+
+## chart/servicemonitor.yaml
+
+- Added `scheme` and `tlsConfig`
 
 # Testing new Velero Version
 

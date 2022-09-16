@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.31.3-bb.1](https://img.shields.io/badge/Version-2.31.3--bb.1-informational?style=flat-square) ![AppVersion: 1.9.1](https://img.shields.io/badge/AppVersion-1.9.1-informational?style=flat-square)
+![Version: 2.31.3-bb.2](https://img.shields.io/badge/Version-2.31.3--bb.2-informational?style=flat-square) ![AppVersion: 1.9.1](https://img.shields.io/badge/AppVersion-1.9.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -55,7 +55,6 @@ helm install velero chart/
 | podSecurityContext.runAsGroup | int | `65534` |  |
 | containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| containerSecurityContext.capabilities.add | list | `[]` |  |
 | containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | priorityClassName | string | `""` |  |
 | tolerations | list | `[]` |  |
@@ -78,7 +77,7 @@ helm install velero chart/
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
 | kubectl.image.tag | string | `"v1.24.4"` |  |
-| kubectl.containerSecurityContext | object | `{}` |  |
+| kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
 | kubectl.resources.limits.memory | string | `"256Mi"` |  |
@@ -146,7 +145,7 @@ helm install velero chart/
 | restic.extraEnvVars | object | `{}` |  |
 | restic.dnsPolicy | string | `"ClusterFirst"` |  |
 | restic.podSecurityContext.runAsUser | int | `0` |  |
-| restic.containerSecurityContext | object | `{}` |  |
+| restic.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | restic.nodeSelector | object | `{}` |  |
 | restic.dnsConfig | object | `{}` |  |
 | schedules | object | `{}` |  |
@@ -169,6 +168,10 @@ helm install velero chart/
 | bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
 | bbtests.scripts.secretEnvs[0].name | string | `"NAMESPACE"` |  |
 | bbtests.scripts.secretEnvs[0].valueFrom.fieldRef.fieldPath | string | `"metadata.namespace"` |  |
+| bbtests.scripts.additionalVolumes[0].name | string | `"minio-volume"` |  |
+| bbtests.scripts.additionalVolumes[0].emptyDir | object | `{}` |  |
+| bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/.mc"` |  |
+| bbtests.scripts.additionalVolumeMounts[0].name | string | `"minio-volume"` |  |
 
 ## Contributing
 
