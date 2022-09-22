@@ -4,8 +4,8 @@ Check the [upstream changelog](url_needed) and the [helm chart upgrade notes](ur
 
 # Upgrading
 
-## Update dependencies  
-  
+## Update dependencies
+
 To Do
 
 ## Update binaries
@@ -13,7 +13,7 @@ To Do
 Pull assets and commit the binaries as well as the Chart.lock file that was generated.
 ```
 helm dependency update ./chart
-``` 
+```
 
 ## Update chart
 
@@ -21,7 +21,7 @@ helm dependency update ./chart
 - To Do
 
 # Modifications made to upstream
-This is a high-level list of modifitations that Big Bang has made to the upstream helm chart. You can use this as as cross-check to make sure that no modifications were lost during the upgrade process.
+This is a high-level list of modifications that Big Bang has made to the upstream helm chart. You can use this as as cross-check to make sure that no modifications were lost during the upgrade process.
 
 ## chart/values.yaml
 
@@ -36,7 +36,7 @@ This is a high-level list of modifitations that Big Bang has made to the upstrea
 
 # Testing new Velero Version
 
-- Deploy Velero as a part of BigBang  
+- Deploy Velero as a part of BigBang
 ```
 helm upgrade \
   --install bigbang ./bigbang/chart \
