@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.31.8-bb.0]
+### Changed
+- Updated to latest chart 2.31.8
+- Updated velero to 1.9.2
+
 ## [2.31.3-bb.2]
 ### Added
 - Added support for tlsConfig and scheme values in the serviceMonitor

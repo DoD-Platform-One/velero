@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.31.3-bb.2](https://img.shields.io/badge/Version-2.31.3--bb.2-informational?style=flat-square) ![AppVersion: 1.9.1](https://img.shields.io/badge/AppVersion-1.9.1-informational?style=flat-square)
+![Version: 2.31.8-bb.0](https://img.shields.io/badge/Version-2.31.8--bb.0-informational?style=flat-square) ![AppVersion: v1.9.2](https://img.shields.io/badge/AppVersion-v1.9.2-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.9.1"` |  |
+| image.tag | string | `"v1.9.2"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -56,6 +56,7 @@ helm install velero chart/
 | containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| lifecycle | object | `{}` |  |
 | priorityClassName | string | `""` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
@@ -75,8 +76,11 @@ helm install velero chart/
 | metrics.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
+| metrics.prometheusRule.enabled | bool | `false` |  |
+| metrics.prometheusRule.additionalLabels | object | `{}` |  |
+| metrics.prometheusRule.spec | list | `[]` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.24.4"` |  |
+| kubectl.image.tag | string | `"v1.25.2"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -146,7 +150,9 @@ helm install velero chart/
 | restic.dnsPolicy | string | `"ClusterFirst"` |  |
 | restic.podSecurityContext.runAsUser | int | `0` |  |
 | restic.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| restic.lifecycle | object | `{}` |  |
 | restic.nodeSelector | object | `{}` |  |
+| restic.affinity | object | `{}` |  |
 | restic.dnsConfig | object | `{}` |  |
 | schedules | object | `{}` |  |
 | configMaps | object | `{}` |  |

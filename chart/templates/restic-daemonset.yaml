@@ -164,6 +164,9 @@ spec:
               value: {{ default "none" $value | quote }}
           {{- end }}
           {{- end }}
+          {{- if .Values.lifecycle }}
+          lifecycle: {{ toYaml .Values.restic.lifecycle | nindent 12 }}
+          {{- end }}
           securityContext:
             privileged: {{ .Values.restic.privileged }}
             {{- with $containerSecurityContext }}
@@ -181,6 +184,10 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.restic.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}      
     {{- with .Values.restic.dnsConfig }}
     dnsConfig:
       {{- toYaml . | nindent 8 }}
