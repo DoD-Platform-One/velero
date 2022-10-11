@@ -34,6 +34,12 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 
 - Added `scheme` and `tlsConfig`
 
+## chart/templates/bigbang/
+
+- Network policies added
+- Istio mTLS (peerauthentication) resources added
+- Grafana dashboard added
+- CSI Snapshot class added
 # Testing new Velero Version
 
 - Deploy Velero as a part of BigBang
