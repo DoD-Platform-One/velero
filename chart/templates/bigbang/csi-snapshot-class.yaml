@@ -1,7 +1,7 @@
 {{- if .Values.configuration.features -}}
 {{- $value := .Values.configuration.features -}}
 {{- if eq $value "EnableCSI" }}
-{{- if or (not (.Capabilities.APIVersions.Has "snapshot.storage.k8s.io/v1/VolumeSnapshot")) (not (.Capabilities.APIVersions.Has "snapshot.storage.k8s.io/v1/VolumeSnapshotClass")) (not (.Capabilities.APIVersions.Has "snapshot.storage.k8s.io/v1/VolumeSnapshotContents")) }}{{- fail "Missing required CRDs for CSI: VolumeSnapshot, VolumeSnapshotClass, VolumeSnapshotContents. Please install dependencies according to the overview at https://docs-bigbang.dso.mil/latest/packages/velero/docs/overview/ ."  }}{{- end }}
+{{- if or (not (.Capabilities.APIVersions.Has "snapshot.storage.k8s.io/v1/VolumeSnapshot")) (not (.Capabilities.APIVersions.Has "snapshot.storage.k8s.io/v1/VolumeSnapshotClass")) (not (.Capabilities.APIVersions.Has "snapshot.storage.k8s.io/v1/VolumeSnapshotContent")) }}{{- fail "Missing required CRDs for CSI: VolumeSnapshot, VolumeSnapshotClass, VolumeSnapshotContent. Please install dependencies according to the overview at https://docs-bigbang.dso.mil/latest/packages/velero/docs/overview/ ."  }}{{- end }}
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
