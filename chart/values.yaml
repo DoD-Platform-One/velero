@@ -53,7 +53,7 @@ dnsPolicy: ClusterFirst
 # If the value is a string then it is evaluated as a template.
 initContainers:
   # - name: velero-plugin-for-csi
-  #   image: velero/velero-plugin-for-csi:v0.3.1
+  #   image: velero/velero-plugin-for-csi:v0.3.2
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -66,7 +66,7 @@ initContainers:
   #       memory: 512Mi
   #       cpu: 100m
   # - name: velero-plugin-for-aws
-  #   image: velero/velero-plugin-for-aws:v1.5.1
+  #   image: velero/velero-plugin-for-aws:v1.5.2
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -216,7 +216,7 @@ metrics:
 kubectl:
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.25.2
+    tag: v1.25.3
     # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
     # If used, it will take precedence over the kubectl.image.tag.
     # digest:
@@ -522,7 +522,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/restic: RestoreItemAction
 #     data:
-#       image: velero/velero-restic-restore-helper:v1.9.2
+#       image: velero/velero-restic-restore-helper:v1.9.3
 configMaps: {}
 
 ##
