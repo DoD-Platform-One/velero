@@ -195,23 +195,84 @@ metrics:
     # PrometheusRule namespace. Defaults to Velero namespace.
     # namespace: ""
     # Rules to be deployed
-    spec: []
-    # - alert: VeleroBackupPartialFailures
-    #   annotations:
-    #     message: Velero backup {{ $labels.schedule }} has {{ $value | humanizePercentage }} partialy failed backups.
-    #   expr: |-
-    #     velero_backup_partial_failure_total{schedule!=""} / velero_backup_attempt_total{schedule!=""} > 0.25
-    #   for: 15m
-    #   labels:
-    #     severity: warning
-    # - alert: VeleroBackupFailures
-    #   annotations:
-    #     message: Velero backup {{ $labels.schedule }} has {{ $value | humanizePercentage }} failed backups.
-    #   expr: |-
-    #     velero_backup_failure_total{schedule!=""} / velero_backup_attempt_total{schedule!=""} > 0.25
-    #   for: 15m
-    #   labels:
-    #     severity: warning
+    spec:
+    - alert: VeleroVeleroJobAbsent
+      annotations:
+        message: ""
+      expr: absent(up{job="velero-velero", namespace="velero"})
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroBackupPartialFailures
+      annotations:
+        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} partially failed backups.
+      expr: velero_backup_partial_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: warning
+    - alert: VeleroBackupFailures
+      annotations:
+        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backups.
+      expr: velero_backup_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroBackupValidationFailures
+      annotations:
+        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backup validations.
+      expr: velero_backup_validation_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroBackupDeletionFailures
+      annotations:
+        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backup deletions.
+      expr: velero_backup_deletion_failure_total{job!=""} / velero_backup_deletion_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroBackupItemErrors
+      annotations:
+        message: Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors.
+      expr: velero_backup_items_errors{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroCSISnapshotFailures
+      annotations:
+        message: Velero CSI snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed CSI snapshots.
+      expr: velero_csi_snapshot_failure_total{job!=""} / velero_csi_snapshot_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroRestorePartialFailures
+      annotations:
+        message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} partially failed restores.
+      expr: velero_restore_partial_failure_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: warning
+    - alert: VeleroRestoreFailures
+      annotations:
+        message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed restores.
+      expr: velero_restore_failed_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroRestoreValidationFailures
+      annotations:
+        message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed restore validations.
+      expr: velero_restore_validation_failed_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
+    - alert: VeleroVolumeSnapshotFailures
+      annotations:
+        message: Velero volume snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed volume snapshots.
+      expr: velero_volume_snapshot_failure_total{job!=""} / velero_volume_snapshot_attempt_total{job!=""} > 0
+      for: 10m
+      labels:
+        severity: critical
 
 kubectl:
   image:
