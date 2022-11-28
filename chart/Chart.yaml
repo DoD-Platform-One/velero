@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.9.2
+appVersion: 1.9.3
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 2.31.8-bb.5
+version: 2.32.2-bb.0
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -25,7 +25,7 @@ dependencies:
     repository: oci://registry.dso.mil/platform-one/big-bang/apps/library-charts/gluon
 annotations:
   bigbang.dev/applicationVersions: |
-    - Velero: v1.9.2
+    - Velero: 1.9.3
   # velero-plugin-for-{csi|aws|azure} images below are optional and are used 
   # dependent on your configuration of the `initContainers` value
   helm.sh/images: |
@@ -34,11 +34,11 @@ annotations:
     - name: velero-plugin-for-aws
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.5.2
     - name: velero-plugin-for-azure
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.5.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.5.2
     - name: velero
-      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.9.2
+      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.9.3
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.2
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.4
     - name: velero-tester
       condition: bbtests.enabled 
       image: registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:0.0.1
