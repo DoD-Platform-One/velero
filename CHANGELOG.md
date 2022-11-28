@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.32.2-bb.0]
+### Update
+- Updated velero to `1.9.3`, upstream chart version `velero-2.32.2`, kubectl to `1.25.4`, and azure plugin to `1.5.2`
+
 ## [2.31.8-bb.5]
 ### Changed
 - Added prometheusRule alerts for common velero failures

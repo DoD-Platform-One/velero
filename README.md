@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.31.8-bb.5](https://img.shields.io/badge/Version-2.31.8--bb.5-informational?style=flat-square) ![AppVersion: 1.9.2](https://img.shields.io/badge/AppVersion-1.9.2-informational?style=flat-square)
+![Version: 2.32.2-bb.0](https://img.shields.io/badge/Version-2.32.2--bb.0-informational?style=flat-square) ![AppVersion: 1.9.3](https://img.shields.io/badge/AppVersion-1.9.3-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.9.2"` |  |
+| image.tag | string | `"v1.9.3"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -58,6 +58,7 @@ helm install velero chart/
 | containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | lifecycle | object | `{}` |  |
 | priorityClassName | string | `""` |  |
+| terminationGracePeriodSeconds | int | `3600` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
@@ -80,7 +81,7 @@ helm install velero chart/
 | metrics.prometheusRule.additionalLabels | object | `{}` |  |
 | metrics.prometheusRule.spec | list | `[]` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.25.3"` |  |
+| kubectl.image.tag | string | `"v1.25.4"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -111,6 +112,7 @@ helm install velero chart/
 | configuration.clientPageSize | string | `nil` |  |
 | configuration.disableControllers | string | `nil` |  |
 | configuration.storeValidationFrequency | string | `nil` |  |
+| configuration.garbageCollectionFrequency | string | `nil` |  |
 | configuration.extraEnvVars | object | `{}` |  |
 | configuration.features | string | `nil` |  |
 | configuration.logLevel | string | `nil` |  |
