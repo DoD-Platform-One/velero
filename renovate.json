@@ -70,7 +70,7 @@
             ],
             "depNameTemplate": "ironbank/opensource/nginx/nginx",
             "datasourceTemplate": "docker",
-            "registryUrlTemplate": "https://registry1.dso.mil
+            "registryUrlTemplate": "https://registry1.dso.mil"
         }
     ],
     "separateMajorMinor": false
