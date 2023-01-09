@@ -1,6 +1,6 @@
 # velero
 
-![Version: 2.32.2-bb.0](https://img.shields.io/badge/Version-2.32.2--bb.0-informational?style=flat-square) ![AppVersion: 1.9.3](https://img.shields.io/badge/AppVersion-1.9.3-informational?style=flat-square)
+![Version: 2.32.5-bb.0](https://img.shields.io/badge/Version-2.32.5--bb.0-informational?style=flat-square) ![AppVersion: 1.10.0](https://img.shields.io/badge/AppVersion-1.10.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.9.3"` |  |
+| image.tag | string | `"v1.10.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -79,9 +79,63 @@ helm install velero chart/
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
 | metrics.prometheusRule.enabled | bool | `false` |  |
 | metrics.prometheusRule.additionalLabels | object | `{}` |  |
-| metrics.prometheusRule.spec | list | `[]` |  |
+| metrics.prometheusRule.spec[0].alert | string | `"VeleroVeleroJobAbsent"` |  |
+| metrics.prometheusRule.spec[0].annotations.message | string | `""` |  |
+| metrics.prometheusRule.spec[0].expr | string | `"absent(up{job=\"velero-velero\", namespace=\"velero\"})"` |  |
+| metrics.prometheusRule.spec[0].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[0].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[1].alert | string | `"VeleroBackupPartialFailures"` |  |
+| metrics.prometheusRule.spec[1].annotations.message | string | `"Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} partially failed backups."` |  |
+| metrics.prometheusRule.spec[1].expr | string | `"velero_backup_partial_failure_total{job!=\"\"} / velero_backup_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[1].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[1].labels.severity | string | `"warning"` |  |
+| metrics.prometheusRule.spec[2].alert | string | `"VeleroBackupFailures"` |  |
+| metrics.prometheusRule.spec[2].annotations.message | string | `"Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed backups."` |  |
+| metrics.prometheusRule.spec[2].expr | string | `"velero_backup_failure_total{job!=\"\"} / velero_backup_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[2].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[2].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[3].alert | string | `"VeleroBackupValidationFailures"` |  |
+| metrics.prometheusRule.spec[3].annotations.message | string | `"Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed backup validations."` |  |
+| metrics.prometheusRule.spec[3].expr | string | `"velero_backup_validation_failure_total{job!=\"\"} / velero_backup_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[3].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[3].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[4].alert | string | `"VeleroBackupDeletionFailures"` |  |
+| metrics.prometheusRule.spec[4].annotations.message | string | `"Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed backup deletions."` |  |
+| metrics.prometheusRule.spec[4].expr | string | `"velero_backup_deletion_failure_total{job!=\"\"} / velero_backup_deletion_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[4].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[4].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[5].alert | string | `"VeleroBackupItemErrors"` |  |
+| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors."` |  |
+| metrics.prometheusRule.spec[5].expr | string | `"velero_backup_items_errors{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[5].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[5].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[6].alert | string | `"VeleroCSISnapshotFailures"` |  |
+| metrics.prometheusRule.spec[6].annotations.message | string | `"Velero CSI snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed CSI snapshots."` |  |
+| metrics.prometheusRule.spec[6].expr | string | `"velero_csi_snapshot_failure_total{job!=\"\"} / velero_csi_snapshot_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[6].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[6].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[7].alert | string | `"VeleroRestorePartialFailures"` |  |
+| metrics.prometheusRule.spec[7].annotations.message | string | `"Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} partially failed restores."` |  |
+| metrics.prometheusRule.spec[7].expr | string | `"velero_restore_partial_failure_total{job!=\"\"} / velero_restore_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[7].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[7].labels.severity | string | `"warning"` |  |
+| metrics.prometheusRule.spec[8].alert | string | `"VeleroRestoreFailures"` |  |
+| metrics.prometheusRule.spec[8].annotations.message | string | `"Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed restores."` |  |
+| metrics.prometheusRule.spec[8].expr | string | `"velero_restore_failed_total{job!=\"\"} / velero_restore_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[8].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[8].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[9].alert | string | `"VeleroRestoreValidationFailures"` |  |
+| metrics.prometheusRule.spec[9].annotations.message | string | `"Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed restore validations."` |  |
+| metrics.prometheusRule.spec[9].expr | string | `"velero_restore_validation_failed_total{job!=\"\"} / velero_restore_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[9].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[9].labels.severity | string | `"critical"` |  |
+| metrics.prometheusRule.spec[10].alert | string | `"VeleroVolumeSnapshotFailures"` |  |
+| metrics.prometheusRule.spec[10].annotations.message | string | `"Velero volume snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value \| humanizePercentage {{`}}`}} failed volume snapshots."` |  |
+| metrics.prometheusRule.spec[10].expr | string | `"velero_volume_snapshot_failure_total{job!=\"\"} / velero_volume_snapshot_attempt_total{job!=\"\"} > 0"` |  |
+| metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
+| metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.25.4"` |  |
+| kubectl.image.tag | string | `"v1.25.5"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -113,6 +167,7 @@ helm install velero chart/
 | configuration.disableControllers | string | `nil` |  |
 | configuration.storeValidationFrequency | string | `nil` |  |
 | configuration.garbageCollectionFrequency | string | `nil` |  |
+| configuration.namespace | string | `nil` |  |
 | configuration.extraEnvVars | object | `{}` |  |
 | configuration.features | string | `nil` |  |
 | configuration.logLevel | string | `nil` |  |
