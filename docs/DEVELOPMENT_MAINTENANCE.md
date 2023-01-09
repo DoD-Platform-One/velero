@@ -27,12 +27,20 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 
 - Added values for `istio`, `networkPolicies`, and `bbtests`
 - Changed image to default to Ironbank image
-- Set default `securityContext`, and `imagePullSecrets`
+- Set default `podSecurityContext`, `containerSecurityContext`,  and `imagePullSecrets`
 - Added commented out values for `serviceMonitor.scheme` and `serviceMonitor.tlsConfig`
 
-## chart/servicemonitor.yaml
+## chart/templates/deployment.yaml
 
-- Added `scheme` and `tlsConfig`
+- Added CA bundle conditionally as ENV/volume mount
+
+## chart/templates/cert-secret.yaml
+
+- Added file/secret for CA cert
+
+## chart/templates/upgrade-crds/upgrade-crds.yaml
+
+- Added resources for containers
 
 ## chart/templates/bigbang/
 

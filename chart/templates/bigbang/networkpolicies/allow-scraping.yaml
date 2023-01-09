@@ -14,7 +14,7 @@ spec:
           matchLabels:
             app: prometheus
       ports:
-      - port: {{ .Values.metrics.port }}
+      - port: 8085
   podSelector:
     matchLabels:
       app.kubernetes.io/name: {{ include "velero.name" . }}
