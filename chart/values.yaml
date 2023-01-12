@@ -637,7 +637,7 @@ csi:
 bbtests:
   enabled: false
   scripts:
-    image: registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:0.0.1
+    image: registry1.dso.mil/bigbang-ci/velero-tester:1.0.0
     envs:
       MINIO_HOST: http://minio.minio.svc
       MINIO_USER: minio

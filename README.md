@@ -1,6 +1,6 @@
 # velero
 
-![Version: 3.1.0-bb.0](https://img.shields.io/badge/Version-3.1.0--bb.0-informational?style=flat-square) ![AppVersion: 1.10.0](https://img.shields.io/badge/AppVersion-1.10.0-informational?style=flat-square)
+![Version: 3.1.0-bb.1](https://img.shields.io/badge/Version-3.1.0--bb.1-informational?style=flat-square) ![AppVersion: 1.10.0](https://img.shields.io/badge/AppVersion-1.10.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -233,7 +233,7 @@ helm install velero chart/
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:0.0.1"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/bigbang-ci/velero-tester:1.0.0"` |  |
 | bbtests.scripts.envs.MINIO_HOST | string | `"http://minio.minio.svc"` |  |
 | bbtests.scripts.envs.MINIO_USER | string | `"minio"` |  |
 | bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
