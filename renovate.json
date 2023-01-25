@@ -55,15 +55,6 @@
             "datasourceTemplate": "docker"
         },
         {
-          "fileMatch": ["^chart/values\\.yaml$"],
-          "matchStrings": [
-            "image:\\s+registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:(?<currentValue>.+)"
-          ],
-          "depNameTemplate": "platform-one/big-bang/apps/cluster-utilities/velero/velero-tester",
-          "datasourceTemplate": "docker",
-          "registryUrlTemplate": "https://registry.dso.mil"
-        },
-        {
             "fileMatch": ["^chart/tests/scripts/backup-restore\\.sh$"],
             "matchStrings": [
               "image:\\s+registry1.dso.mil/ironbank/opensource/nginx/nginx:(?<currentValue>.+)"

@@ -39,4 +39,4 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.5
     - name: velero-tester
       condition: bbtests.enabled 
-      image: registry.dso.mil/platform-one/big-bang/apps/cluster-utilities/velero/velero-tester:0.0.1
+      image: registry1.dso.mil/bigbang-ci/velero-tester:1.0.0
