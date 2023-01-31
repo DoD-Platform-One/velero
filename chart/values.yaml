@@ -49,6 +49,75 @@ resources:
 # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
 dnsPolicy: ClusterFirst
 
+# Configure Velero plugins outside of the initContainers.
+plugins:
+  csi:
+    enabled: false
+    name: velero-plugin-for-csi
+    image:
+      repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi
+      tag: v0.4.0
+    container:
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+          cpu: 100m
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+  aws:
+    enabled: false
+    name: velero-plugin-for-aws
+    image:
+      repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws
+      tag: v1.6.0
+    container:
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+          cpu: 100m
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+  azure:
+    enabled: false
+    name: velero-plugin-for-microsoft-azure
+    image:
+      repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure
+      tag: v1.6.0
+    container:
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+          cpu: 100m
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+
 # Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
 # If the value is a string then it is evaluated as a template.
 initContainers:
