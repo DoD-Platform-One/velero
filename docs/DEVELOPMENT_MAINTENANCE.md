@@ -29,10 +29,12 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 - Changed image to default to Ironbank image
 - Set default `podSecurityContext`, `containerSecurityContext`,  and `imagePullSecrets`
 - Added commented out values for `serviceMonitor.scheme` and `serviceMonitor.tlsConfig`
+- Added values for aws, csi, and azure under the new `plugins` section
 
 ## chart/templates/deployment.yaml
 
 - Added CA bundle conditionally as ENV/volume mount
+- Changed `initContainers` configuration to merge `.values.plugins` with the `initContainers` configs
 
 ## chart/templates/cert-secret.yaml
 

@@ -1,6 +1,6 @@
 # velero
 
-![Version: 3.1.0-bb.1](https://img.shields.io/badge/Version-3.1.0--bb.1-informational?style=flat-square) ![AppVersion: 1.10.0](https://img.shields.io/badge/AppVersion-1.10.0-informational?style=flat-square)
+![Version: 3.1.0-bb.2](https://img.shields.io/badge/Version-3.1.0--bb.2-informational?style=flat-square) ![AppVersion: 1.10.0](https://img.shields.io/badge/AppVersion-1.10.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -50,6 +50,39 @@ helm install velero chart/
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |
 | dnsPolicy | string | `"ClusterFirst"` |  |
+| plugins.csi.enabled | bool | `false` |  |
+| plugins.csi.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi"` |  |
+| plugins.csi.image.tag | string | `"v0.4.0"` |  |
+| plugins.csi.container.imagePullPolicy | string | `"IfNotPresent"` |  |
+| plugins.csi.container.volumeMounts[0].mountPath | string | `"/target"` |  |
+| plugins.csi.container.volumeMounts[0].name | string | `"plugins"` |  |
+| plugins.csi.container.resources.requests.memory | string | `"512Mi"` |  |
+| plugins.csi.container.resources.requests.cpu | string | `"100m"` |  |
+| plugins.csi.container.resources.limits.memory | string | `"512Mi"` |  |
+| plugins.csi.container.resources.limits.cpu | string | `"100m"` |  |
+| plugins.csi.container.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| plugins.aws.enabled | bool | `false` |  |
+| plugins.aws.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws"` |  |
+| plugins.aws.image.tag | string | `"v1.6.0"` |  |
+| plugins.aws.container.imagePullPolicy | string | `"IfNotPresent"` |  |
+| plugins.aws.container.volumeMounts[0].mountPath | string | `"/target"` |  |
+| plugins.aws.container.volumeMounts[0].name | string | `"plugins"` |  |
+| plugins.aws.container.resources.requests.memory | string | `"512Mi"` |  |
+| plugins.aws.container.resources.requests.cpu | string | `"100m"` |  |
+| plugins.aws.container.resources.limits.memory | string | `"512Mi"` |  |
+| plugins.aws.container.resources.limits.cpu | string | `"100m"` |  |
+| plugins.aws.container.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| plugins.azure.enabled | bool | `false` |  |
+| plugins.azure.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure"` |  |
+| plugins.azure.image.tag | string | `"v1.6.0"` |  |
+| plugins.azure.container.imagePullPolicy | string | `"IfNotPresent"` |  |
+| plugins.azure.container.volumeMounts[0].mountPath | string | `"/target"` |  |
+| plugins.azure.container.volumeMounts[0].name | string | `"plugins"` |  |
+| plugins.azure.container.resources.requests.memory | string | `"512Mi"` |  |
+| plugins.azure.container.resources.requests.cpu | string | `"100m"` |  |
+| plugins.azure.container.resources.limits.memory | string | `"512Mi"` |  |
+| plugins.azure.container.resources.limits.cpu | string | `"100m"` |  |
+| plugins.azure.container.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | initContainers | string | `nil` |  |
 | podSecurityContext.runAsUser | int | `65534` |  |
 | podSecurityContext.runAsGroup | int | `65534` |  |
