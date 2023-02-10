@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: c51718e9fb28fd45125bd031600920bf8ee4eb65
+    commit: 88b446a2c72466426aff3d12fd3d6c44b839ad61
     repo: https://github.com/vmware-tanzu/helm-charts
     directory: /charts/velero
-    ref: velero-3.1.0
+    ref: velero-3.1.2
