@@ -270,7 +270,7 @@ spec:
             secretName: {{ include "velero.secretName" . }}
         {{- end }}
         {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
-        - name: cabundle
+        - name: cacert
           secret:
             secretName: {{ include "velero.secretName" . }}-cabundle
         {{- end }}

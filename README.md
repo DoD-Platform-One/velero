@@ -1,6 +1,6 @@
 # velero
 
-![Version: 3.1.2-bb.0](https://img.shields.io/badge/Version-3.1.2--bb.0-informational?style=flat-square) ![AppVersion: 1.10.1](https://img.shields.io/badge/AppVersion-1.10.1-informational?style=flat-square)
+![Version: 3.1.2-bb.1](https://img.shields.io/badge/Version-3.1.2--bb.1-informational?style=flat-square) ![AppVersion: 1.10.1](https://img.shields.io/badge/AppVersion-1.10.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -110,6 +110,7 @@ helm install velero chart/
 | metrics.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | metrics.podAnnotations."prometheus.io/port" | string | `"8085"` |  |
 | metrics.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
+| metrics.serviceMonitor.autodetect | bool | `true` |  |
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | metrics.serviceMonitor.annotations | object | `{}` |  |
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
