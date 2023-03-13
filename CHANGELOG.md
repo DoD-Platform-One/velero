@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [3.1.2-bb.2]
+### Changed
+- Updated nginx to `1.23.3` and kubectl to `1.26.2`
+
 ## [3.1.2-bb.1]
 ### Changed
 - Fixed mismatch between volume and mount for caCert
