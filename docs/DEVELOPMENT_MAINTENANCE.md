@@ -6,7 +6,9 @@ Check the [upstream changelog](url_needed) and the [helm chart upgrade notes](ur
 
 ## Update dependencies
 
-To Do
+```
+kpt pkg update chart/@velero-X.X.X --strategy alpha-git-path 
+```
 
 ## Update binaries
 
