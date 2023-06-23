@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [3.1.5-bb.2]
+### Changed
+- Set default for s3 region to mitigate broadcast requests to all S3 regions
+
 ## [3.1.5-bb.1]
 ### Changed
 - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl patch v1.26.3 -> v1.26.4
