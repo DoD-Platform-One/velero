@@ -1,6 +1,6 @@
 # velero
 
-![Version: 3.1.5-bb.1](https://img.shields.io/badge/Version-3.1.5--bb.1-informational?style=flat-square) ![AppVersion: 1.10.2](https://img.shields.io/badge/AppVersion-1.10.2-informational?style=flat-square)
+![Version: 3.1.5-bb.2](https://img.shields.io/badge/Version-3.1.5--bb.2-informational?style=flat-square) ![AppVersion: 1.10.2](https://img.shields.io/badge/AppVersion-1.10.2-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -190,10 +190,10 @@ helm install velero chart/
 | configuration.backupStorageLocation.prefix | string | `nil` |  |
 | configuration.backupStorageLocation.default | string | `nil` |  |
 | configuration.backupStorageLocation.accessMode | string | `"ReadWrite"` |  |
-| configuration.backupStorageLocation.config | object | `{}` |  |
+| configuration.backupStorageLocation.config.region | string | `"us-gov-west-1"` |  |
 | configuration.volumeSnapshotLocation.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation.provider | string | `nil` |  |
-| configuration.volumeSnapshotLocation.config | object | `{}` |  |
+| configuration.volumeSnapshotLocation.config.region | string | `"us-gov-west-1"` |  |
 | configuration.uploaderType | string | `nil` | ------------------ `velero server` default: restic |
 | configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.fsBackupTimeout | string | `nil` |  |
