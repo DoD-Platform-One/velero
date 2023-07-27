@@ -1,6 +1,6 @@
 # velero
 
-![Version: 3.1.5-bb.2](https://img.shields.io/badge/Version-3.1.5--bb.2-informational?style=flat-square) ![AppVersion: 1.10.2](https://img.shields.io/badge/AppVersion-1.10.2-informational?style=flat-square)
+![Version: 4.0.3-bb.0](https://img.shields.io/badge/Version-4.0.3--bb.0-informational?style=flat-square) ![AppVersion: 1.11.0](https://img.shields.io/badge/AppVersion-1.11.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -38,7 +38,7 @@ helm install velero chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.10.2"` |  |
+| image.tag | string | `"v1.11.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | annotations | object | `{}` |  |
@@ -53,7 +53,7 @@ helm install velero chart/
 | plugins.csi.enabled | bool | `false` |  |
 | plugins.csi.name | string | `"velero-plugin-for-csi"` |  |
 | plugins.csi.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi"` |  |
-| plugins.csi.image.tag | string | `"v0.4.2"` |  |
+| plugins.csi.image.tag | string | `"v0.5.0"` |  |
 | plugins.csi.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.csi.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.csi.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -65,7 +65,7 @@ helm install velero chart/
 | plugins.aws.enabled | bool | `false` |  |
 | plugins.aws.name | string | `"velero-plugin-for-aws"` |  |
 | plugins.aws.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws"` |  |
-| plugins.aws.image.tag | string | `"v1.6.1"` |  |
+| plugins.aws.image.tag | string | `"v1.7.0"` |  |
 | plugins.aws.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.aws.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.aws.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -77,7 +77,7 @@ helm install velero chart/
 | plugins.azure.enabled | bool | `false` |  |
 | plugins.azure.name | string | `"velero-plugin-for-microsoft-azure"` |  |
 | plugins.azure.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure"` |  |
-| plugins.azure.image.tag | string | `"v1.6.1"` |  |
+| plugins.azure.image.tag | string | `"v1.7.0"` |  |
 | plugins.azure.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.azure.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.azure.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -114,6 +114,10 @@ helm install velero chart/
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | metrics.serviceMonitor.annotations | object | `{}` |  |
 | metrics.serviceMonitor.additionalLabels | object | `{}` |  |
+| metrics.nodeAgentPodMonitor.autodetect | bool | `true` |  |
+| metrics.nodeAgentPodMonitor.enabled | bool | `false` |  |
+| metrics.nodeAgentPodMonitor.annotations | object | `{}` |  |
+| metrics.nodeAgentPodMonitor.additionalLabels | object | `{}` |  |
 | metrics.prometheusRule.enabled | bool | `false` |  |
 | metrics.prometheusRule.additionalLabels | object | `{}` |  |
 | metrics.prometheusRule.spec[0].alert | string | `"VeleroVeleroJobAbsent"` |  |
@@ -182,18 +186,19 @@ helm install velero chart/
 | kubectl.labels | object | `{}` |  |
 | upgradeCRDs | bool | `true` |  |
 | cleanUpCRDs | bool | `false` |  |
-| configuration.provider | string | `nil` |  |
-| configuration.backupStorageLocation.name | string | `nil` |  |
-| configuration.backupStorageLocation.provider | string | `nil` |  |
-| configuration.backupStorageLocation.bucket | string | `nil` |  |
-| configuration.backupStorageLocation.caCert | string | `nil` |  |
-| configuration.backupStorageLocation.prefix | string | `nil` |  |
-| configuration.backupStorageLocation.default | string | `nil` |  |
-| configuration.backupStorageLocation.accessMode | string | `"ReadWrite"` |  |
-| configuration.backupStorageLocation.config.region | string | `"us-gov-west-1"` |  |
-| configuration.volumeSnapshotLocation.name | string | `nil` |  |
-| configuration.volumeSnapshotLocation.provider | string | `nil` |  |
-| configuration.volumeSnapshotLocation.config.region | string | `"us-gov-west-1"` |  |
+| configuration.backupStorageLocation[0].name | string | `nil` |  |
+| configuration.backupStorageLocation[0].provider | string | `nil` |  |
+| configuration.backupStorageLocation[0].bucket | string | `nil` |  |
+| configuration.backupStorageLocation[0].caCert | string | `nil` |  |
+| configuration.backupStorageLocation[0].prefix | string | `nil` |  |
+| configuration.backupStorageLocation[0].default | string | `nil` |  |
+| configuration.backupStorageLocation[0].accessMode | string | `"ReadWrite"` |  |
+| configuration.backupStorageLocation[0].credential.name | string | `nil` |  |
+| configuration.backupStorageLocation[0].credential.key | string | `nil` |  |
+| configuration.backupStorageLocation[0].config.region | string | `"us-gov-west-1"` |  |
+| configuration.volumeSnapshotLocation[0].name | string | `nil` |  |
+| configuration.volumeSnapshotLocation[0].provider | string | `nil` |  |
+| configuration.volumeSnapshotLocation[0].config.region | string | `"us-gov-west-1"` |  |
 | configuration.uploaderType | string | `nil` | ------------------ `velero server` default: restic |
 | configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.fsBackupTimeout | string | `nil` |  |

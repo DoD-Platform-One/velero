@@ -3,9 +3,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [3.1.5-bb.2]
+## [4.0.3-bb.0]
 ### Changed
-- Set default for s3 region to mitigate broadcast requests to all S3 regions
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.10.2 -> v1.11.0
+- registry1.dso.mil/ironbank/opensource/velero/velero 1.10.2 -> 1.11.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.6.1 -> v1.7.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi v0.4.2 -> v0.5.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.6.1 -> v1.7.0
+- velero/velero-plugin-for-aws v1.6.1 -> v1.7.0
+- velero/velero-plugin-for-csi v0.4.2 -> v0.5.0
+- velero/velero-restore-helper v1.10.2 -> v1.11.0
 
 ## [3.1.5-bb.1]
 ### Changed
