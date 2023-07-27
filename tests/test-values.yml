@@ -3,23 +3,26 @@ image:
   - private-registry
 
 plugins: 
-  aws:
+  aws: 
     enabled: true
 
 configuration:
   # minio uses s3 provider
-  provider: aws
   backupStorageLocation:
-    bucket: velero
+  - bucket: velero
+    provider: aws
+    default: true
     config:
       region: velero
       insecureSkipTLSVerify: "true"
       s3ForcePathStyle: "true"
       s3Url: http://minio.minio.svc
   volumeSnapshotLocation:
+  - name: default
     provider: aws
     config:
       region: velero
+
 
 credentials:
   useSecret: true
@@ -28,6 +31,7 @@ credentials:
       [default]
       aws_access_key_id = minio
       aws_secret_access_key = minio123
+
 
 # Set a service account so that the CRD clean up job has proper permissions to delete CRDs
 serviceAccount:

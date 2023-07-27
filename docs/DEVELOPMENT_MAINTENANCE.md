@@ -1,13 +1,13 @@
 # To upgrade the Velero Package
 
-Check the [upstream changelog](url_needed) and the [helm chart upgrade notes](url_needed).
+Check the [upstream changelog](https://github.com/vmware-tanzu/velero) and the [helm chart upgrade notes](url_needed).
 
 # Upgrading
 
 ## Update dependencies
 
 ```
-kpt pkg update chart/@velero-X.X.X --strategy alpha-git-path 
+kpt pkg update chart/@velero-X.X.X --strategy alpha-git-patch 
 ```
 
 ## Update binaries
@@ -89,8 +89,8 @@ addons:
         - private-registry
 
       configuration:
-        provider: aws
         backupStorageLocation:
+        - provider: aws
           bucket: velero99
           config:
             region: "us-gov-west-1"
@@ -98,6 +98,7 @@ addons:
             s3ForcePathStyle: "true"
             s3Url: http://minio.minio.svc
         volumeSnapshotLocation:
+        - name: default
           provider: aws
           config:
             region: "us-gov-west-1"
@@ -122,6 +123,7 @@ addons:
 
       bbtests:
         enabled: true
+
 ```
 `overrides/minio.yaml`
 ```

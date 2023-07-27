@@ -13,7 +13,7 @@ All images were updated to be from Iron Bank. Additionally, an image pull secret
 ```yaml
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.6.1
+  tag: v1.7.0
   pullPolicy: IfNotPresent
   imagePullSecrets:
   - private-registry
@@ -46,7 +46,7 @@ kubectl:
 configMaps:
   restic-restore-action-config:
     data:
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-restic-restore-helper:v1.6.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-restic-restore-helper:v1.7.0
 ```
 
 ## Big Bang Modifications
