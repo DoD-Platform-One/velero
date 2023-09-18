@@ -3,9 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [4.0.3-bb.1]
+## [5.0.2-bb.0]
 ### Changed
-- velero-tester Dockerfile dependencies bump and rebuild
+- ironbank/opensource/nginx/nginx 1.23.3 -> 1.25.1
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.26.4 -> 1.27.4
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.11.0 -> v1.11.1
+- registry1.dso.mil/ironbank/opensource/velero/velero 1.11.0 -> 1.11.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.7.0 -> v1.7.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi v0.5.0 -> v0.5.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.7.0 -> v1.7.1
+- velero/velero-plugin-for-aws v1.7.0 -> v1.7.1
+- velero/velero-plugin-for-csi v0.5.0 -> v0.5.1
+- velero/velero-restore-helper v1.11.0 -> v1.11.1
 
 ## [4.0.3-bb.0]
 ### Changed
