@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [4.0.3-bb.1]
+### Changed
+- velero-tester Dockerfile dependencies bump and rebuild
+
 ## [4.0.3-bb.0]
 ### Changed
 - registry1.dso.mil/ironbank/opensource/velero/velero v1.10.2 -> v1.11.0

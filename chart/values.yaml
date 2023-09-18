@@ -722,7 +722,7 @@ csi:
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/bigbang-ci/velero-tester:1.0.0
+    image: registry1.dso.mil/bigbang-ci/velero-tester:1.1.0
     envs:
       MINIO_HOST: http://minio.minio.svc
       MINIO_USER: minio
