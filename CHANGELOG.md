@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [5.0.2-bb.1]
+### Changed
+- added Kopia integration volumes into the node-agent Daemonset and the Velero Deployment
+
 ## [5.0.2-bb.0]
 ### Changed
 - ironbank/opensource/nginx/nginx 1.23.3 -> 1.25.1
