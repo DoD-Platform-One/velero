@@ -73,6 +73,12 @@ spec:
         - name: scratch
           emptyDir: {}
         {{- end }}
+        {{- if eq .Values.configuration.uploaderType "kopia" }}
+        - name: kopia-udmrepo
+          emptyDir: {}
+        - name: kopia-cache
+          emptyDir: {}          
+        {{- end }}
         {{- if .Values.nodeAgent.extraVolumes }}
         {{- toYaml .Values.nodeAgent.extraVolumes | nindent 8 }}
         {{- end }}
@@ -117,6 +123,12 @@ spec:
             {{- if .Values.nodeAgent.useScratchEmptyDir }}
             - name: scratch
               mountPath: /scratch
+            {{- end }}
+            {{- if eq .Values.configuration.uploaderType "kopia" }}
+            - name: kopia-udmrepo
+              mountPath: /root/udmrepo
+            - name: kopia-cache
+              mountPath: /root/.cache
             {{- end }}
             {{- if .Values.nodeAgent.extraVolumeMounts }}
             {{- toYaml .Values.nodeAgent.extraVolumeMounts | nindent 12 }}

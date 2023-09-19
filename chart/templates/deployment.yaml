@@ -191,6 +191,12 @@ spec:
             - name: tmpdir
               mountPath: /tmp
             {{- end }}
+            {{- if eq .Values.configuration.uploaderType "kopia" }}
+            - name: kopia-udmrepo
+              mountPath: /udmrepo
+            - name: kopia-cache
+              mountPath: /.cache
+            {{- end }}
             {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
@@ -267,6 +273,12 @@ spec:
         - name: cloud-credentials
           secret:
             secretName: {{ include "velero.secretName" . }}
+        {{- end }}
+        {{- if eq .Values.configuration.uploaderType "kopia" }}
+        - name: kopia-udmrepo
+          emptyDir: {}
+        - name: kopia-cache
+          emptyDir: {}
         {{- end }}
         {{- range $key, $value := .Values.configuration.backupStorageLocation }}
         {{- if not (empty $value.caCert ) -}}
