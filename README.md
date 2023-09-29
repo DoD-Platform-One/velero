@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.0.2-bb.1](https://img.shields.io/badge/Version-5.0.2--bb.1-informational?style=flat-square) ![AppVersion: 1.11.1](https://img.shields.io/badge/AppVersion-1.11.1-informational?style=flat-square)
+![Version: 5.0.2-bb.2](https://img.shields.io/badge/Version-5.0.2--bb.2-informational?style=flat-square) ![AppVersion: 1.11.1](https://img.shields.io/badge/AppVersion-1.11.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -195,7 +195,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"1.27.4"` |  |
+| kubectl.image.tag | string | `"1.27.6"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -297,7 +297,7 @@ helm install velero chart/
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/bigbang-ci/velero-tester:1.0.0"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/bigbang-ci/velero-tester:1.1.0"` |  |
 | bbtests.scripts.envs.MINIO_HOST | string | `"http://minio.minio.svc"` |  |
 | bbtests.scripts.envs.MINIO_USER | string | `"minio"` |  |
 | bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
