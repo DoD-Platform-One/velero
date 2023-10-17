@@ -786,6 +786,8 @@ bbtests:
       MINIO_HOST: http://minio.minio.svc
       MINIO_USER: minio
       MINIO_PASS: minio123
+      SCHEDULED_BACKUP_NAME: '{{ include "velero.fullname" . | trim }}-scheduled-backup'
+      SCHEDULED_TEST: 'false'
     secretEnvs:
       - name: NAMESPACE
         valueFrom:
