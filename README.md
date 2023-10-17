@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.0.2-bb.3](https://img.shields.io/badge/Version-5.0.2--bb.2-informational?style=flat-square) ![AppVersion: 1.11.1](https://img.shields.io/badge/AppVersion-1.11.1-informational?style=flat-square)
+![Version: 5.0.2-bb.4](https://img.shields.io/badge/Version-5.0.2--bb.4-informational?style=flat-square) ![AppVersion: 1.11.1](https://img.shields.io/badge/AppVersion-1.11.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -221,7 +221,7 @@ helm install velero chart/
 | configuration.volumeSnapshotLocation[0].credential.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].credential.key | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].config.region | string | `"us-gov-west-1"` |  |
-| configuration.uploaderType | string | `nil` | ------------------ `velero server` default: restic |
+| configuration.uploaderType | string | `"restic"` | ------------------ `velero server` options: restic,kopia default: restic |
 | configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.fsBackupTimeout | string | `nil` |  |
 | configuration.clientBurst | string | `nil` |  |
@@ -278,6 +278,7 @@ helm install velero chart/
 | nodeAgent.extraEnvVars | object | `{}` |  |
 | nodeAgent.dnsPolicy | string | `"ClusterFirst"` |  |
 | nodeAgent.podSecurityContext.runAsUser | int | `0` |  |
+| nodeAgent.podSecurityContext.fsGroup | int | `1337` |  |
 | nodeAgent.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | nodeAgent.lifecycle | object | `{}` |  |
 | nodeAgent.nodeSelector | object | `{}` |  |
@@ -301,6 +302,8 @@ helm install velero chart/
 | bbtests.scripts.envs.MINIO_HOST | string | `"http://minio.minio.svc"` |  |
 | bbtests.scripts.envs.MINIO_USER | string | `"minio"` |  |
 | bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
+| bbtests.scripts.envs.SCHEDULED_BACKUP_NAME | string | `"{{ include \"velero.fullname\" . \| trim }}-scheduled-backup"` |  |
+| bbtests.scripts.envs.SCHEDULED_TEST | string | `"false"` |  |
 | bbtests.scripts.secretEnvs[0].name | string | `"NAMESPACE"` |  |
 | bbtests.scripts.secretEnvs[0].valueFrom.fieldRef.fieldPath | string | `"metadata.namespace"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"minio-volume"` |  |

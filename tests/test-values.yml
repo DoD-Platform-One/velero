@@ -47,5 +47,26 @@ cleanUpCRDs: true
 networkPolicies:
   enabled: true
 
+schedules:
+  scheduled-backup:
+    disabled: false
+    annotations:
+      meta.helm.sh/release-name: "{{ .Release.Name }}"
+      meta.helm.sh/release-namespace: "{{ .Release.Namespace }}"
+    schedule: "0 0 * * *"
+    useOwnerReferencesInBackup: false
+    template:
+      storageLocation: default
+      wait: true
+      labelSelector:
+        matchLabels:
+          app: nginx
+        app: nginx
+      ttl: "1h"
+
+
 bbtests:
   enabled: true
+  scripts:
+    envs:
+      SCHEDULED_TESTS: 'true'

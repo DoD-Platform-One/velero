@@ -123,7 +123,21 @@ if [[ ${BACKUP_FAILED} == "true" ]]; then
   velero backup logs test-backup -n $NAMESPACE
   exit 1
 fi
-echo "Test 1 Success: Created backup."
+
+# Use Scheduled backup to test backup creation
+if [[ ${SCHEDULED_TESTS} == "true" ]]; then 
+  velero backup create --from-schedule $SCHEDULED_BACKUP_NAME --wait || export BACKUP_FAILED="true"
+  if [[ ${BACKUP_FAILED} == "true" ]]; then
+    echo "Test 1 Failure: Cannot create scheduled backup."
+    echo "Printing scheduled backup describe:"
+    velero backup describe test-backup -n $NAMESPACE
+    echo "Printing logs from scheduled backup create:"
+    velero backup logs test-backup -n $NAMESPACE
+    exit 1
+  fi
+fi
+
+echo "Test 1 Success: Created backup and backup from schedule."
 
 echo "State before disaster:"
 kubectl get all -n $NAMESPACE
