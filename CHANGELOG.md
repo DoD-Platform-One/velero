@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [5.1.0-bb.0] - 2023-10-18
+### Changed
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl 1.27.6 -> v1.27.3
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.11.1 -> v1.12.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.7.1 -> v1.8.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi v0.5.1 -> v0.6.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.7.1 -> v1.8.0
+- velero/velero-plugin-for-aws v1.7.1 -> v1.8.0
+- velero/velero-plugin-for-csi v0.5.1 -> v0.6.0
+- velero/velero-restore-helper v1.11.1 -> v1.12.0
+
 ## [5.0.2-bb.5] - 2023-10-18
 ### Changed
 - OSCAL version update from 1.0.0 to 1.1.1
