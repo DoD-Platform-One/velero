@@ -33,7 +33,7 @@ namespace:
 # enabling node-agent). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.12.0
+  tag: v1.12.1
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -50,6 +50,9 @@ fullnameOverride: ""
 # If you are using reloader use the following annotation with your VELERO_SECRET_NAME
 annotations: {}
 # secret.reloader.stakater.com/reload: "<VELERO_SECRET_NAME>"
+
+# Annotations to add to secret
+secretAnnotations: {}
 
 # Labels to add to the Velero deployment's. Optional.
 labels: {}
@@ -71,12 +74,21 @@ podLabels: {}
 # Resource requests/limits to specify for the Velero deployment.
 # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
 resources:
-  requests:
-    cpu: 1000m
-    memory: 512Mi
-  limits:
-    cpu: 1000m
-    memory: 512Mi
+  server:
+    requests:
+      cpu: 1000m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
+# Resource requests/limits to specify for the upgradeCRDs job pod.
+  upgradeJob:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
 
 # Configure the dnsPolicy of the Velero deployment
 # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
@@ -89,7 +101,7 @@ plugins:
     name: velero-plugin-for-csi
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi
-      tag: v0.6.0
+      tag: v0.6.1
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -155,7 +167,7 @@ plugins:
 # If the value is a string then it is evaluated as a template.
 initContainers:
   # - name: velero-plugin-for-csi
-  #   image: velero/velero-plugin-for-csi:v0.6.0
+  #   image: velero/velero-plugin-for-csi:v0.6.1
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -168,7 +180,7 @@ initContainers:
   #       memory: 512Mi
   #       cpu: 100m
   # - name: velero-plugin-for-aws
-  #   image: velero/velero-plugin-for-aws:v1.8.0
+  #   image: velero/velero-plugin-for-aws:v1.8.1
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -744,7 +756,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/pod-volume-restore: RestoreItemAction
 #     data:
-#       image: velero/velero-restore-helper:v1.12.0
+#       image: velero/velero-restore-helper:v1.12.1
 #       cpuRequest: 200m
 #       memRequest: 128Mi
 #       cpuLimit: 200m

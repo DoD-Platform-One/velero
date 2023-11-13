@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.12.0
+appVersion: 1.12.1
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 5.1.0-bb.0
+version: 5.1.3-bb.0
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -23,10 +23,10 @@ dependencies:
     repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/applicationVersions: |
-    - Velero: 1.12.0
+    - Velero: 1.12.1
   helm.sh/images: |
     - name: velero-plugin-for-csi
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.6.0
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.6.1
       condition: plugins.csi.enabled
     - name: velero-plugin-for-aws
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.8.0
@@ -35,7 +35,7 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.8.0
       condition: plugins.azure.enabled
     - name: velero
-      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.12.0
+      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.12.1
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:1.27.3
     - name: velero-tester
