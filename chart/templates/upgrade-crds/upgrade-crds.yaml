@@ -62,13 +62,6 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: crds
-          resources:
-            requests:
-              memory: 256Mi
-              cpu: 100m
-            limits:
-              memory: 256Mi
-              cpu: 100m
       containers:
         - name: velero
           {{- if .Values.image.digest }}
@@ -82,7 +75,7 @@ spec:
           args:
             - -c
             - /velero install --crds-only --dry-run -o yaml | /tmp/kubectl apply -f -
-          {{- with .Values.resources }}
+          {{- with .Values.resources.upgradeJob }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -93,13 +86,6 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: crds
-          resources:
-            requests:
-              memory: 256Mi
-              cpu: 100m
-            limits:
-              memory: 256Mi
-              cpu: 100m
       volumes:
         - name: crds
           emptyDir: {}
