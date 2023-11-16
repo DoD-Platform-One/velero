@@ -50,7 +50,7 @@ spec:
             - /bin/sh
           args:
             - -c
-            - cp `which sh` /tmp && cp `which kubectl` /tmp
+            - cp /bin/sh /tmp && cp /usr/local/bin/kubectl /tmp
           {{- with .Values.kubectl.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
