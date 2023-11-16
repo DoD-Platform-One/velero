@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.1.3-bb.0](https://img.shields.io/badge/Version-5.1.3--bb.0-informational?style=flat-square) ![AppVersion: 1.12.1](https://img.shields.io/badge/AppVersion-1.12.1-informational?style=flat-square)
+![Version: 5.1.3-bb.1](https://img.shields.io/badge/Version-5.1.3--bb.1-informational?style=flat-square) ![AppVersion: 1.12.1](https://img.shields.io/badge/AppVersion-1.12.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -201,7 +201,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"1.27.3"` |  |
+| kubectl.image.tag | string | `"v1.28.3"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
