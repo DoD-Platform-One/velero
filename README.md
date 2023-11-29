@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.1.3-bb.1](https://img.shields.io/badge/Version-5.1.3--bb.1-informational?style=flat-square) ![AppVersion: 1.12.1](https://img.shields.io/badge/AppVersion-1.12.1-informational?style=flat-square)
+![Version: 5.1.3-bb.2](https://img.shields.io/badge/Version-5.1.3--bb.2-informational?style=flat-square) ![AppVersion: 1.12.1](https://img.shields.io/badge/AppVersion-1.12.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -73,7 +73,7 @@ helm install velero chart/
 | plugins.aws.enabled | bool | `false` |  |
 | plugins.aws.name | string | `"velero-plugin-for-aws"` |  |
 | plugins.aws.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws"` |  |
-| plugins.aws.image.tag | string | `"v1.8.0"` |  |
+| plugins.aws.image.tag | string | `"v1.8.2"` |  |
 | plugins.aws.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.aws.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.aws.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -201,7 +201,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.28.3"` |  |
+| kubectl.image.tag | string | `"v1.28.4"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
