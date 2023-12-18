@@ -33,7 +33,7 @@ namespace:
 # enabling node-agent). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.12.1
+  tag: v1.12.2
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -101,7 +101,7 @@ plugins:
     name: velero-plugin-for-csi
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi
-      tag: v0.6.1
+      tag: v0.6.2
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -123,7 +123,7 @@ plugins:
     name: velero-plugin-for-aws
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws
-      tag: v1.8.0
+      tag: v1.8.2
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -145,7 +145,7 @@ plugins:
     name: velero-plugin-for-microsoft-azure
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure
-      tag: v1.8.0
+      tag: v1.8.2
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -167,7 +167,7 @@ plugins:
 # If the value is a string then it is evaluated as a template.
 initContainers:
   # - name: velero-plugin-for-csi
-  #   image: velero/velero-plugin-for-csi:v0.6.1
+  #   image: velero/velero-plugin-for-csi:v0.6.2
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -580,6 +580,8 @@ configuration:
   storeValidationFrequency:
   # How long to wait on persistent volumes and namespaces to terminate during a restore before timing out. Default: 10m
   terminatingResourceTimeout:
+  # Bool flag to configure Velero server to move data by default for all snapshots supporting data movement. Default: false
+  defaultSnapshotMoveData:
   # Comma separated list of velero feature flags. default: empty
   # features: EnableCSI
   features:
@@ -756,7 +758,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/pod-volume-restore: RestoreItemAction
 #     data:
-#       image: velero/velero-restore-helper:v1.12.1
+#       image: velero/velero-restore-helper:v1.12.2
 #       cpuRequest: 200m
 #       memRequest: 128Mi
 #       cpuLimit: 200m

@@ -20,7 +20,9 @@ helm dependency update ./chart
 ## Update chart
 
 ```chart/Chart.yaml```
-- To Do
+Renovate will:
+- Bump `appVersion` and `version` to the appropriate new versions. 
+- Update any image tags under `annotations`
 
 # Modifications made to upstream
 This is a high-level list of modifications that Big Bang has made to the upstream helm chart. You can use this as as cross-check to make sure that no modifications were lost during the upgrade process.
@@ -67,13 +69,12 @@ helm upgrade \
   --values ./overrides/minio.yaml \
   --set monitoring.enabled=true \
   --set kyverno.enabled=false \
-  --set kyvernopolicies.enabled=false \
+  --set kyvernoPolicies.enabled=false \
   --set clusterAuditor.enabled=false \
   --set gatekeeper.enabled=false \
   --set twistlock.enabled=false \
-  --set eckoperator.enabled=false \
+  --set eckOperator.enabled=false \
   --set fluentbit.enabled=false \
-  --set logging.enabled=false \
   --set jaeger.enabled=false
 ```
 `overrides/velero.yaml`

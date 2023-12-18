@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [5.1.6-bb.0] - 2023-12-06
+### Changed
+- Updated to latest chart version `5.1.6`
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.12.1 -> v1.12.2
+- registry1.dso.mil/ironbank/opensource/velero/velero 1.12.1 -> 1.12.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.8.0 -> v1.8.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi v0.6.1 -> v0.6.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.8.0 -> v1.8.2
+- velero/velero-plugin-for-csi v0.6.1 -> v0.6.2
+- velero/velero-restore-helper v1.12.1 -> v1.12.2
+
 ## [5.1.3-bb.2] - 2023-11-25
 ### Changed
 - Updated kubectl chart chart dependancy to  `1.28.4`
