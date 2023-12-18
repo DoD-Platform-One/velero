@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.1.3-bb.2](https://img.shields.io/badge/Version-5.1.3--bb.2-informational?style=flat-square) ![AppVersion: 1.12.1](https://img.shields.io/badge/AppVersion-1.12.1-informational?style=flat-square)
+![Version: 5.1.6-bb.0](https://img.shields.io/badge/Version-5.1.6--bb.0-informational?style=flat-square) ![AppVersion: 1.12.2](https://img.shields.io/badge/AppVersion-1.12.2-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -39,7 +39,7 @@ helm install velero chart/
 |-----|------|---------|-------------|
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.12.1"` |  |
+| image.tag | string | `"v1.12.2"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | nameOverride | string | `""` |  |
@@ -61,7 +61,7 @@ helm install velero chart/
 | plugins.csi.enabled | bool | `false` |  |
 | plugins.csi.name | string | `"velero-plugin-for-csi"` |  |
 | plugins.csi.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi"` |  |
-| plugins.csi.image.tag | string | `"v0.6.1"` |  |
+| plugins.csi.image.tag | string | `"v0.6.2"` |  |
 | plugins.csi.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.csi.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.csi.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -85,7 +85,7 @@ helm install velero chart/
 | plugins.azure.enabled | bool | `false` |  |
 | plugins.azure.name | string | `"velero-plugin-for-microsoft-azure"` |  |
 | plugins.azure.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure"` |  |
-| plugins.azure.image.tag | string | `"v1.8.0"` |  |
+| plugins.azure.image.tag | string | `"v1.8.2"` |  |
 | plugins.azure.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.azure.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.azure.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -247,6 +247,7 @@ helm install velero chart/
 | configuration.restoreResourcePriorities | string | `nil` |  |
 | configuration.storeValidationFrequency | string | `nil` |  |
 | configuration.terminatingResourceTimeout | string | `nil` |  |
+| configuration.defaultSnapshotMoveData | string | `nil` |  |
 | configuration.features | string | `nil` |  |
 | configuration.namespace | string | `nil` |  |
 | configuration.extraEnvVars | object | `{}` |  |
