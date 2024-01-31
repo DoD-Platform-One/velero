@@ -33,7 +33,7 @@ namespace:
 # enabling node-agent). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.12.2
+  tag: v1.12.3
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -90,6 +90,22 @@ resources:
       cpu: 100m
       memory: 256Mi
 
+# Resource requests/limits to specify for the upgradeCRDs job pod. Need to be adjusted by user accordingly.
+upgradeJobResources: {}
+# requests:
+#     cpu: 50m
+#     memory: 128Mi
+#   limits:
+#     cpu: 100m
+#     memory: 256Mi
+upgradeCRDsJob:
+  # Extra volumes for the Upgrade CRDs Job. Optional.
+  extraVolumes: []
+  # Extra volumeMounts for the Upgrade CRDs Job. Optional.
+  extraVolumeMounts: []
+  # Extra key/value pairs to be used as environment variables. Optional.
+  extraEnvVars: {}
+
 # Configure the dnsPolicy of the Velero deployment
 # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
 dnsPolicy: ClusterFirst
@@ -101,7 +117,7 @@ plugins:
     name: velero-plugin-for-csi
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi
-      tag: v0.6.2
+      tag: v0.6.3
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -167,7 +183,7 @@ plugins:
 # If the value is a string then it is evaluated as a template.
 initContainers:
   # - name: velero-plugin-for-csi
-  #   image: velero/velero-plugin-for-csi:v0.6.2
+  #   image: velero/velero-plugin-for-csi:v0.6.3
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -423,7 +439,7 @@ metrics:
 kubectl:
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.28.4
+    tag: v1.28.6
     # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
     # If used, it will take precedence over the kubectl.image.tag.
     # digest:
@@ -628,7 +644,7 @@ serviceAccount:
 credentials:
   # Whether a secret should be used. Set to false if, for examples:
   # - using kube2iam or kiam to provide AWS IAM credentials instead of providing the key file. (AWS only)
-  # - using workload identity instead of providing the key file. (GCP only)
+  # - using workload identity instead of providing the key file. (Azure/GCP only)
   useSecret: true
   # Name of the secret to create if `useSecret` is true and `existingSecret` is empty
   name:
@@ -758,7 +774,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/pod-volume-restore: RestoreItemAction
 #     data:
-#       image: velero/velero-restore-helper:v1.12.2
+#       image: velero/velero-restore-helper:v1.12.3
 #       cpuRequest: 200m
 #       memRequest: 128Mi
 #       cpuLimit: 200m

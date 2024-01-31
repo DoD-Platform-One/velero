@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [5.2.2-bb.0] - 2024-01-31
+### Changed
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.28.4 -> v1.28.6
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.12.2 -> v1.12.3
+- registry1.dso.mil/ironbank/opensource/velero/velero 1.12.2 -> 1.12.3
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi v0.6.2 -> v0.6.3
+- velero/velero-plugin-for-csi v0.6.2 -> v0.6.3
+- velero/velero-restore-helper v1.12.2 -> v1.12.3
+
 ## [5.1.6-bb.0] - 2023-12-06
 ### Changed
 - Updated to latest chart version `5.1.6`
