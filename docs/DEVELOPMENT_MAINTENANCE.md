@@ -62,29 +62,40 @@ helm upgrade \
   --install bigbang ./bigbang/chart \
   --create-namespace \
   --namespace bigbang \
-  --values ./bigbang/chart/values.yaml \
-  --values ./bigbang/chart/ingress-certs.yaml \
-  --values ./overrides/ib_creds.yaml \
-  --values ./overrides/velero.yaml \
-  --values ./overrides/minio.yaml \
-  --set monitoring.enabled=true \
-  --set kyverno.enabled=false \
-  --set kyvernoPolicies.enabled=false \
-  --set clusterAuditor.enabled=false \
-  --set gatekeeper.enabled=false \
-  --set twistlock.enabled=false \
-  --set eckOperator.enabled=false \
-  --set fluentbit.enabled=false \
-  --set jaeger.enabled=false
+  -f ./bigbang/chart/ingress-certs.yaml \
+  -f ./bigbang/docs/assets/configs/example/dev-sso-values.yaml \
+  -f ./overrides/registry-values.yaml \
+  -f ./overrides/velero.yaml
 ```
 `overrides/velero.yaml`
 ```
+kiali:
+  enabled: false
+kyverno:
+  enabled: false
+kyvernoPolicies:
+  enabled: false
+kyvernoReporter:
+  enabled: false
+promtail:
+  enabled: false
+loki:
+  enabled: false
+neuvector:
+  enabled: false
+tempo:
+  enabled: false
+monitoring:
+  enabled: true
 addons:
   velero:
     enabled: true
     plugins:
     - aws
     values:
+      plugins: 
+        aws: 
+          enabled: true
       image:
         imagePullSecrets:
         - private-registry
@@ -92,7 +103,7 @@ addons:
       configuration:
         backupStorageLocation:
         - provider: aws
-          bucket: velero99
+          bucket: velero123
           config:
             region: "us-gov-west-1"
             insecureSkipTLSVerify: "true"
@@ -125,10 +136,6 @@ addons:
       bbtests:
         enabled: true
 
-```
-`overrides/minio.yaml`
-```
-addons:
   minioOperator:
     enabled: true
 
@@ -163,8 +170,27 @@ addons:
             MINIO_HOST: 'https://minio-api.bigbang.dev'
 ```
 
-- Visit `https://prometheus.bigbang.dev`
-- ...more to do...
+### Setting up
+- The above instructions will bring Velero up quickly, by disabling most other bigbang packages aside from Istio and the Monitoring stack. ib_creds.yaml refers to wherever your registryCredentials key is saved.
+- Once everything comes up, log in to Minio using the credentials above (minio/minio123 by default) and create a Bucket called velero123 (or whatever you set  under addons.velero.values.configuration.backupStorageLocation[].bucket). This ensures that Veleros backups will have a destination.
+- If you encounter an issue where Velero has no deployed releases, you may need to roll back any helm releases and Velero resources before redeploying.
+
+### Backing up a cluster
+
+Velero can be interacted with using its pod:
+
+```
+% kubectl get pods -n velero
+NAME                            READY   STATUS    RESTARTS   AGE
+velero-velero-579bd4f68-6wl4p   2/2     Running   0          3m40s
+
+% kubectl exec -it velero-velero-579bd4f68-6wl4p -n velero -- bash
+bash-5.1$ velero backup create goodbackup
+bash-5.1$ velero backup create monitoringbackup --include-namespaces=monitoring
+```
+
+These backup files will be delivered to Minio, or whatever BackupStorageLocation was chosen. If these backups are not being placed in the Minio bucket, ensure that it was created and named correctly. You can also use `velero backup describe <backupname>` to troubleshoot issues. [Velero Backup Documentation](https://velero.io/docs/v1.10/backup-reference/) can help with taking more fine-grained backups, and [Velero Restore Documentation](https://velero.io/docs/main/restore-reference/) can assist in restoring backups to the same or different clusters.
+
 
 ### automountServiceAccountToken
 The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads). 
