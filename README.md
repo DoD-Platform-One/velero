@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.2.2-bb.0](https://img.shields.io/badge/Version-5.2.2--bb.0-informational?style=flat-square) ![AppVersion: 1.12.3](https://img.shields.io/badge/AppVersion-1.12.3-informational?style=flat-square)
+![Version: 5.2.2-bb.1](https://img.shields.io/badge/Version-5.2.2--bb.1-informational?style=flat-square) ![AppVersion: 1.12.3](https://img.shields.io/badge/AppVersion-1.12.3-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -298,6 +298,12 @@ helm install velero chart/
 | schedules | object | `{}` |  |
 | configMaps | object | `{}` |  |
 | istio.enabled | bool | `false` |  |
+| istio.hardened.enabled | bool | `true` |  |
+| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
+| istio.hardened.tempo.enabled | bool | `true` |  |
+| istio.hardened.tempo.namespaces[0] | string | `"tempo"` |  |
+| istio.hardened.tempo.principals[0] | string | `"cluster.local/ns/tempo/sa/tempo-tempo"` |  |
+| istio.hardened.monitoring.enabled | bool | `true` |  |
 | istio.mtls | object | `{"mode":"STRICT"}` | Default velero peer authentication |
 | istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
 | monitoring.enabled | bool | `false` |  |

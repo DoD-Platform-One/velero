@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [5.2.2-bb.1] - 2024-02-08
+### Added
+- Added istio `allow-nothing` policy
+- Added istio `monitoring-authz` policy
+- Added istio `tempo-authz` policy
+- Added istio `allow-http-envoy-prom` policy
+- Added istio `allow-http` policy
+- Added istio custom policy template
+
 ## [5.2.2-bb.0] - 2024-01-31
 ### Changed
 - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.28.4 -> v1.28.6

@@ -798,6 +798,20 @@ configMaps: {}
 istio:
   # Toggle istio integration
   enabled: false
+  hardened:
+    enabled: true
+    customAuthorizationPolicies: []
+    # - name: "allow-nothing"
+    #   enabled: true
+    #   spec: {}
+    tempo:
+      enabled: true
+      namespaces:
+      - tempo
+      principals:
+      - cluster.local/ns/tempo/sa/tempo-tempo
+    monitoring:
+      enabled: true
   # -- Default velero peer authentication
   mtls:
     # -- STRICT = Allow only mutual TLS traffic,
