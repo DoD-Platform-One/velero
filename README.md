@@ -1,6 +1,6 @@
 # velero
 
-![Version: 5.2.2-bb.1](https://img.shields.io/badge/Version-5.2.2--bb.1-informational?style=flat-square) ![AppVersion: 1.12.3](https://img.shields.io/badge/AppVersion-1.12.3-informational?style=flat-square)
+![Version: 5.2.2-bb.2](https://img.shields.io/badge/Version-5.2.2--bb.2-informational?style=flat-square) ![AppVersion: 1.12.3](https://img.shields.io/badge/AppVersion-1.12.3-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -37,6 +37,7 @@ helm install velero chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| openshift | bool | `false` |  |
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
 | image.tag | string | `"v1.12.3"` |  |

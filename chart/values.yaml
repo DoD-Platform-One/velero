@@ -1,7 +1,9 @@
 ##
-## Configuration settings related to Velero installation namespace
-##
 
+openshift: false
+
+## Configuration settings related to Velero installation namespace
+#
 # Labels settings in namespace
 namespace:
   labels: {}
