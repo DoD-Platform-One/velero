@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.0.0-bb.0] - 2024-02-05
+### Changed
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.12.3 -> v1.13.1
+- registry1.dso.mil/ironbank/opensource/velero/velero 1.12.3 -> 1.13.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.8.2 -> v1.9.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi v0.6.3 -> v0.7.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.8.2 -> v1.9.0
+- velero/velero-plugin-for-aws v1.8.2 -> v1.9.0
+- velero/velero-plugin-for-csi v0.6.3 -> v0.7.0
+- velero/velero-restore-helper v1.12.3 -> v1.13.1
+
 ## [5.2.2-bb.2] - 2024-03-04
 ### Changed
  - Openshift update for deploying Velero into Openshift cluster
