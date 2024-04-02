@@ -1,0 +1,20 @@
+{{- /* Render Istio ServiceEntries */ -}}
+{{- if and .Values.istio.enabled .Values.istio.hardened.enabled -}}
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: allow-neuvector-for-velero
+  namespace: {{ $.Release.Namespace }}
+spec:
+  hosts:
+    - 'neuvector.dev.bigbang.mil'
+  location: MESH_EXTERNAL
+  exportTo:
+  - "."
+  ports:
+    - number: 443
+      name: https
+      protocol: TLS
+  resolution: DNS
+---
+{{- end -}}
