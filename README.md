@@ -1,6 +1,6 @@
 # velero
 
-![Version: 6.0.0-bb.1](https://img.shields.io/badge/Version-6.0.0--bb.1-informational?style=flat-square) ![AppVersion: 1.13.1](https://img.shields.io/badge/AppVersion-1.13.1-informational?style=flat-square)
+![Version: 6.0.0-bb.2](https://img.shields.io/badge/Version-6.0.0--bb.2-informational?style=flat-square) ![AppVersion: 1.13.1](https://img.shields.io/badge/AppVersion-1.13.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -232,13 +232,14 @@ helm install velero chart/
 | configuration.volumeSnapshotLocation[0].credential.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].credential.key | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].config.region | string | `"us-gov-west-1"` |  |
-| configuration.uploaderType | string | `"restic"` | ------------------ `velero server` options: restic,kopia default: restic |
+| configuration.uploaderType | string | `nil` | ------------------ `velero server` default: kopia |
 | configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.fsBackupTimeout | string | `nil` |  |
 | configuration.clientBurst | string | `nil` |  |
 | configuration.clientPageSize | string | `nil` |  |
 | configuration.clientQPS | string | `nil` |  |
 | configuration.defaultBackupStorageLocation | string | `nil` |  |
+| configuration.defaultItemOperationTimeout | string | `nil` |  |
 | configuration.defaultBackupTTL | string | `nil` |  |
 | configuration.defaultVolumeSnapshotLocations | string | `nil` |  |
 | configuration.disableControllers | string | `nil` |  |
@@ -275,7 +276,6 @@ helm install velero chart/
 | snapshotsEnabled | bool | `true` |  |
 | deployNodeAgent | bool | `false` |  |
 | nodeAgent.podVolumePath | string | `"/var/lib/kubelet/pods"` |  |
-| nodeAgent.privileged | bool | `false` |  |
 | nodeAgent.priorityClassName | string | `""` |  |
 | nodeAgent.resources.requests.cpu | string | `"1000m"` |  |
 | nodeAgent.resources.requests.memory | string | `"1024Mi"` |  |
@@ -299,7 +299,9 @@ helm install velero chart/
 | schedules | object | `{}` |  |
 | configMaps | object | `{}` |  |
 | istio.enabled | bool | `false` |  |
-| istio.hardened.enabled | bool | `true` |  |
+| istio.hardened.enabled | bool | `false` |  |
+| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
+| istio.hardened.customServiceEntries | list | `[]` |  |
 | istio.hardened.customAuthorizationPolicies | list | `[]` |  |
 | istio.hardened.tempo.enabled | bool | `true` |  |
 | istio.hardened.tempo.namespaces[0] | string | `"tempo"` |  |
