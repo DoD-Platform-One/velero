@@ -3,6 +3,9 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.0.0-bb.4] - 2024-04-10
+### Changed
+- Update dependency registry1.dso.mil/ironbank/opensource/kubernetes/kubectl to v1.29.3
 ## [6.0.0-bb.3] - 2024-04-03
 ### Added
 - Added custom network policies
