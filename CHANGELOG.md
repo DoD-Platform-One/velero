@@ -3,9 +3,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.0.0-bb.5] - 2024-04-24
+### Changed
+- velero/velero-plugin-for-aws v1.9.1 -> v1.9.2
+- velero/velero-plugin-for-csi v0.7.0 -> v0.7.1
+- velero/velero-restore-helper v1.13.1 -> v1.13.2
+
 ## [6.0.0-bb.4] - 2024-04-10
 ### Changed
 - Update dependency registry1.dso.mil/ironbank/opensource/kubernetes/kubectl to v1.29.3
+
 ## [6.0.0-bb.3] - 2024-04-03
 ### Added
 - Added custom network policies

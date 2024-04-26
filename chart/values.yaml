@@ -185,7 +185,7 @@ plugins:
 # If the value is a string then it is evaluated as a template.
 initContainers:
   # - name: velero-plugin-for-csi
-  #   image: velero/velero-plugin-for-csi:v0.7.0
+  #   image: velero/velero-plugin-for-csi:v0.7.1
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -198,7 +198,7 @@ initContainers:
   #       memory: 512Mi
   #       cpu: 100m
   # - name: velero-plugin-for-aws
-  #   image: velero/velero-plugin-for-aws:v1.9.1
+  #   image: velero/velero-plugin-for-aws:v1.9.2
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -777,7 +777,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/pod-volume-restore: RestoreItemAction
 #     data:
-#       image: velero/velero-restore-helper:v1.13.1
+#       image: velero/velero-restore-helper:v1.13.2
 #       cpuRequest: 200m
 #       memRequest: 128Mi
 #       cpuLimit: 200m
