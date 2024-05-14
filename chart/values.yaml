@@ -35,7 +35,7 @@ namespace:
 # enabling node-agent). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.13.1
+  tag: v1.13.2
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -141,7 +141,7 @@ plugins:
     name: velero-plugin-for-aws
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws
-      tag: v1.9.1
+      tag: v1.9.2
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -163,7 +163,7 @@ plugins:
     name: velero-plugin-for-microsoft-azure
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure
-      tag: v1.9.1
+      tag: v1.9.2
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -441,7 +441,7 @@ metrics:
 kubectl:
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.29.3
+    tag: v1.29.4
     # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
     # If used, it will take precedence over the kubectl.image.tag.
     # digest:

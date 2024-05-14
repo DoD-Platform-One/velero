@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.0.0-bb.6] - 2024-04-29
+### Changed
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.29.3 -> v1.29.4
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.13.1 -> v1.13.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.9.1 -> v1.9.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.9.1 -> v1.9.2
+
+
 ## [6.0.0-bb.5] - 2024-04-24
 ### Changed
 - velero/velero-plugin-for-aws v1.9.1 -> v1.9.2
