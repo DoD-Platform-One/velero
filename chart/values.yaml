@@ -441,7 +441,7 @@ metrics:
 kubectl:
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.29.4
+    tag: v1.29.5
     # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
     # If used, it will take precedence over the kubectl.image.tag.
     # digest:
@@ -580,6 +580,8 @@ configuration:
   defaultVolumeSnapshotLocations:
   # `velero server` default: empty
   disableControllers:
+  # `velero server` default: false
+  disableInformerCache: false
   # `velero server` default: 1h
   garbageCollectionFrequency:
   # Set log-format for Velero pod. Default: text. Other option: json.
@@ -607,6 +609,9 @@ configuration:
   features:
   # `velero server` default: velero
   namespace:
+  # additional command-line arguments that will be passed to the `velero server`
+  # e.g.: extraArgs: ["--foo=bar"]
+  extraArgs: []
 
   # additional key/value pairs to be used as environment variables such as "AWS_CLUSTER_NAME: 'yourcluster.domain.tld'"
   extraEnvVars: {}
@@ -761,6 +766,7 @@ nodeAgent:
 #       myenv: foo
 #     schedule: "0 0 * * *"
 #     useOwnerReferencesInBackup: false
+#     paused: false
 #     template:
 #       ttl: "240h"
 #       storageLocation: default
