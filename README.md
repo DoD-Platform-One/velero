@@ -1,6 +1,6 @@
 # velero
 
-![Version: 6.1.0-bb.0](https://img.shields.io/badge/Version-6.1.0--bb.0-informational?style=flat-square) ![AppVersion: 1.13.2](https://img.shields.io/badge/AppVersion-1.13.2-informational?style=flat-square)
+![Version: 6.4.0-bb.0](https://img.shields.io/badge/Version-6.4.0--bb.0-informational?style=flat-square) ![AppVersion: 1.13.4](https://img.shields.io/badge/AppVersion-1.13.4-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -40,7 +40,7 @@ helm install velero chart/
 | openshift | bool | `false` |  |
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.13.2"` |  |
+| image.tag | string | `"v1.13.4"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | nameOverride | string | `""` |  |
@@ -66,7 +66,7 @@ helm install velero chart/
 | plugins.csi.enabled | bool | `false` |  |
 | plugins.csi.name | string | `"velero-plugin-for-csi"` |  |
 | plugins.csi.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi"` |  |
-| plugins.csi.image.tag | string | `"v0.7.0"` |  |
+| plugins.csi.image.tag | string | `"v0.7.1"` |  |
 | plugins.csi.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.csi.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.csi.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -206,7 +206,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.29.4"` |  |
+| kubectl.image.tag | string | `"v1.29.5"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
