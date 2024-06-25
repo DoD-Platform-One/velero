@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.7.0-bb.0] - 2024-06-18
+### Changed
+- Updated to latest chart version `6.7.0`
+- velero/velero-plugin-for-aws v1.9.2 -> v1.10.0
+- velero/velero-restore-helper v1.13.2 -> v1.14.0
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.29.5 -> v1.29.9
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.9.2 -> v1.10.0
+
 ## [6.6.0-bb.0] - 2024-06-05
 ### Changed
 - Updated to latest chart version `6.6.0`

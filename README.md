@@ -1,6 +1,6 @@
 # velero
 
-![Version: 6.6.0-bb.0](https://img.shields.io/badge/Version-6.6.0--bb.0-informational?style=flat-square) ![AppVersion: 1.13.4](https://img.shields.io/badge/AppVersion-1.13.4-informational?style=flat-square)
+![Version: 6.7.0-bb.0](https://img.shields.io/badge/Version-6.7.0--bb.0-informational?style=flat-square) ![AppVersion: 1.13.4](https://img.shields.io/badge/AppVersion-1.13.4-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -50,10 +50,10 @@ helm install velero chart/
 | labels | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
-| resources.server.requests.cpu | string | `"1000m"` |  |
-| resources.server.requests.memory | string | `"512Mi"` |  |
-| resources.server.limits.cpu | string | `"1000m"` |  |
-| resources.server.limits.memory | string | `"512Mi"` |  |
+| resources.requests.cpu | string | `"1000m"` |  |
+| resources.requests.memory | string | `"512Mi"` |  |
+| resources.limits.cpu | string | `"1000m"` |  |
+| resources.limits.memory | string | `"512Mi"` |  |
 | resources.upgradeJob.requests.cpu | string | `"100m"` |  |
 | resources.upgradeJob.requests.memory | string | `"256Mi"` |  |
 | resources.upgradeJob.limits.cpu | string | `"100m"` |  |
@@ -78,7 +78,7 @@ helm install velero chart/
 | plugins.aws.enabled | bool | `false` |  |
 | plugins.aws.name | string | `"velero-plugin-for-aws"` |  |
 | plugins.aws.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws"` |  |
-| plugins.aws.image.tag | string | `"v1.9.2"` |  |
+| plugins.aws.image.tag | string | `"v1.10.0"` |  |
 | plugins.aws.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.aws.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.aws.container.volumeMounts[0].name | string | `"plugins"` |  |
