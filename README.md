@@ -5,11 +5,13 @@
 A Helm chart for velero
 
 ## Upstream References
+
 * <https://github.com/vmware-tanzu/velero>
 
 * <https://github.com/vmware-tanzu/velero>
 
 ## Learn More
+
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -23,12 +25,13 @@ Kubernetes: `>=1.16.0-0`
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
+
 ```bash
 helm install velero chart/
 ```
@@ -176,7 +179,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[4].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[4].labels.severity | string | `"critical"` |  |
 | metrics.prometheusRule.spec[5].alert | string | `"VeleroBackupItemErrors"` |  |
-| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors."` |  |
+| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{`{{` }} $labels.job {{ `}}`}} ) has item errors."` |  |
 | metrics.prometheusRule.spec[5].expr | string | `"velero_backup_items_errors{job!=\"\"} > 0"` |  |
 | metrics.prometheusRule.spec[5].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[5].labels.severity | string | `"critical"` |  |
