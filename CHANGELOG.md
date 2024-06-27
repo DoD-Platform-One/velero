@@ -3,12 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.7.0-bb.2] - 2024-06-26
+
+### Changed
+
+- registry1.dso.mil/ironbank/opensource/velero/velero v1.13.2 -> v1.14.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.9.2 -> v1.10.0
+
 ## [6.7.0-bb.1] - 2024-06-27
 
 ### Changed
 
 - Fixed duplicate exportTo attribute in serviceentry.yaml
-
 
 ## [6.7.0-bb.0] - 2024-06-18
 

@@ -1,17 +1,15 @@
 # velero
 
-![Version: 6.7.0-bb.1](https://img.shields.io/badge/Version-6.7.0--bb.1-informational?style=flat-square) ![AppVersion: 1.13.2](https://img.shields.io/badge/AppVersion-1.13.2-informational?style=flat-square)
+![Version: 6.7.0-bb.2](https://img.shields.io/badge/Version-6.7.0--bb.2-informational?style=flat-square) ![AppVersion: 1.14.0](https://img.shields.io/badge/AppVersion-1.14.0-informational?style=flat-square)
 
 A Helm chart for velero
 
 ## Upstream References
-
 * <https://github.com/vmware-tanzu/velero>
 
 * <https://github.com/vmware-tanzu/velero>
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -25,13 +23,12 @@ Kubernetes: `>=1.16.0-0`
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install velero chart/
 ```
@@ -43,7 +40,7 @@ helm install velero chart/
 | openshift | bool | `false` |  |
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.13.2"` |  |
+| image.tag | string | `"v1.14.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | nameOverride | string | `""` |  |
@@ -96,7 +93,7 @@ helm install velero chart/
 | plugins.azure.enabled | bool | `false` |  |
 | plugins.azure.name | string | `"velero-plugin-for-microsoft-azure"` |  |
 | plugins.azure.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure"` |  |
-| plugins.azure.image.tag | string | `"v1.9.2"` |  |
+| plugins.azure.image.tag | string | `"v1.10.0"` |  |
 | plugins.azure.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.azure.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.azure.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -182,7 +179,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[4].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[4].labels.severity | string | `"critical"` |  |
 | metrics.prometheusRule.spec[5].alert | string | `"VeleroBackupItemErrors"` |  |
-| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{`{{` }} $labels.job {{ `}}`}} ) has item errors."` |  |
+| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors."` |  |
 | metrics.prometheusRule.spec[5].expr | string | `"velero_backup_items_errors{job!=\"\"} > 0"` |  |
 | metrics.prometheusRule.spec[5].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[5].labels.severity | string | `"critical"` |  |
