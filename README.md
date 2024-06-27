@@ -1,6 +1,6 @@
 # velero
 
-![Version: 6.7.0-bb.0](https://img.shields.io/badge/Version-6.7.0--bb.0-informational?style=flat-square) ![AppVersion: 1.13.4](https://img.shields.io/badge/AppVersion-1.13.4-informational?style=flat-square)
+![Version: 6.7.0-bb.1](https://img.shields.io/badge/Version-6.7.0--bb.1-informational?style=flat-square) ![AppVersion: 1.13.2](https://img.shields.io/badge/AppVersion-1.13.2-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -43,7 +43,7 @@ helm install velero chart/
 | openshift | bool | `false` |  |
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.13.4"` |  |
+| image.tag | string | `"v1.13.2"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | nameOverride | string | `""` |  |
@@ -61,7 +61,10 @@ helm install velero chart/
 | resources.upgradeJob.requests.memory | string | `"256Mi"` |  |
 | resources.upgradeJob.limits.cpu | string | `"100m"` |  |
 | resources.upgradeJob.limits.memory | string | `"256Mi"` |  |
-| upgradeJobResources | object | `{}` |  |
+| upgradeJobResources.requests.cpu | string | `"100m"` |  |
+| upgradeJobResources.requests.memory | string | `"256Mi"` |  |
+| upgradeJobResources.limits.cpu | string | `"100m"` |  |
+| upgradeJobResources.limits.memory | string | `"256Mi"` |  |
 | upgradeCRDsJob.extraVolumes | list | `[]` |  |
 | upgradeCRDsJob.extraVolumeMounts | list | `[]` |  |
 | upgradeCRDsJob.extraEnvVars | object | `{}` |  |
@@ -209,7 +212,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.29.5"` |  |
+| kubectl.image.tag | string | `"v1.29.6"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -230,11 +233,13 @@ helm install velero chart/
 | configuration.backupStorageLocation[0].credential.name | string | `nil` |  |
 | configuration.backupStorageLocation[0].credential.key | string | `nil` |  |
 | configuration.backupStorageLocation[0].config.region | string | `"us-gov-west-1"` |  |
+| configuration.backupStorageLocation[0].annotations | object | `{}` |  |
 | configuration.volumeSnapshotLocation[0].name | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].provider | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].credential.name | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].credential.key | string | `nil` |  |
 | configuration.volumeSnapshotLocation[0].config.region | string | `"us-gov-west-1"` |  |
+| configuration.volumeSnapshotLocation[0].annotations | object | `{}` |  |
 | configuration.uploaderType | string | `nil` | ------------------ `velero server` default: kopia |
 | configuration.backupSyncPeriod | string | `nil` |  |
 | configuration.fsBackupTimeout | string | `nil` |  |
@@ -246,6 +251,7 @@ helm install velero chart/
 | configuration.defaultBackupTTL | string | `nil` |  |
 | configuration.defaultVolumeSnapshotLocations | string | `nil` |  |
 | configuration.disableControllers | string | `nil` |  |
+| configuration.disableInformerCache | bool | `false` |  |
 | configuration.garbageCollectionFrequency | string | `nil` |  |
 | configuration.logFormat | string | `nil` |  |
 | configuration.logLevel | string | `nil` |  |
@@ -259,6 +265,7 @@ helm install velero chart/
 | configuration.defaultSnapshotMoveData | string | `nil` |  |
 | configuration.features | string | `nil` |  |
 | configuration.namespace | string | `nil` |  |
+| configuration.extraArgs | list | `[]` |  |
 | configuration.extraEnvVars | object | `{}` |  |
 | configuration.defaultVolumesToFsBackup | string | `nil` |  |
 | configuration.defaultRepoMaintainFrequency | string | `nil` |  |
@@ -269,6 +276,7 @@ helm install velero chart/
 | serviceAccount.server.name | string | `nil` |  |
 | serviceAccount.server.annotations | string | `nil` |  |
 | serviceAccount.server.labels | string | `nil` |  |
+| serviceAccount.server.imagePullSecrets | list | `[]` |  |
 | credentials.useSecret | bool | `true` |  |
 | credentials.name | string | `nil` |  |
 | credentials.existingSecret | string | `nil` |  |
