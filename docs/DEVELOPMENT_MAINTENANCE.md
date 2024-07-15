@@ -191,6 +191,26 @@ bash-5.1$ velero backup create monitoringbackup --include-namespaces=monitoring
 
 These backup files will be delivered to Minio, or whatever BackupStorageLocation was chosen. If these backups are not being placed in the Minio bucket, ensure that it was created and named correctly. You can also use `velero backup describe <backupname>` to troubleshoot issues. [Velero Backup Documentation](https://velero.io/docs/v1.10/backup-reference/) can help with taking more fine-grained backups, and [Velero Restore Documentation](https://velero.io/docs/main/restore-reference/) can assist in restoring backups to the same or different clusters.
 
+### Big Bang Integration Testing
+
+As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages. 
+
+    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Velero enabled (the below is a reference, actual changes could be more depending on what changes where made to Velero in the pakcage MR).
+
+### [test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)
+    ```yaml
+    addons:
+      velero:
+        enabled: true
+        git:
+          tag: null
+          branch: <my-package-branch-that-needs-testing>
+        values:
+          istio:
+            hardened:
+              enabled: true
+      ### Additional compononents of Velero should be changed to reflect testing changes introduced in the package MR
+    ```
 
 ### automountServiceAccountToken
 The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads). 
