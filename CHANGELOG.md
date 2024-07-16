@@ -3,14 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.7.0-bb.4] - 2024-07-16
+
+### Changed
+
+- Removed shared auth policies
+
 ## [6.7.0-bb.3] - 2024-07-10
 
 ### Changed
 
 - Added bigbang test integration within DEVELOPMENT_MAINTENANCE.md
 
-## [6.7.0-bb.2] - 2024-06-26
-
+## [6.7.0-bb.2] - 2024-06-18
 ### Changed
 
 - registry1.dso.mil/ironbank/opensource/velero/velero v1.13.2 -> v1.14.0
