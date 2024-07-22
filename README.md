@@ -9,6 +9,10 @@ A Helm chart for velero
 
 * <https://github.com/vmware-tanzu/velero>
 
+### Upstream Release Notes
+
+The [upstream Tanzu Velero chart changelog](https://github.com/vmware-tanzu/helm-charts/releases) may help when reviewing this package.
+
 ## Learn More
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
