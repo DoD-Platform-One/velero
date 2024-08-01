@@ -40,6 +40,7 @@ spec:
         {{- if .Values.podLabels }}
           {{- toYaml .Values.podLabels | nindent 8 }}
         {{- end }}
+        {{- include "bigbang.labels" . | nindent 8 }}
     {{- if or .Values.podAnnotations .Values.metrics.enabled (and .Values.credentials.useSecret (not .Values.credentials.existingSecret)) }}
       annotations:
       {{- with .Values.podAnnotations }}

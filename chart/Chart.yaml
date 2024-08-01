@@ -3,7 +3,7 @@ appVersion: 1.14.0
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 6.7.0-bb.4
+version: 6.7.0-bb.5
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -24,6 +24,9 @@ dependencies:
 annotations:
   bigbang.dev/applicationVersions: |
     - Velero: 1.14.0
+  bigbang.dev/upstreamReleaseNotesMarkdown: |
+    * [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
+    * [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
   helm.sh/images: |
     - name: velero-plugin-for-csi
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
@@ -39,5 +42,5 @@ annotations:
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.6
     - name: velero-tester
-      condition: bbtests.enabled 
+      condition: bbtests.enabled
       image: registry1.dso.mil/bigbang-ci/velero-tester:1.1.0
