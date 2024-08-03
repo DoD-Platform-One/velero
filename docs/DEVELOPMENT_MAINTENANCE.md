@@ -163,11 +163,11 @@ addons:
         enabled: false
         cypress:
           envs:
-            cypress_url: 'https://minio.bigbang.dev/login'
+            cypress_url: 'https://minio.dev.bigbang.mil/login'
         scripts:
           envs:
             MINIO_PORT: ''
-            MINIO_HOST: 'https://minio-api.bigbang.dev'
+            MINIO_HOST: 'https://minio-api.dev.bigbang.mil'
 ```
 
 ### Setting up
