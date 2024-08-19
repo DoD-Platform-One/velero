@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 6.7.0-bb.7](https://img.shields.io/badge/Version-6.7.0--bb.7-informational?style=flat-square) ![AppVersion: 1.14.0](https://img.shields.io/badge/AppVersion-1.14.0-informational?style=flat-square)
+![Version: 6.7.0-bb.8](https://img.shields.io/badge/Version-6.7.0--bb.8-informational?style=flat-square) ![AppVersion: 1.14.0](https://img.shields.io/badge/AppVersion-1.14.0-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -312,6 +312,7 @@ helm install velero chart/
 | nodeAgent.dnsConfig | object | `{}` |  |
 | schedules | object | `{}` |  |
 | configMaps | object | `{}` |  |
+| domain | string | `"dev.bigbang.mil"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
