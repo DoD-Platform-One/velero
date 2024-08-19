@@ -811,6 +811,8 @@ configMaps: {}
 ## End of additional Velero resource settings.
 ##
 
+domain: dev.bigbang.mil
+
 istio:
   # Toggle istio integration
   enabled: false
