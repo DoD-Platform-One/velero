@@ -4,22 +4,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [6.7.0-bb.9] - 2024-08-21
+
+### Changed
+
+- Updated registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.29.7 -> v1.29.8
+- Updated ironbank/opensource/nginx/nginx 1.26.1 -> 1.26.2
+
 ## [6.7.0-bb.8] - 2024-08-15
 
 ### Changed
+
 - Updated the service entries to include minio, and made dynamic with domain
 
 ## [6.7.0-bb.7] - 2024-08-02
 
 ### Changed
+
 - Updated kubectl to v1.29.7
 - URL fixes in DEVELOPMENT_MAINTENANCE.md
 
 ## [6.7.0-bb.6] - 2024-08-02
 
 ### Changed
-- Updated test-values.yaml file to remove duplicate values that are already set in the chart defaults
 
+- Updated test-values.yaml file to remove duplicate values that are already set in the chart defaults
 
 ## [6.7.0-bb.5] - 2024-08-01
 
@@ -41,6 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added bigbang test integration within DEVELOPMENT_MAINTENANCE.md
 
 ## [6.7.0-bb.2] - 2024-06-18
+
 ### Changed
 
 - registry1.dso.mil/ironbank/opensource/velero/velero v1.13.2 -> v1.14.0
@@ -188,14 +198,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- Updated kubectl chart chart dependancy to  `1.28.4`
+- Updated kubectl chart chart dependancy to `1.28.4`
 - Updated velero-plugin-for-aws dependency to `1.8.2`
 
 ## [5.1.3-bb.1] - 2023-11-15
 
 ### Changed
 
-- Updated kubectl chart chart dependancy to  `1.28.3`
+- Updated kubectl chart chart dependancy to `1.28.3`
 
 ## [5.1.3-bb.0] - 2023-11-01
 
