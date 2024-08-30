@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 6.7.0-bb.10](https://img.shields.io/badge/Version-6.7.0--bb.10-informational?style=flat-square) ![AppVersion: 1.14.0](https://img.shields.io/badge/AppVersion-1.14.0-informational?style=flat-square)
+![Version: 7.1.5-bb.0](https://img.shields.io/badge/Version-7.1.5--bb.0-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
 
 A Helm chart for velero
 

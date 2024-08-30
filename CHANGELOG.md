@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [7.1.5-bb.0] - 2024-08-30
+
+### Updated
+
+- Updated velero version to 7.1.5
+- velero/velero-plugin-for-aws v1.9.2 -> v1.10.1
+- velero/velero-restore-helper v1.13.2 -> v1.14.1
+
 ## [6.7.0-bb.10] - 2024-08-27
 
 ### Updated
