@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 7.1.5-bb.0](https://img.shields.io/badge/Version-7.1.5--bb.0-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
+![Version: 7.1.5-bb.1](https://img.shields.io/badge/Version-7.1.5--bb.1-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -46,7 +46,7 @@ helm install velero chart/
 | openshift | bool | `false` |  |
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.14.0"` |  |
+| image.tag | string | `"v1.14.1"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | nameOverride | string | `""` |  |
@@ -87,7 +87,7 @@ helm install velero chart/
 | plugins.aws.enabled | bool | `false` |  |
 | plugins.aws.name | string | `"velero-plugin-for-aws"` |  |
 | plugins.aws.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws"` |  |
-| plugins.aws.image.tag | string | `"v1.10.0"` |  |
+| plugins.aws.image.tag | string | `"v1.10.1"` |  |
 | plugins.aws.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.aws.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.aws.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -99,7 +99,7 @@ helm install velero chart/
 | plugins.azure.enabled | bool | `false` |  |
 | plugins.azure.name | string | `"velero-plugin-for-microsoft-azure"` |  |
 | plugins.azure.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure"` |  |
-| plugins.azure.image.tag | string | `"v1.10.0"` |  |
+| plugins.azure.image.tag | string | `"v1.10.1"` |  |
 | plugins.azure.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.azure.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.azure.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -185,7 +185,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[4].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[4].labels.severity | string | `"critical"` |  |
 | metrics.prometheusRule.spec[5].alert | string | `"VeleroBackupItemErrors"` |  |
-| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{`{{` }} $labels.job {{ `}}`}} ) has item errors."` |  |
+| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors."` |  |
 | metrics.prometheusRule.spec[5].expr | string | `"velero_backup_items_errors{job!=\"\"} > 0"` |  |
 | metrics.prometheusRule.spec[5].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[5].labels.severity | string | `"critical"` |  |

@@ -31,7 +31,7 @@ spec:
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         helm.sh/chart: {{ include "velero.chart" . }}
       {{- if .Values.podLabels }}
-        {{- toYaml .Values.podLabels | nindent 8 }}
+        {{- tpl (toYaml .Values.podLabels | nindent 8) . }}
       {{- end }}
     {{- if or .Values.podAnnotations .Values.metrics.enabled (and .Values.credentials.useSecret (not .Values.credentials.existingSecret)) }}
       annotations:
@@ -80,7 +80,7 @@ spec:
         - name: kopia-udmrepo
           emptyDir: {}
         - name: kopia-cache
-          emptyDir: {}          
+          emptyDir: {}
         {{- end }}
         {{- if .Values.nodeAgent.extraVolumes }}
         {{- toYaml .Values.nodeAgent.extraVolumes | nindent 8 }}
