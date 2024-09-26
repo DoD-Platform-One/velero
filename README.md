@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 7.2.1-bb.0](https://img.shields.io/badge/Version-7.2.1--bb.0-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
+![Version: 7.2.1-bb.1](https://img.shields.io/badge/Version-7.2.1--bb.1-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -185,7 +185,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[4].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[4].labels.severity | string | `"critical"` |  |
 | metrics.prometheusRule.spec[5].alert | string | `"VeleroBackupItemErrors"` |  |
-| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors."` |  |
+| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has item errors."` |  |
 | metrics.prometheusRule.spec[5].expr | string | `"velero_backup_items_errors{job!=\"\"} > 0"` |  |
 | metrics.prometheusRule.spec[5].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[5].labels.severity | string | `"critical"` |  |
