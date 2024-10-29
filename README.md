@@ -1,29 +1,28 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 7.2.1-bb.3](https://img.shields.io/badge/Version-7.2.1--bb.3-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
+![Version: 7.2.1-bb.4](https://img.shields.io/badge/Version-7.2.1--bb.4-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
 
 A Helm chart for velero
 
 ## Upstream References
 * <https://github.com/vmware-tanzu/velero>
 
-* <https://github.com/vmware-tanzu/velero>
-
-### Upstream Release Notes
+## Upstream Release Notes
 
 * [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
 * [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
 
 ## Learn More
-* [Application Overview](docs/overview.md)
-* [Other Documentation](docs/)
+
+- [Application Overview](docs/overview.md)
+- [Other Documentation](docs/)
 
 ## Pre-Requisites
 
-* Kubernetes Cluster deployed
-* Kubernetes config installed in `~/.kube/config`
-* Helm installed
+- Kubernetes Cluster deployed
+- Kubernetes config installed in `~/.kube/config`
+- Helm installed
 
 Kubernetes: `>=1.16.0-0`
 
@@ -35,6 +34,7 @@ https://helm.sh/docs/intro/install/
 
 * Clone down the repository
 * cd into directory
+
 ```bash
 helm install velero chart/
 ```
@@ -185,7 +185,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[4].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[4].labels.severity | string | `"critical"` |  |
 | metrics.prometheusRule.spec[5].alert | string | `"VeleroBackupItemErrors"` |  |
-| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has item errors."` |  |
+| metrics.prometheusRule.spec[5].annotations.message | string | `"Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors."` |  |
 | metrics.prometheusRule.spec[5].expr | string | `"velero_backup_items_errors{job!=\"\"} > 0"` |  |
 | metrics.prometheusRule.spec[5].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[5].labels.severity | string | `"critical"` |  |
@@ -215,7 +215,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.29.8"` |  |
+| kubectl.image.tag | string | `"v1.30.6"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
