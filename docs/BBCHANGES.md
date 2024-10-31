@@ -86,33 +86,4 @@ kubectl:
     sidecar.istio.io/inject: 'false'
 ```
 
-- To support CA bundle trusting, `chart/templates/cert-secret.yaml` was added and `chart/templates/deployment.yaml` was modified to utilize this cert:
-
-```yaml
-spec:
-  template:
-    spec:
-      containers:
-          volumeMounts:
-            {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
-            - name: cacert
-              subPath: ca-bundle.crt
-              mountPath: /etc/ssl/certs/ca-bundle.crt
-            {{- end }}
-          env:
-            {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
-            {{- if eq $provider "aws" }}
-            - name: AWS_CA_BUNDLE
-              value: /etc/ssl/certs/ca-bundle.crt
-            {{- else if eq $provider "azure" }}
-            - name: REQUESTS_CA_BUNDLE
-              value: /etc/ssl/certs/ca-bundle.crt
-            {{- end }}
-            {{- end }}
-      volumes:
-        {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
-        - name: cabundle
-          secret:
-            secretName: {{ include "velero.secretName" . }}-cabundle
-        {{- end }}
-```
+- To support CA bundle trusting, `chart/templates/cert-secret.yaml` was added.  `chart/templates/deployment.yaml` was modified to mount CA certs to `/etc/ssl/certs/ca-bundle-{{ $value.bucket }}.crt`
