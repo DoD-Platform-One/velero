@@ -197,10 +197,10 @@ spec:
             - name: scratch
               mountPath: /scratch
             {{- range $key, $value := .Values.configuration.backupStorageLocation }}
-            {{- if not (empty $value.caCert ) -}}
-            - name: cacert
-              subPath: ca-bundle.crt
-              mountPath: /etc/ssl/certs/ca-bundle.crt
+            {{- if not (empty $value.caCert) }}
+            - name: cacert-{{ $value.bucket }}
+              subPath: ca-bundle-{{ $value.bucket }}.crt
+              mountPath: /etc/ssl/certs/ca-bundle-{{ $value.bucket }}.crt
             {{- end }}
             {{- end }}
             {{- if .Values.containerSecurityContext.readOnlyRootFilesystem }}
@@ -297,10 +297,10 @@ spec:
           emptyDir: {}
         {{- end }}
         {{- range $key, $value := .Values.configuration.backupStorageLocation }}
-        {{- if not (empty $value.caCert ) -}}
-        - name: cacert
+        {{- if not (empty $value.caCert) }}
+        - name: cacert-{{ $value.bucket }}
           secret:
-            secretName: {{ include "velero.secretName" . }}-cabundle
+            secretName: {{ include "velero.secretName" $ }}-{{ $value.bucket }}-cabundle
         {{- end }}
         {{- end }}
         - name: plugins

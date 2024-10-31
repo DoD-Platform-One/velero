@@ -3,12 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [7.2.1-bb.5] - 2024-10-30
+
+### Changed
+
+- Fixed caCert issue preventing tls certs from being used with Backupstoragelocations
+
 ## [7.2.1-bb.4] - 2024-10-25
 
 ### Removed
 
 - Reverted old Kiali Label commits
-
 
 ## [7.2.1-bb.3] - 2024-10-24
 
