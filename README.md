@@ -1,28 +1,30 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 7.2.1-bb.5](https://img.shields.io/badge/Version-7.2.1--bb.5-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
+![Version: 7.2.2-bb.0](https://img.shields.io/badge/Version-7.2.2--bb.0-informational?style=flat-square) ![AppVersion: 1.14.1](https://img.shields.io/badge/AppVersion-1.14.1-informational?style=flat-square)
 
 A Helm chart for velero
 
 ## Upstream References
-* <https://github.com/vmware-tanzu/velero>
+- <https://github.com/vmware-tanzu/velero>
+
+- <https://github.com/vmware-tanzu/velero>
 
 ## Upstream Release Notes
 
-* [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
-* [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
+- [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
+- [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
 
 ## Learn More
 
-* [Application Overview](docs/overview.md)
-* [Other Documentation](docs/)
+- [Application Overview](docs/overview.md)
+- [Other Documentation](docs/)
 
 ## Pre-Requisites
 
-* Kubernetes Cluster deployed
-* Kubernetes config installed in `~/.kube/config`
-* Helm installed
+- Kubernetes Cluster deployed
+- Kubernetes config installed in `~/.kube/config`
+- Helm installed
 
 Kubernetes: `>=1.16.0-0`
 
@@ -32,8 +34,8 @@ https://helm.sh/docs/intro/install/
 
 ## Deployment
 
-* Clone down the repository
-* cd into directory
+- Clone down the repository
+- cd into directory
 
 ```bash
 helm install velero chart/
