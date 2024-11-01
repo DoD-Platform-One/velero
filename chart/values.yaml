@@ -396,7 +396,7 @@ metrics:
         severity: critical
     - alert: VeleroBackupItemErrors
       annotations:
-        message: Velero backup job ( {{ `{{` }} $labels.job {{ `}}` }} ) has item errors.
+        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has item errors.
       expr: velero_backup_items_errors{job!=""} > 0
       for: 10m
       labels:
