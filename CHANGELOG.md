@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [7.2.2-bb.1] - 2024-11-07
+
+### Changed
+
+- Updated velero-restore-helper v1.14.1 -> v1.15.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.10.1 -> v1.11.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.10.1 -> v1.11.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero 1.14.1 -> 1.15.0
+
 ## [7.2.2-bb.0] - 2024-10-31
 
 ### Changed
