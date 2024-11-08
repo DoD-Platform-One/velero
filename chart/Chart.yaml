@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.14.1
+appVersion: 1.15.0
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 7.2.2-bb.0
+version: 7.2.2-bb.1
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -23,7 +23,7 @@ dependencies:
     repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/applicationVersions: |
-    - Velero: 1.14.1
+    - Velero: 1.15.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     * [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
     * [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
@@ -32,13 +32,13 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
       condition: plugins.csi.enabled
     - name: velero-plugin-for-aws
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.11.0
       condition: plugins.aws.enabled
     - name: velero-plugin-for-azure
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.10.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.11.0
       condition: plugins.azure.enabled
     - name: velero
-      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.14.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.15.0
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.6
     - name: velero-tester
