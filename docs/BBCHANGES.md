@@ -16,9 +16,9 @@ image:
   tag: v1.7.0
   pullPolicy: IfNotPresent
   imagePullSecrets:
-  - private-registry
+    - private-registry
 
-initContainers: 
+initContainers:
   - name: velero-plugin-for-aws
     image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.2.0
     imagePullPolicy: IfNotPresent
@@ -62,7 +62,7 @@ monitoring:
 
 networkPolicies:
   enabled: false
-  ingressLabels: 
+  ingressLabels:
     app: istio-ingressgateway
     istio: ingressgateway
   controlPlaneCidr: 0.0.0.0/0
@@ -83,7 +83,70 @@ In addition to the Iron Bank and Big Bang changes, the following changes were ma
 ```yaml
 kubectl:
   annotations:
-    sidecar.istio.io/inject: 'false'
+    sidecar.istio.io/inject: "false"
 ```
 
-- To support CA bundle trusting, `chart/templates/cert-secret.yaml` was added.  `chart/templates/deployment.yaml` was modified to mount CA certs to `/etc/ssl/certs/ca-bundle-{{ $value.bucket }}.crt`
+- To support CA bundle trusting, `chart/templates/cert-secret.yaml` was added and `chart/templates/deployment.yaml` was modified to utilize this cert:
+
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+          volumeMounts:
+            {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+            - name: cacert
+              subPath: ca-bundle.crt
+              mountPath: /etc/ssl/certs/ca-bundle.crt
+            {{- end }}
+          env:
+            {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+            {{- if eq $provider "aws" }}
+            - name: AWS_CA_BUNDLE
+              value: /etc/ssl/certs/ca-bundle.crt
+            {{- else if eq $provider "azure" }}
+            - name: REQUESTS_CA_BUNDLE
+              value: /etc/ssl/certs/ca-bundle.crt
+            {{- end }}
+            {{- end }}
+      volumes:
+        {{- if not (empty .Values.configuration.backupStorageLocation.caCert) }}
+        - name: cabundle
+          secret:
+            secretName: {{ include "velero.secretName" . }}-cabundle
+        {{- end }}
+```
+
+- Velero default RBAC modification. Previous role has full access (\*) to all API groups, resources, and verbs, allowing unrestricted access to cluster resources. This updated role is now restricted to specific resources and actions needed for Velero to deploy with default rbac in both the core Kubernetes API and the velero.io API group.
+
+```yaml
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: velero-default-rbac-role
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: {{ include "velero.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "velero.chart" . }}
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "persistentvolumeclaims", "namespaces", "secrets", "services"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["daemonsets", "replicasets", "statefulsets", "deployments", "services"]
+    verbs: ["get", "list", "watch", "delete"]
+  - apiGroups: ["autoscaling"]
+    resources: ["horizontalpodautoscalers"]
+    verbs: ["get", "list", "create", "watch", "delete"]
+  - apiGroups: ["batch"]
+    resources: ["cronjobs", "jobs"]
+    verbs: ["get", "list", "create", "watch"]
+  - apiGroups: ["velero.io"]
+    resources: [""]
+    verbs: ["create", "get", "list", "update", "patch", "delete", "watch"]
+{{- end }}
+```

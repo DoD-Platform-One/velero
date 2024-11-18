@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "velero.fullname" . }}-server
+  name: velero-default-rbac-role
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: server
@@ -16,6 +16,6 @@ subjects:
     name: {{ include "velero.serverServiceAccount" . }}
 roleRef:
   kind: Role
-  name: {{ include "velero.fullname" . }}-server
+  name: velero-default-rbac-role
   apiGroup: rbac.authorization.k8s.io
 {{- end }}
