@@ -32,7 +32,7 @@ if [ $(mc ls test/velero >/dev/null; echo $?) -eq 0 ]; then
   exit 0
 else
   mc mb test/velero
-  mc policy --insecure set public test/velero
+  mc anonymous set public test/velero
   echo "Setup 2 Success: MinIO Bucket Created"
 fi
 

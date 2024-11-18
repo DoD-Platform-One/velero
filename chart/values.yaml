@@ -6,7 +6,8 @@ openshift: false
 #
 # Labels settings in namespace
 namespace:
-  labels: {}
+  labels:
+    {}
     # Enforce Pod Security Standards with Namespace Labels
     # https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/
     # - key: pod-security.kubernetes.io/enforce
@@ -26,7 +27,6 @@ namespace:
 ## End of namespace-related settings.
 ##
 
-
 ##
 ## Configuration settings that directly affect the Velero deployment YAML.
 ##
@@ -42,7 +42,7 @@ image:
   pullPolicy: IfNotPresent
   # One or more secrets to be used when pulling images
   imagePullSecrets:
-  - private-registry
+    - private-registry
 
 nameOverride: ""
 fullnameOverride: ""
@@ -63,7 +63,8 @@ labels: {}
 #
 # If using kube2iam or kiam, use the following annotation with your AWS_ACCOUNT_ID
 # and VELERO_ROLE_NAME filled in:
-podAnnotations: {}
+podAnnotations:
+  {}
   #  iam.amazonaws.com/role: "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<VELERO_ROLE_NAME>"
 
 # Additional pod labels for Velero deployment's template. Optional
@@ -82,7 +83,7 @@ resources:
   limits:
     cpu: 1000m
     memory: 512Mi
-# Resource requests/limits to specify for the upgradeCRDs job pod.
+  # Resource requests/limits to specify for the upgradeCRDs job pod.
   upgradeJob:
     requests:
       cpu: 100m
@@ -279,7 +280,8 @@ extraVolumes: []
 extraVolumeMounts: []
 
 # Extra K8s manifests to deploy
-extraObjects: []
+extraObjects:
+  []
   # - apiVersion: secrets-store.csi.x-k8s.io/v1
   #   kind: SecretProviderClass
   #   metadata:
@@ -359,83 +361,83 @@ metrics:
     # namespace: ""
     # Rules to be deployed
     spec:
-    - alert: VeleroVeleroJobAbsent
-      annotations:
-        message: ""
-      expr: absent(up{job="velero-velero", namespace="velero"})
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroBackupPartialFailures
-      annotations:
-        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} partially failed backups.
-      expr: velero_backup_partial_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: warning
-    - alert: VeleroBackupFailures
-      annotations:
-        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backups.
-      expr: velero_backup_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroBackupValidationFailures
-      annotations:
-        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backup validations.
-      expr: velero_backup_validation_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroBackupDeletionFailures
-      annotations:
-        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backup deletions.
-      expr: velero_backup_deletion_failure_total{job!=""} / velero_backup_deletion_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroBackupItemErrors
-      annotations:
-        message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has item errors.
-      expr: velero_backup_items_errors{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroCSISnapshotFailures
-      annotations:
-        message: Velero CSI snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed CSI snapshots.
-      expr: velero_csi_snapshot_failure_total{job!=""} / velero_csi_snapshot_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroRestorePartialFailures
-      annotations:
-        message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} partially failed restores.
-      expr: velero_restore_partial_failure_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: warning
-    - alert: VeleroRestoreFailures
-      annotations:
-        message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed restores.
-      expr: velero_restore_failed_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroRestoreValidationFailures
-      annotations:
-        message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed restore validations.
-      expr: velero_restore_validation_failed_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
-    - alert: VeleroVolumeSnapshotFailures
-      annotations:
-        message: Velero volume snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed volume snapshots.
-      expr: velero_volume_snapshot_failure_total{job!=""} / velero_volume_snapshot_attempt_total{job!=""} > 0
-      for: 10m
-      labels:
-        severity: critical
+      - alert: VeleroVeleroJobAbsent
+        annotations:
+          message: ""
+        expr: absent(up{job="velero-velero", namespace="velero"})
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroBackupPartialFailures
+        annotations:
+          message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} partially failed backups.
+        expr: velero_backup_partial_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: warning
+      - alert: VeleroBackupFailures
+        annotations:
+          message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backups.
+        expr: velero_backup_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroBackupValidationFailures
+        annotations:
+          message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backup validations.
+        expr: velero_backup_validation_failure_total{job!=""} / velero_backup_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroBackupDeletionFailures
+        annotations:
+          message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed backup deletions.
+        expr: velero_backup_deletion_failure_total{job!=""} / velero_backup_deletion_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroBackupItemErrors
+        annotations:
+          message: Velero backup job ( {{`{{`}} $labels.job {{`}}`}} ) has item errors.
+        expr: velero_backup_items_errors{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroCSISnapshotFailures
+        annotations:
+          message: Velero CSI snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed CSI snapshots.
+        expr: velero_csi_snapshot_failure_total{job!=""} / velero_csi_snapshot_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroRestorePartialFailures
+        annotations:
+          message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} partially failed restores.
+        expr: velero_restore_partial_failure_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: warning
+      - alert: VeleroRestoreFailures
+        annotations:
+          message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed restores.
+        expr: velero_restore_failed_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroRestoreValidationFailures
+        annotations:
+          message: Velero restore job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed restore validations.
+        expr: velero_restore_validation_failed_total{job!=""} / velero_restore_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
+      - alert: VeleroVolumeSnapshotFailures
+        annotations:
+          message: Velero volume snapshot job ( {{`{{`}} $labels.job {{`}}`}} ) has {{`{{`}} $value | humanizePercentage {{`}}`}} failed volume snapshots.
+        expr: velero_volume_snapshot_failure_total{job!=""} / velero_volume_snapshot_attempt_total{job!=""} > 0
+        for: 10m
+        labels:
+          severity: critical
 
 kubectl:
   image:
@@ -462,7 +464,7 @@ kubectl:
       cpu: 100m
   # Annotations to set for the upgrade/cleanup job. Optional.
   annotations:
-    sidecar.istio.io/inject: 'false'
+    sidecar.istio.io/inject: "false"
   # Labels to set for the upgrade/cleanup job. Optional.
   labels: {}
 
@@ -477,7 +479,6 @@ cleanUpCRDs: false
 ## End of deployment-related settings.
 ##
 
-
 ##
 ## Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation,
 ## and additional server settings.
@@ -488,75 +489,75 @@ configuration:
   backupStorageLocation:
     # name is the name of the backup storage location where backups should be stored. If a name is not provided,
     # a backup storage location will be created with the name "default". Optional.
-  - name:
-    # provider is the name for the backup storage location provider.
-    provider:
-    # bucket is the name of the bucket to store backups in. Required.
-    bucket:
-    # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
-    caCert:
-    # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
-    prefix:
-    # default indicates this location is the default backup storage location. Optional.
-    default:
-    # validationFrequency defines how frequently Velero should validate the object storage. Optional.
-    validationFrequency:
-    # accessMode determines if velero can write to this backup storage location. Optional.
-    # default to ReadWrite, ReadOnly is used during migrations and restores.
-    accessMode: ReadWrite
-    credential:
-      # name of the secret used by this backupStorageLocation.
-      name:
-      # name of key that contains the secret data to be used.
-      key:
-    # Additional provider-specific configuration. See link above
-    # for details of required/optional fields for your provider.
-    config:
-      region: us-gov-west-1
-    #  s3ForcePathStyle:
-    #  s3Url:
-    #  kmsKeyId:
-    #  resourceGroup:
-    #  The ID of the subscription containing the storage account, if different from the cluster’s subscription. (Azure only)
-    #  subscriptionId:
-    #  storageAccount:
-    #  publicUrl:
-    #  Name of the GCP service account to use for this backup storage location. Specify the
-    #  service account here if you want to use workload identity instead of providing the key file.(GCP only)
-    #  serviceAccount:
-    #  Option to skip certificate validation or not if insecureSkipTLSVerify is set to be true, the client side should set the
-    #  flag. For Velero client Command like velero backup describe, velero backup logs needs to add the flag --insecure-skip-tls-verify
-    #  insecureSkipTLSVerify:
+    - name:
+      # provider is the name for the backup storage location provider.
+      provider:
+      # bucket is the name of the bucket to store backups in. Required.
+      bucket:
+      # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
+      caCert:
+      # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
+      prefix:
+      # default indicates this location is the default backup storage location. Optional.
+      default:
+      # validationFrequency defines how frequently Velero should validate the object storage. Optional.
+      validationFrequency:
+      # accessMode determines if velero can write to this backup storage location. Optional.
+      # default to ReadWrite, ReadOnly is used during migrations and restores.
+      accessMode: ReadWrite
+      credential:
+        # name of the secret used by this backupStorageLocation.
+        name:
+        # name of key that contains the secret data to be used.
+        key:
+      # Additional provider-specific configuration. See link above
+      # for details of required/optional fields for your provider.
+      config:
+        region: us-gov-west-1
+      #  s3ForcePathStyle:
+      #  s3Url:
+      #  kmsKeyId:
+      #  resourceGroup:
+      #  The ID of the subscription containing the storage account, if different from the cluster’s subscription. (Azure only)
+      #  subscriptionId:
+      #  storageAccount:
+      #  publicUrl:
+      #  Name of the GCP service account to use for this backup storage location. Specify the
+      #  service account here if you want to use workload identity instead of providing the key file.(GCP only)
+      #  serviceAccount:
+      #  Option to skip certificate validation or not if insecureSkipTLSVerify is set to be true, the client side should set the
+      #  flag. For Velero client Command like velero backup describe, velero backup logs needs to add the flag --insecure-skip-tls-verify
+      #  insecureSkipTLSVerify:
 
-    # annotations allows adding arbitrary annotations to this BackupStorageLocation resource. Optional.
-    annotations: {}
+      # annotations allows adding arbitrary annotations to this BackupStorageLocation resource. Optional.
+      annotations: {}
 
   # Parameters for the VolumeSnapshotLocation(s). Configure multiple by adding other element(s) to the volumeSnapshotLocation slice.
   # See https://velero.io/docs/v1.6/api-types/volumesnapshotlocation/
   volumeSnapshotLocation:
     # name is the name of the volume snapshot location where snapshots are being taken. Required.
-  - name:
-    # provider is the name for the volume snapshot provider.
-    provider:
-    credential:
-      # name of the secret used by this volumeSnapshotLocation.
-      name:
-      # name of key that contains the secret data to be used.
-      key:
-    # Additional provider-specific configuration. See link above
-    # for details of required/optional fields for your provider.
-    config:
-      region: us-gov-west-1
-  #    apiTimeout:
-  #    resourceGroup:
-  #    The ID of the subscription where volume snapshots should be stored, if different from the cluster’s subscription. If specified, also requires `configuration.volumeSnapshotLocation.config.resourceGroup`to be set. (Azure only)
-  #    subscriptionId:
-  #    incremental:
-  #    snapshotLocation:
-  #    project:
+    - name:
+      # provider is the name for the volume snapshot provider.
+      provider:
+      credential:
+        # name of the secret used by this volumeSnapshotLocation.
+        name:
+        # name of key that contains the secret data to be used.
+        key:
+      # Additional provider-specific configuration. See link above
+      # for details of required/optional fields for your provider.
+      config:
+        region: us-gov-west-1
+      #    apiTimeout:
+      #    resourceGroup:
+      #    The ID of the subscription where volume snapshots should be stored, if different from the cluster’s subscription. If specified, also requires `configuration.volumeSnapshotLocation.config.resourceGroup`to be set. (Azure only)
+      #    subscriptionId:
+      #    incremental:
+      #    snapshotLocation:
+      #    project:
 
-    # annotations allows adding arbitrary annotations to this VolumeSnapshotLocation resource. Optional.
-    annotations: {}
+      # annotations allows adding arbitrary annotations to this VolumeSnapshotLocation resource. Optional.
+      annotations: {}
 
   # These are server-level settings passed as CLI flags to the `velero server` command. Velero
   # uses default values if they're not passed in, so they only need to be explicitly specified
@@ -631,7 +632,6 @@ configuration:
 ## End of backup/snapshot location settings.
 ##
 
-
 ##
 ## Settings for additional Velero resources.
 ##
@@ -642,7 +642,7 @@ rbac:
   # Whether to create the cluster role binding to give administrator permissions to Velero
   clusterAdministrator: true
   # Name of the ClusterRole.
-  clusterAdministratorName: cluster-admin
+  clusterAdministratorName: "cluster-admin"
 
 # Information about the Kubernetes service account Velero uses.
 serviceAccount:
@@ -784,7 +784,7 @@ schedules: {}
 # Velero ConfigMaps.
 # Eg:
 # configMaps:
-    # See: https://velero.io/docs/v1.11/file-system-backup/
+# See: https://velero.io/docs/v1.11/file-system-backup/
 #   fs-restore-action-config:
 #     labels:
 #       velero.io/plugin-config: ""
@@ -819,7 +819,8 @@ istio:
   hardened:
     enabled: false
     outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries: []
+    customServiceEntries:
+      []
       # - name: "allow-google"
       #   enabled: true
       #   spec:
@@ -839,9 +840,9 @@ istio:
     tempo:
       enabled: true
       namespaces:
-      - tempo
+        - tempo
       principals:
-      - cluster.local/ns/tempo/sa/tempo-tempo
+        - cluster.local/ns/tempo/sa/tempo-tempo
     monitoring:
       enabled: true
   # -- Default velero peer authentication
@@ -878,7 +879,7 @@ bbtests:
       MINIO_USER: minio
       MINIO_PASS: minio123
       SCHEDULED_BACKUP_NAME: '{{ include "velero.fullname" . | trim }}-scheduled-backup'
-      SCHEDULED_TEST: 'false'
+      SCHEDULED_TEST: "false"
     secretEnvs:
       - name: NAMESPACE
         valueFrom:
