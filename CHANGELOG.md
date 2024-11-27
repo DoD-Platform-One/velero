@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [7.2.2-bb.3] - 2024-11-25
+
+### Added
+
+- Updated registry1.dso.mil/ironbank/opensource/kubernetes/kubectl Docker tag to v1.30.7
+
 ## [7.2.2-bb.2] - 2024-11-15
 
 ### Added
