@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Updated registry1.dso.mil/ironbank/opensource/kubernetes/kubectl Docker tag to v1.30.7
+- Added the maintenance track annotation and badge
 
 ## [7.2.2-bb.2] - 2024-11-15
 
