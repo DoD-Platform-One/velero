@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [7.2.2-bb.4] - 2024-12-04
+
+### Added
+
+- Updated ironbank/opensource/nginx/nginx (source) 1.27.2 -> 1.27.3
+
 ## [7.2.2-bb.3] - 2024-11-25
 
 ### Added
