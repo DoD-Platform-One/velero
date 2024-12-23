@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.1.0-bb.0] - 2024-12-12
+
+### Added
+
+- Updated velero to 8.1.0
+- Updated registry1.dso.mil/ironbank/opensource/kubernetes/kubectl (source) v1.30.7 -> v1.30.8
+
 ## [7.2.2-bb.4] - 2024-12-04
 
 ### Added
