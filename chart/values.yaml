@@ -141,7 +141,7 @@ plugins:
     name: velero-plugin-for-aws
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws
-      tag: v1.11.0
+      tag: v1.11.1
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -198,7 +198,7 @@ initContainers:
   #       memory: 512Mi
   #       cpu: 100m
   # - name: velero-plugin-for-aws
-  #   image: velero/velero-plugin-for-aws:v1.11.0
+  #   image: velero/velero-plugin-for-aws:v1.11.1
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -790,7 +790,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/pod-volume-restore: RestoreItemAction
 #     data:
-#       image: velero/velero-restore-helper:v1.15.0
+#       image: velero/velero-restore-helper:v1.15.1
 #       cpuRequest: 200m
 #       memRequest: 128Mi
 #       cpuLimit: 200m
