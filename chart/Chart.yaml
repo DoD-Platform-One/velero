@@ -3,7 +3,7 @@ appVersion: 1.15.0
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 8.1.0-bb.0
+version: 8.1.0-bb.1
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -33,7 +33,7 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
       condition: plugins.csi.enabled
     - name: velero-plugin-for-aws
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.11.0
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.11.1
       condition: plugins.aws.enabled
     - name: velero-plugin-for-azure
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.11.0
