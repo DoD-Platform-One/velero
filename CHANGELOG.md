@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [8.2.0-bb.0] - 2024-01-08
+
+### Added
+
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) v1.15.0 -> v1.15.1
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) 1.15.0 -> 1.15.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure (source) v1.11.0 -> v1.11.1
+
 ## [8.1.0-bb.1] - 2024-12-27
 
 ### Added
