@@ -790,7 +790,7 @@ schedules: {}
 #       velero.io/plugin-config: ""
 #       velero.io/pod-volume-restore: RestoreItemAction
 #     data:
-#       image: velero/velero-restore-helper:v1.15.1
+#       image: velero/velero-restore-helper:v1.15.2
 #       cpuRequest: 200m
 #       memRequest: 128Mi
 #       cpuLimit: 200m
