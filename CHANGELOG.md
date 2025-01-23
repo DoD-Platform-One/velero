@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.3.0-bb.0] - 2025-01-22
+
+### Added
+
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl (source) v1.30.8 -> v1.30.9
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) v1.15.1 -> v1.15.2
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) 1.15.1 -> 1.15.2
+
 ## [8.2.0-bb.1] - 2025-01-16
 
 ### Added
