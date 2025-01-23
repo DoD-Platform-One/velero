@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 8.2.0-bb.1](https://img.shields.io/badge/Version-8.2.0--bb.1-informational?style=flat-square) ![AppVersion: 1.15.1](https://img.shields.io/badge/AppVersion-1.15.1-informational?style=flat-square)
+![Version: 8.3.0-bb.0](https://img.shields.io/badge/Version-8.3.0--bb.0-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square)
 
 A Helm chart for velero
 
@@ -48,7 +48,7 @@ helm install velero chart/
 | openshift | bool | `false` |  |
 | namespace.labels | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| image.tag | string | `"v1.15.1"` |  |
+| image.tag | string | `"v1.15.2"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | nameOverride | string | `""` |  |
