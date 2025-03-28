@@ -1,12 +1,13 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 8.4.0-bb.0](https://img.shields.io/badge/Version-8.4.0--bb.0-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 8.4.0-bb.1](https://img.shields.io/badge/Version-8.4.0--bb.1-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
 ## Upstream References
 
+- <https://github.com/vmware-tanzu/velero>
 - <https://github.com/vmware-tanzu/velero>
 
 ## Upstream Release Notes
@@ -29,7 +30,7 @@ Kubernetes: `>=1.16.0-0`
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
