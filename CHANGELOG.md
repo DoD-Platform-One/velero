@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.4.0-bb.1] - 2025-03-28
+
+### Changed
+
+- Updated nginx image in test script to 1.27.4
+
 ## [8.4.0-bb.0] - 2025-02-20
 
 ### Changed
