@@ -103,6 +103,8 @@ This version removes the `nodeAgent.privileged` field, you should use `nodeAgent
 
 The [instructions found here](https://velero.io/docs/v1.14/upgrade-to-1.14/) will assist you in upgrading from version v1.13.x to v1.14.
 
+### Upgrading to v1.13
+
 The [instructions found here](https://velero.io/docs/v1.13/upgrade-to-1.13/) will assist you in upgrading from version v1.12.x to v1.13.
 
 ### Upgrading to v1.12

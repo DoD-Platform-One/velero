@@ -1,12 +1,11 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 8.3.0-bb.0](https://img.shields.io/badge/Version-8.3.0--bb.0-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square)
+![Version: 8.4.0-bb.0](https://img.shields.io/badge/Version-8.4.0--bb.0-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
 ## Upstream References
-- <https://github.com/vmware-tanzu/velero>
 
 - <https://github.com/vmware-tanzu/velero>
 
@@ -217,7 +216,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.30.7"` |  |
+| kubectl.image.tag | string | `"v1.30.9"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
@@ -300,6 +299,7 @@ helm install velero chart/
 | nodeAgent.tolerations | list | `[]` |  |
 | nodeAgent.annotations | object | `{}` |  |
 | nodeAgent.labels | object | `{}` |  |
+| nodeAgent.podLabels | object | `{}` |  |
 | nodeAgent.useScratchEmptyDir | bool | `true` |  |
 | nodeAgent.extraVolumes | list | `[]` |  |
 | nodeAgent.extraVolumeMounts | list | `[]` |  |
@@ -356,4 +356,3 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
-

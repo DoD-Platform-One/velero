@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.4.0-bb.0] - 2025-02-20
+
+### Changed
+
+- Updated velero to 8.4.0
+
 ## [8.3.0-bb.0] - 2025-01-22
 
 ### Added
