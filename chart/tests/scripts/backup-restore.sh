@@ -5,13 +5,23 @@ set -e
 set -x
 trap 'echo ❌ exit at ${0}:${LINENO}, command was: ${BASH_COMMAND} 1>&2' ERR
 
-# need to add specifics and urls
+RETRY_COUNT=12       # Number of retry attempts
+RETRY_DELAY=3       # Delay (in seconds) between retries
+CONNECT_TIMEOUT=120   # Maximum time (in seconds) to wait for a connection
+RETRY_MAX_TIME=120   # Maximum total time (in seconds) for retries
+
 echo "Setup 1: Ensuring MinIO endpoint up and available"
-curl -sIS "${MINIO_HOST}" &>/dev/null || export MINIO_DOWN="true"
-if [[ ${MINIO_DOWN} == "true" ]]; then
-  echo "Setup 1 Failure: Cannot hit MINIO endpoint."
+if curl --retry $RETRY_COUNT \
+        --retry-delay $RETRY_DELAY \
+        --retry-connrefused \
+        --connect-timeout $CONNECT_TIMEOUT \
+        --max-time $RETRY_MAX_TIME \
+        -sIS "$MINIO_HOST" &>/dev/null; then
+  echo "Setup 1 Success: MinIO is up."
+else
+  echo "Setup 1 Failure: Cannot hit MinIO endpoint after $RETRY_COUNT attempts."
   echo "Debug information (curl response):"
-  curl "${MINIO_HOST}"
+  curl -v "${MINIO_HOST}"
   exit 1
 fi
 echo "Setup 1 Success: MinIO is up."
