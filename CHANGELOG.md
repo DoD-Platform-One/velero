@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.4.0-bb.2] - 2025-03-28
+
+### Added
+
+- Added Dynamic Network Policy
+
 ## [8.4.0-bb.1] - 2025-03-28
 
 ### Changed
