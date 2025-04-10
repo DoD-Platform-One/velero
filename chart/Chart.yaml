@@ -3,7 +3,7 @@ appVersion: 1.15.2
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 8.4.0-bb.3
+version: 8.7.1-bb.0
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -41,7 +41,7 @@ annotations:
     - name: velero
       image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.15.2
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.31.7
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3
     - name: velero-tester
       condition: bbtests.enabled
       image: registry1.dso.mil/bigbang-ci/velero-tester:1.1.0
