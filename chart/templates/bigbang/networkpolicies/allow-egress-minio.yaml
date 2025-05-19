@@ -9,10 +9,6 @@ spec:
   policyTypes:
   - Egress
   egress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          app.kubernetes.io/name: velero
   - to:
     - namespaceSelector:
         matchLabels:
