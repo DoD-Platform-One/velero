@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 8.7.1-bb.0](https://img.shields.io/badge/Version-8.7.1--bb.0-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 8.7.1-bb.1](https://img.shields.io/badge/Version-8.7.1--bb.1-informational?style=flat-square) ![AppVersion: 1.15.2](https://img.shields.io/badge/AppVersion-1.15.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -30,7 +30,7 @@ Kubernetes: `>=1.16.0-0`
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
@@ -118,6 +118,7 @@ helm install velero chart/
 | containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | lifecycle | object | `{}` |  |
 | priorityClassName | string | `""` |  |
+| runtimeClassName | string | `""` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
 | livenessProbe.httpGet.path | string | `"/metrics"` |  |
 | livenessProbe.httpGet.port | string | `"http-monitoring"` |  |
@@ -292,6 +293,7 @@ helm install velero chart/
 | snapshotsEnabled | bool | `true` |  |
 | deployNodeAgent | bool | `false` |  |
 | nodeAgent.podVolumePath | string | `"/var/lib/kubelet/pods"` |  |
+| nodeAgent.pluginVolumePath | string | `"/var/lib/kubelet/plugins"` |  |
 | nodeAgent.priorityClassName | string | `""` |  |
 | nodeAgent.resources.requests.cpu | string | `"1000m"` |  |
 | nodeAgent.resources.requests.memory | string | `"1024Mi"` |  |
@@ -357,3 +359,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+
