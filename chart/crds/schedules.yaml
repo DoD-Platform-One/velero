@@ -2,10 +2,10 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
   labels:
     component: velero
-  annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
   name: schedules.velero.io
 spec:
   group: velero.io
@@ -57,7 +57,8 @@ spec:
             description: ScheduleSpec defines the specification for a Velero schedule
             properties:
               paused:
-                description: Paused specifies whether the schedule is paused or not
+                description: Paused specifies whether the schedule is paused or
+                  not
                 type: boolean
               schedule:
                 description: Schedule is a Cron expression defining when to run the
@@ -93,10 +94,11 @@ spec:
                     nullable: true
                     type: boolean
                   defaultVolumesToRestic:
-                    description: "DefaultVolumesToRestic specifies whether restic
-                      should be used to take a backup of all pod volumes by default.
-                      \n Deprecated: this field is no longer used and will be removed
-                      entirely in future. Use DefaultVolumesToFsBackup instead."
+                    description: |-
+                      DefaultVolumesToRestic specifies whether restic should be used to take a
+                      backup of all pod volumes by default.
+
+                      Deprecated: this field is no longer used and will be removed entirely in future. Use DefaultVolumesToFsBackup instead.
                     nullable: true
                     type: boolean
                   excludedClusterScopedResources:
@@ -132,12 +134,12 @@ spec:
                     nullable: true
                     type: array
                   hooks:
-                    description: Hooks represent custom behaviors that should be executed
-                      at different phases of the backup.
+                    description: Hooks represent custom behaviors that should be
+                      executed at different phases of the backup.
                     properties:
                       resources:
-                        description: Resources are hooks that should be executed when
-                          backing up individual instances of a resource.
+                        description: Resources are hooks that should be executed
+                          when backing up individual instances of a resource.
                         items:
                           description: BackupResourceHookSpec defines one or more
                             BackupResourceHooks that should be executed based on the
@@ -174,13 +176,14 @@ spec:
                               nullable: true
                               type: array
                             labelSelector:
-                              description: LabelSelector, if specified, filters the
-                                resources to which this hook spec applies.
+                              description: LabelSelector, if specified, filters
+                                the resources to which this hook spec applies.
                               nullable: true
                               properties:
                                 matchExpressions:
                                   description: matchExpressions is a list of label
-                                    selector requirements. The requirements are ANDed.
+                                    selector requirements. The requirements are
+                                    ANDed.
                                   items:
                                     description: A label selector requirement is a
                                       selector that contains values, a key, and an
@@ -205,11 +208,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchLabels:
                                   additionalProperties:
                                     type: string
@@ -238,8 +243,8 @@ spec:
                                     description: Exec defines an exec hook.
                                     properties:
                                       command:
-                                        description: Command is the command and arguments
-                                          to execute.
+                                        description: Command is the command and
+                                          arguments to execute.
                                         items:
                                           type: string
                                         minItems: 1
@@ -284,8 +289,8 @@ spec:
                                     description: Exec defines an exec hook.
                                     properties:
                                       command:
-                                        description: Command is the command and arguments
-                                          to execute.
+                                        description: Command is the command and
+                                          arguments to execute.
                                         items:
                                           type: string
                                         minItems: 1
@@ -397,11 +402,13 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: atomic
                           required:
                           - key
                           - operator
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                       matchLabels:
                         additionalProperties:
                           type: string
@@ -458,11 +465,13 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: atomic
                             required:
                             - key
                             - operator
                             type: object
                           type: array
+                          x-kubernetes-list-type: atomic
                         matchLabels:
                           additionalProperties:
                             type: string
@@ -519,21 +528,21 @@ spec:
                     nullable: true
                     type: boolean
                   storageLocation:
-                    description: StorageLocation is a string containing the name of
-                      a BackupStorageLocation where the backup should be stored.
+                    description: StorageLocation is a string containing the name
+                      of a BackupStorageLocation where the backup should be stored.
                     type: string
                   ttl:
                     description: TTL is a time.Duration-parseable string describing
                       how long the Backup should be retained for.
                     type: string
                   uploaderConfig:
-                    description: UploaderConfig specifies the configuration for the
-                      uploader.
+                    description: UploaderConfig specifies the configuration for
+                      the uploader.
                     nullable: true
                     properties:
                       parallelFilesUpload:
-                        description: ParallelFilesUpload is the number of files parallel
-                          uploads to perform when using the uploader.
+                        description: ParallelFilesUpload is the number of files
+                          parallel uploads to perform when using the uploader.
                         type: integer
                     type: object
                   volumeSnapshotLocations:

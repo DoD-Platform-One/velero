@@ -35,7 +35,7 @@ namespace:
 # enabling node-agent). Required.
 image:
   repository: registry1.dso.mil/ironbank/opensource/velero/velero
-  tag: v1.15.2
+  tag: v1.16.1
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
@@ -92,6 +92,14 @@ resources:
       cpu: 100m
       memory: 256Mi
 
+# Configure hostAliases for Velero deployment. Optional
+# For more information, check: https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
+hostAliases: []
+  # - ip: "127.0.0.1"
+  #   hostnames:
+  #     - "foo.local"
+  #     - "bar.local"
+
 # Resource requests/limits to specify for the upgradeCRDs job pod. Need to be adjusted by user accordingly.
 upgradeJobResources:
   requests:
@@ -105,8 +113,23 @@ upgradeCRDsJob:
   extraVolumes: []
   # Extra volumeMounts for the Upgrade CRDs Job. Optional.
   extraVolumeMounts: []
-  # Extra key/value pairs to be used as environment variables. Optional.
-  extraEnvVars: {}
+  # Additional values to be used as environment variables. Optional.
+  extraEnvVars: []
+    # Simple value
+    # - name: SIMPLE_VAR
+    #   value: "simple-value"
+
+    # FieldRef example
+    # - name: MY_POD_LABEL
+    #   valueFrom:
+    #     fieldRef:
+    #       fieldPath: metadata.labels['my_label']
+
+  # Configure if API credential for Service Account is automounted.
+  automountServiceAccountToken: true
+  # Configure the shell cmd in case you are using custom image
+  # shellCmd: /tmp/sh
+  # updateCmd: /velero install --crds-only --dry-run -o yaml | /tmp/kubectl apply -f -
 
 # Configure the dnsPolicy of the Velero deployment
 # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
@@ -141,7 +164,7 @@ plugins:
     name: velero-plugin-for-aws
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws
-      tag: v1.11.1
+      tag: v1.12.0
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -163,7 +186,7 @@ plugins:
     name: velero-plugin-for-microsoft-azure
     image:
       repository: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure
-      tag: v1.11.1
+      tag: v1.12.0
     container:
       imagePullPolicy: IfNotPresent
       volumeMounts:
@@ -198,7 +221,7 @@ initContainers:
   #       memory: 512Mi
   #       cpu: 100m
   # - name: velero-plugin-for-aws
-  #   image: velero/velero-plugin-for-aws:v1.11.1
+  #   image: velero/velero-plugin-for-aws:v1.12.0
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -470,6 +493,10 @@ kubectl:
     sidecar.istio.io/inject: "false"
   # Labels to set for the upgrade/cleanup job. Optional.
   labels: {}
+  # Extra volumes for the upgrade/cleanup job. Optional.
+  extraVolumes: []
+  # Extra volumeMounts for the upgrade/cleanup job.. Optional.
+  extraVolumeMounts: []
 
 # This job upgrades the CRDs.
 upgradeCRDs: true
@@ -593,6 +620,8 @@ configuration:
   disableInformerCache: false
   # `velero server` default: 1h
   garbageCollectionFrequency:
+  # `velero server` default: 1
+  itemBlockWorkerCount:
   # Set log-format for Velero pod. Default: text. Other option: json.
   logFormat:
   # Set log-level for Velero pod. Default: info. Other options: debug, warning, error, fatal, panic.
@@ -616,14 +645,36 @@ configuration:
   # Comma separated list of velero feature flags. default: empty
   # features: EnableCSI
   features:
+  # Configures the timeout for provisioning the volume created from the CSI snapshot. Default: 30m
+  dataMoverPrepareTimeout:
+  # Resource requests/limits to specify for the repository-maintenance job. Optional.
+  # https://velero.io/docs/v1.14/repository-maintenance/#resource-limitation
+  repositoryMaintenanceJob:
+    requests:
+    #   cpu: 500m
+    #   memory: 512Mi
+    limits:
+    #   cpu: 1000m
+    #   memory: 1024Mi
+    # Number of latest maintenance jobs to keep for each repository
+    latestJobsCount: 3
   # `velero server` default: velero
   namespace:
   # additional command-line arguments that will be passed to the `velero server`
   # e.g.: extraArgs: ["--foo=bar"]
   extraArgs: []
 
-  # additional key/value pairs to be used as environment variables such as "AWS_CLUSTER_NAME: 'yourcluster.domain.tld'"
-  extraEnvVars: {}
+  # Additional values to be used as environment variables. Optional.
+  extraEnvVars: []
+    # Simple value
+    # - name: SIMPLE_VAR
+    #   value: "simple-value"
+
+    # FieldRef example
+    # - name: MY_POD_LABEL
+    #   valueFrom:
+    #     fieldRef:
+    #       fieldPath: metadata.labels['my_label']
 
   # Set true for backup all pod volumes without having to apply annotation on the pod when used file system backup Default: false.
   defaultVolumesToFsBackup:
@@ -656,6 +707,8 @@ serviceAccount:
     labels:
     imagePullSecrets: []
     # - registrySecretName
+    # Configure if API credential for Service Account is automounted.
+    automountServiceAccountToken: true
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
@@ -703,6 +756,8 @@ nodeAgent:
   pluginVolumePath: /var/lib/kubelet/plugins
   # Pod priority class name to use for the node-agent daemonset. Optional.
   priorityClassName: ""
+  # Pod runtime class name to use for the node-agent daemonset. Optional.
+  runtimeClassName: ""
   # Resource requests/limits to specify for the node-agent daemonset deployment. Optional.
   # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
   resources:
@@ -737,12 +792,29 @@ nodeAgent:
   # Extra volumeMounts for the node-agent daemonset. Optional.
   extraVolumeMounts: []
 
-  # Key/value pairs to be used as environment variables for the node-agent daemonset. Optional.
-  extraEnvVars: {}
+  # Additional values to be used as environment variables for node-agent daemonset. Optional.
+  extraEnvVars: []
+    # Simple key/value
+    # - name: SIMPLE_VAR
+    #   value: "simple-value"
+
+    # FieldRef example
+    # - name: MY_POD_LABEL
+    #   valueFrom:
+    #     fieldRef:
+    #       fieldPath: metadata.labels['my_label']
 
   # Configure the dnsPolicy of the node-agent daemonset
   # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
   dnsPolicy: ClusterFirst
+
+  # Configure hostAliases for node-agent daemonset. Optional
+  # For more information, check: https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
+  hostAliases: []
+    # - ip: "127.0.0.1"
+    #   hostnames:
+    #   - "foo.local"
+    #   - "bar.local"
 
   # SecurityContext to use for the Velero deployment. Optional.
   # Set fsGroup for `AWS IAM Roles for Service Accounts`
