@@ -124,7 +124,11 @@ velero delete backup test-backup -n $NAMESPACE --confirm || true
 echo "Waiting 15 seconds for delete to complete"
 sleep 15
 echo "Creating Backup"
-velero backup create test-backup --namespace $NAMESPACE --wait --selector app=nginx || export BACKUP_FAILED="true"
+velero backup create test-backup --namespace $NAMESPACE --wait --selector app=nginx --include-namespaces $NAMESPACE || export BACKUP_FAILED="true"
+
+velero backup describe test-backup -n $NAMESPACE || true
+velero backup logs test-backup -n $NAMESPACE  || true
+
 if [[ ${BACKUP_FAILED} == "true" ]]; then
   echo "Test 1 Failure: Cannot create backup."
   echo "Printing backup describe:"
@@ -166,12 +170,15 @@ echo "Test 2: Test restore capacity"
 echo "Clearing out restores"
 velero delete restore test-backup -n $NAMESPACE --confirm || true
 echo "Creating restore"
-velero restore create test-backup --from-backup test-backup --wait -n $NAMESPACE  || export RESTORE_FAILED="true"
+velero restore create test-backup --from-backup test-backup --wait -n $NAMESPACE --selector app=nginx || export RESTORE_FAILED="true"
 if [[ ${RESTORE_FAILED} == "true" ]]; then
   echo "Test 2 Failure: Could not restore from backup."
   exit 1
 fi
 echo "Test 2 Success: Restored pod and NS."
+
+velero restore describe test-backup -n $NAMESPACE || true
+velero restore logs test-backup -n $NAMESPACE  || true
 
 echo "Printing State after restore"
 kubectl get all -n $NAMESPACE

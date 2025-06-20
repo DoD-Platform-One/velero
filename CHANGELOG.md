@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.0.1-bb.0] - 2025-04-15
+
+### Changed
+
+- Updated chart to 10.0.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.11.1 -> v1.12.0
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.11.1 -> v1.12.0
+- velero/velero-plugin-for-aws v1.11.1 -> v1.12.0
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) v1.15.2 -> v1.16.1
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) 1.15.2 -> 1.16.1
+
 ## [8.7.1-bb.1] - 2025-05-13
 
 ### Changed
