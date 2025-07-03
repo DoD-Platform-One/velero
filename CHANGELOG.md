@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+
+## [10.0.7-bb.0] - 2025-06-24
+
+### Changed
+
+- Updated chart to 10.0.7
+- ironbank/opensource/nginx/nginx 1.27.4 -> 1.28.0
+- velero/velero-plugin-for-aws v1.12.0 -> v1.12.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.12.0 -> v1.12.1
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.12.0 -> v1.12.1
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.32.3 -> v1.32.6
+
 ## [10.0.1-bb.0] - 2025-04-15
 
 ### Changed

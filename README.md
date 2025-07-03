@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 10.0.1-bb.0](https://img.shields.io/badge/Version-10.0.1--bb.0-informational?style=flat-square) ![AppVersion: 1.16.1](https://img.shields.io/badge/AppVersion-1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 10.0.7-bb.0](https://img.shields.io/badge/Version-10.0.7--bb.0-informational?style=flat-square) ![AppVersion: 1.16.1](https://img.shields.io/badge/AppVersion-1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -89,7 +89,7 @@ helm install velero chart/
 | plugins.aws.enabled | bool | `false` |  |
 | plugins.aws.name | string | `"velero-plugin-for-aws"` |  |
 | plugins.aws.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws"` |  |
-| plugins.aws.image.tag | string | `"v1.12.0"` |  |
+| plugins.aws.image.tag | string | `"v1.12.1"` |  |
 | plugins.aws.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.aws.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.aws.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -101,7 +101,7 @@ helm install velero chart/
 | plugins.azure.enabled | bool | `false` |  |
 | plugins.azure.name | string | `"velero-plugin-for-microsoft-azure"` |  |
 | plugins.azure.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure"` |  |
-| plugins.azure.image.tag | string | `"v1.12.0"` |  |
+| plugins.azure.image.tag | string | `"v1.12.1"` |  |
 | plugins.azure.container.imagePullPolicy | string | `"IfNotPresent"` |  |
 | plugins.azure.container.volumeMounts[0].mountPath | string | `"/target"` |  |
 | plugins.azure.container.volumeMounts[0].name | string | `"plugins"` |  |
@@ -147,6 +147,10 @@ helm install velero chart/
 | metrics.scrapeInterval | string | `"30s"` |  |
 | metrics.scrapeTimeout | string | `"10s"` |  |
 | metrics.service.annotations | object | `{}` |  |
+| metrics.service.type | string | `"ClusterIP"` |  |
+| metrics.service.nodePort | string | `"null"` |  |
+| metrics.service.externalTrafficPolicy | string | `""` | External traffic policy setting (Cluster, Local) - https://kubernetes.io/docs/reference/networking/virtual-ips/#traffic-policies |
+| metrics.service.internalTrafficPolicy | string | `""` | Internal traffic policy setting (Cluster, Local) - https://kubernetes.io/docs/reference/networking/virtual-ips/#traffic-policies |
 | metrics.service.labels | object | `{}` |  |
 | metrics.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | metrics.podAnnotations."prometheus.io/port" | string | `"8085"` |  |
@@ -218,7 +222,7 @@ helm install velero chart/
 | metrics.prometheusRule.spec[10].for | string | `"10m"` |  |
 | metrics.prometheusRule.spec[10].labels.severity | string | `"critical"` |  |
 | kubectl.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| kubectl.image.tag | string | `"v1.32.3"` |  |
+| kubectl.image.tag | string | `"v1.32.6"` |  |
 | kubectl.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | kubectl.resources.requests.memory | string | `"256Mi"` |  |
 | kubectl.resources.requests.cpu | string | `"100m"` |  |
