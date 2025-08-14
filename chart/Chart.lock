@@ -1,6 +1,9 @@
 dependencies:
-- name: gluon
-  repository: oci://registry1.dso.mil/bigbang
-  version: 0.4.4
-digest: sha256:306ebeeb7af982b73ea4d7ffb6a6467c2be21d957b2f2af92973e859c03c05a9
-generated: "2023-12-06T13:56:32.375502-05:00"
+  - name: gluon
+    repository: oci://registry1.dso.mil/bigbang
+    version: 0.4.4
+  - name: velero
+    repository: https://vmware-tanzu.github.io/helm-charts
+    version: 10.0.7
+digest: sha256:eecb6656c495b8dfc240f44a3a2cd73b3c6f947909477b8b1a395478bd0a4e8a
+generated: "2025-07-09T12:32:22.0698675-07:00"

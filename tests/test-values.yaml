@@ -1,22 +1,3 @@
-#########################
-# Disable Core Packages #
-#########################
-bbctl:
-  enabled: false
-grafana:
-  enabled: false
-monitoring:
-  enabled: false
-kyvernoReporter:
-  enabled: false
-neuvector:
-  enabled: false
-loki:
-  enabled: false
-tempo:
-  enabled: false
-kiali:
-  enabled: false
 addons:
   # minioOperator:
   #   enabled: false
@@ -35,8 +16,6 @@ addons:
         enabled: false
   velero:
     enabled: true
-    values:
-      fullnameOverride: "velero"
 kyverno:
   values:
     bbtests:

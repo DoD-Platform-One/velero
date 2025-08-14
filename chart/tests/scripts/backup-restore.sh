@@ -37,14 +37,15 @@ until [ $(mc config host add test ${MINIO_HOST} ${MINIO_USER} ${MINIO_PASS} >/de
   attempt_counter=$(($attempt_counter+1))
   sleep 10
 done
+
 if [ $(mc ls test/velero >/dev/null; echo $?) -eq 0 ]; then
-  echo "Setup 2 Success: MinIO Bucket Exists"
-  exit 0
-else
-  mc mb test/velero
-  mc anonymous set public test/velero
-  echo "Setup 2 Success: MinIO Bucket Created"
+  echo "Setup 2 Success: MinIO Bucket Exists..Removing existing bucket"
+  mc rb --force test/velero || true
 fi
+
+mc mb test/velero
+mc anonymous set public test/velero
+echo "Setup 2 Success: MinIO Bucket Created"
 
 echo "Setup 3: Creating test pod"
 cat <<EOF | kubectl apply -f -
@@ -121,8 +122,11 @@ echo "Pods deployed"
 echo "Test 1: Create backup."
 echo "Cleaning up test backups"
 velero delete backup test-backup -n $NAMESPACE --confirm || true
+kubectl delete --wait --timeout 10s -n $NAMESPACE Backup/test-backup || true
+kubectl delete --wait --timeout 10s -n $NAMESPACE Restores/test-backup || true
 echo "Waiting 15 seconds for delete to complete"
 sleep 15
+
 echo "Creating Backup"
 velero backup create test-backup --namespace $NAMESPACE --wait --selector app=nginx --include-namespaces $NAMESPACE || export BACKUP_FAILED="true"
 
@@ -157,9 +161,9 @@ echo "State before disaster:"
 kubectl get all -n $NAMESPACE
 
 echo "Setup 3: Simulate disaster. Deleteing pod."
-kubectl delete deployment velero-backup-restore-test -n $NAMESPACE || export DELETE_FAILED="true"
-kubectl delete persistentvolumeclaim nginx-logs -n $NAMESPACE || export DELETE_FAILED="true"
-kubectl delete service my-nginx  -n $NAMESPACE || export DELETE_FAILED="true"
+kubectl delete --wait --timeout 30s deployment velero-backup-restore-test -n $NAMESPACE || export DELETE_FAILED="true"
+kubectl delete --wait --timeout 30s persistentvolumeclaim nginx-logs -n $NAMESPACE || export DELETE_FAILED="true"
+kubectl delete --wait --timeout 30s service my-nginx  -n $NAMESPACE || export DELETE_FAILED="true"
 if [[ ${DELETE_FAILED} == "true" ]]; then
   echo "Setup 3 Failure: Could not delete test resources."
   exit 1
@@ -188,16 +192,26 @@ kubectl wait --for=condition=available --timeout 600s -n $NAMESPACE deployment -
 kubectl wait --for=condition=ready --timeout 600s -n $NAMESPACE pods --all --field-selector status.phase=Running
 echo "Pods deployed"
 
-echo "Waiting 15 seconds for funzies"
-sleep 15
-
 echo "Test 3: Ensure backup restored pods"
 export NGINX_URL="http://my-nginx"
-response=$(curl $NGINX_URL) || export RESTORE_FAILED="true" 
-if [[ ${RESTORE_FAILED} == "true" ]]; then
-  echo "Test 3 Failure: Could not hit endpoint."
+if curl --retry $RETRY_COUNT \
+        --retry-delay $RETRY_DELAY \
+        --retry-connrefused \
+        --connect-timeout $CONNECT_TIMEOUT \
+        --max-time $RETRY_MAX_TIME \
+        -sIS "$NGINX_URL" &>/dev/null; then
+  echo "Test 3: Recieved response from NGINX"
+else
+  echo "Test 3 Failure: Cannot hit NGINX endpoint after $RETRY_COUNT attempts."
   echo "Debug information (curl response):"
-  echo $response
+  curl -v "${NGINX_URL}"
   exit 1
 fi
-echo "Test 3: Recieved response"
+
+echo "Removing test resources"
+mc rb --force test/velero || true
+kubectl delete --wait --timeout 10s -n $NAMESPACE Backup/test-backup || true
+kubectl delete --wait --timeout 10s -n $NAMESPACE Restores/test-backup || true
+kubectl delete --wait --timeout 30s deployment velero-backup-restore-test -n $NAMESPACE || true
+kubectl delete --wait --timeout 30s persistentvolumeclaim nginx-logs -n $NAMESPACE || true
+kubectl delete --wait --timeout 30s service my-nginx  -n $NAMESPACE || true
