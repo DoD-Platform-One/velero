@@ -5,7 +5,7 @@ set -e
 set -x
 trap 'echo ❌ exit at ${0}:${LINENO}, command was: ${BASH_COMMAND} 1>&2' ERR
 
-RETRY_COUNT=12       # Number of retry attempts
+RETRY_COUNT=40       # Number of retry attempts
 RETRY_DELAY=3       # Delay (in seconds) between retries
 CONNECT_TIMEOUT=120   # Maximum time (in seconds) to wait for a connection
 RETRY_MAX_TIME=120   # Maximum total time (in seconds) for retries
