@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [10.0.7-bb.1] - 2025-07-31
+
+### Changed
+
+- Converted chart to use pass-through method
+
 ## [10.0.7-bb.0] - 2025-06-24
 
 ### Changed
