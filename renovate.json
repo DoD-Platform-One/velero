@@ -1,22 +1,35 @@
 {
-    "baseBranches": ["main"],
+    "baseBranches": [
+        "main"
+    ],
     "configWarningReuseIssue": false,
     "dependencyDashboard": true,
     "dependencyDashboardTitle": "Renovate: Upgrade Velero Dependencies",
     "draftPR": true,
-    "enabledManagers": ["helm-values", "regex"],
-    "labels": ["velero","renovate"],
+    "enabledManagers": [
+        "helm-values",
+        "custom.regex"
+    ],
+    "labels": [
+        "velero",
+        "renovate"
+    ],
     "commitMessagePrefix": "SKIP UPDATE CHECK",
     "ignorePaths": [],
     "packageRules": [
         {
-            "matchDatasources": ["docker"],
+            "matchDatasources": [
+                "docker"
+            ],
             "groupName": "Ironbank"
         }
     ],
-    "regexManagers": [
+    "customManagers": [
         {
-            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/Chart\\.yaml$"
+            ],
             "matchStrings": [
                 "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)",
                 "- Velero:\\s+(?<currentValue>.+)"
@@ -26,37 +39,52 @@
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^chart/values\\.yaml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/values\\.yaml$"
+            ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^tests/test-values\\.yml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^tests/test-values\\.yml$"
+            ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^tests/images\\.txt$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^tests/images\\.txt$"
+            ],
             "matchStrings": [
-              "s*(?<depName>.+):(?<currentValue>.+)"
+                "s*(?<depName>.+):(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/Chart\\.yaml$"
+            ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^chart/tests/scripts/backup-restore\\.sh$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/tests/scripts/backup-restore\\.sh$"
+            ],
             "matchStrings": [
-              "image:\\s+registry1.dso.mil/ironbank/opensource/nginx/nginx:(?<currentValue>.+)"
+                "image:\\s+registry1.dso.mil/ironbank/opensource/nginx/nginx:(?<currentValue>.+)"
             ],
             "depNameTemplate": "ironbank/opensource/nginx/nginx",
             "datasourceTemplate": "docker",
@@ -64,5 +92,7 @@
         }
     ],
     "separateMajorMinor": false,
-    "postUpdateOptions": ["helmUpdateSubChartArchives"]
+    "postUpdateOptions": [
+        "helmUpdateSubChartArchives"
+    ]
 }
