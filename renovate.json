@@ -27,8 +27,8 @@
     "customManagers": [
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/Chart\\.yaml$"
+            "managerFilePatterns": [
+                "/^chart/Chart\\.yaml$/"
             ],
             "matchStrings": [
                 "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)",
@@ -40,8 +40,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/values\\.yaml$"
+            "managerFilePatterns": [
+                "/^chart/values\\.yaml$/"
             ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
@@ -50,8 +50,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^tests/test-values\\.yml$"
+            "managerFilePatterns": [
+                "/^tests/test-values\\.yml$/"
             ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
@@ -60,8 +60,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^tests/images\\.txt$"
+            "managerFilePatterns": [
+                "/^tests/images\\.txt$/"
             ],
             "matchStrings": [
                 "s*(?<depName>.+):(?<currentValue>.+)"
@@ -70,8 +70,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/Chart\\.yaml$"
+            "managerFilePatterns": [
+                "/^chart/Chart\\.yaml$/"
             ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
@@ -80,8 +80,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/tests/scripts/backup-restore\\.sh$"
+            "managerFilePatterns": [
+                "/^chart/tests/scripts/backup-restore\\.sh$/"
             ],
             "matchStrings": [
                 "image:\\s+registry1.dso.mil/ironbank/opensource/nginx/nginx:(?<currentValue>.+)"
