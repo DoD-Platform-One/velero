@@ -2,9 +2,6 @@
 # Notably, the following have not been disabled
 # - networkPolicies - not disabled due to ease of use when deploying via k3d_dev
 
-clusterAuditor:
-  enabled: false
-
 eckOperator:
   enabled: false
 
@@ -17,16 +14,7 @@ fluentbit:
 gatekeeper:
   enabled: false
 
-grafana:
-  enabled: false
-
-istio:
-  enabled: false
-
-istioOperator:
-  enabled: false
-
-jaeger:
+istioGateway:
   enabled: false
 
 kiali:
@@ -48,9 +36,6 @@ monitoring:
   enabled: false
 
 neuvector:
-  enabled: false
-
-promtail:
   enabled: false
 
 tempo:
@@ -115,7 +100,4 @@ addons:
     enabled: false
 
   vault:
-    enabled: false
-
-  velero:
     enabled: false
