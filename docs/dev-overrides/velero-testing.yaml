@@ -3,46 +3,39 @@ addons:
     enabled: true
     git:
       tag: null
-      branch: "renovate/ironbank"
-    plugins:
-    - aws
+      branch: "main" #"renovate/ironbank"
     values:
-      plugins: 
-        aws: 
-          enabled: true
-      image:
-        imagePullSecrets:
-        - private-registry
+      upstream:
+        image:
+          imagePullSecrets:
+          - private-registry
 
-      configuration:
-        backupStorageLocation:
-        - provider: aws
-          bucket: velero123
-          config:
-            region: "us-gov-west-1"
-            insecureSkipTLSVerify: "true"
-            s3ForcePathStyle: "true"
-            s3Url: http://minio.minio.svc
-        volumeSnapshotLocation:
-        - name: default
-          provider: aws
-          config:
-            region: "us-gov-west-1"
+        configuration:
+          backupStorageLocation:
+          - provider: aws
+            bucket: velero123
+            config:
+              region: "us-gov-west-1"
+              insecureSkipTLSVerify: "true"
+              s3ForcePathStyle: "true"
+              s3Url: http://minio.minio.svc
+          volumeSnapshotLocation:
+          - name: default
+            provider: aws
+            config:
+              region: "us-gov-west-1"
 
-      credentials:
-        useSecret: true
-        secretContents:
-          cloud: |
-            [default]
-            aws_access_key_id = minio
-            aws_secret_access_key = minio123
+        credentials:
+          useSecret: true
+          secretContents:
+            cloud: |
+              [default]
+              aws_access_key_id = minio
+              aws_secret_access_key = minio123
 
-      # Set a service account so that the CRD clean up job has proper permissions to delete CRDs
-      serviceAccount:
-        server:
-          name: velero
-
-      cleanUpCRDs: true
+        serviceAccount:
+          server:
+            name: velero
 
       networkPolicies:
         enabled: true
@@ -56,23 +49,24 @@ addons:
   minio:
     enabled: true
     values:
-      tenants:
-        pools:
-        - servers: 2
-          volumesPerServer: 4
-          size: 256Mi
-          resources:
-            requests:
-              cpu: 250m
-              memory: 2Gi
-            limits:
-              cpu: 250m
-              memory: 2Gi
-          securityContext:
-            runAsUser: 1001
-            runAsGroup: 1001
-            fsGroup: 1001
-            runAsNonRoot: true
+      upstream:
+        tenants:
+          pools:
+          - servers: 2
+            volumesPerServer: 4
+            size: 256Mi
+            resources:
+              requests:
+                cpu: 250m
+                memory: 2Gi
+              limits:
+                cpu: 250m
+                memory: 2Gi
+            securityContext:
+              runAsUser: 1001
+              runAsGroup: 1001
+              fsGroup: 1001
+              runAsNonRoot: true
       bbtests:
         enabled: false
         cypress:
