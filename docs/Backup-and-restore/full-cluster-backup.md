@@ -79,7 +79,7 @@ ubuntu@ip-172-31-32-130:~$ kubectl get pods -n flux-system  -o jsonpath="{.items
       1 registry1.dso.mil/ironbank/fluxcd/source-controller:v0.14.0
 ```
 
-Both clusters are deployed in AWS using [Konvoy](https://docs.d2iq.com/dkp/konvoy/1.6/install/install-aws/). 
+Both clusters are deployed in AWS using [Konvoy](https://archive-docs-old.d2iq.com/dkp/konvoy/2.2/choose-infrastructure/aws/quick-start-aws/). 
 
 Now that we have satisfied the pre reqs we can go ahead with the migration. 
 

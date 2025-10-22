@@ -29,7 +29,7 @@ echo "Setup 1 Success: MinIO is up."
 echo "Setup 2: Create MinIO Bucket"
 attempt_counter=0
 max_attempts=25
-until [ $(mc config host add test ${MINIO_HOST} ${MINIO_USER} ${MINIO_PASS} >/dev/null; echo $?) -eq 0 ]; do
+until [ $(mc alias set test ${MINIO_HOST} ${MINIO_USER} ${MINIO_PASS} >/dev/null; echo $?) -eq 0 ]; do
   if [ ${attempt_counter} -eq ${max_attempts} ];then
     echo "Setup 2 Failure: Failed to Create MinIO Bucket"
     exit 1

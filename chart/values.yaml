@@ -64,7 +64,7 @@ csi:
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/bigbang-ci/velero-tester:1.1.0
+    image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.0
     envs:
       MINIO_HOST: http://minio.minio.svc
       MINIO_USER: minio
@@ -80,7 +80,7 @@ bbtests:
       - name: minio-volume
         emptyDir: {}
     additionalVolumeMounts:
-      - mountPath: /.mc
+      - mountPath: /home/devops-user/.mc
         name: minio-volume
 
 upstream:
