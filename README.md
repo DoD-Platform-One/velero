@@ -2,7 +2,7 @@
 
 # velero
 
-![Version: 10.0.7-bb.1](https://img.shields.io/badge/Version-10.0.7--bb.1-informational?style=flat-square) ![AppVersion: 1.16.1](https://img.shields.io/badge/AppVersion-1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 10.0.7-bb.2](https://img.shields.io/badge/Version-10.0.7--bb.2-informational?style=flat-square) ![AppVersion: 1.16.1](https://img.shields.io/badge/AppVersion-1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -196,7 +196,7 @@ helm install velero chart/
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/bigbang-ci/velero-tester:1.1.0"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/big-bang/devops-tester:1.0"` |  |
 | bbtests.scripts.envs.MINIO_HOST | string | `"http://minio.minio.svc"` |  |
 | bbtests.scripts.envs.MINIO_USER | string | `"minio"` |  |
 | bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
@@ -206,7 +206,7 @@ helm install velero chart/
 | bbtests.scripts.secretEnvs[0].valueFrom.fieldRef.fieldPath | string | `"metadata.namespace"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"minio-volume"` |  |
 | bbtests.scripts.additionalVolumes[0].emptyDir | object | `{}` |  |
-| bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/.mc"` |  |
+| bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/home/devops-user/.mc"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"minio-volume"` |  |
 
 ## Contributing
