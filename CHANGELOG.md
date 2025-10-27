@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.0.7-bb.3] - 2025-10-22
+
+### Changed
+
+- Updated the allow-egress-storage network policy to remove label
+- Updated the allow-egress-api network policy to include helm hooks for crd job race condition
+- Adds networkpolicy for the velero-test-script pod
+
 ## [10.0.7-bb.2] - 2025-10-22
 
 ### Changed

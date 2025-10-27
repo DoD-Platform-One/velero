@@ -10,7 +10,6 @@ spec:
       app.kubernetes.io/name: {{ include "velero.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/managed-by: {{ .Release.Service }}
-      helm.sh/chart: {{ include "velero.chart" . }}       
   egress:
   #ideally, this should be whitelisted to region specific IPs that can be obtained here https://aws.amazon.com/premiumsupport/knowledge-center/s3-find-ip-address-ranges/
   - to:

@@ -4,6 +4,9 @@ kind: NetworkPolicy
 metadata:
   name: allow-egress-api
   namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade,pre-rollback
+    "helm.sh/hook-weight": "-1"
 spec:
   podSelector: {}
   egress:
