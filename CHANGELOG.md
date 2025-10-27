@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.0.7-bb.4] - 2025-10-27
+
+### Updated
+
+- Updated ironbank/opensource/nginx/nginx (source) 1.28.0 -> 1.29.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws 1.12.1 -> 1.13.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure 1.12.1 -> 1.13.0
+- Updated gluon 0.4.4 -> 0.9.5
+
 ## [10.0.7-bb.3] - 2025-10-22
 
 ### Changed

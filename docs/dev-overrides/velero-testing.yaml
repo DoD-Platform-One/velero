@@ -2,8 +2,10 @@ addons:
   velero:
     enabled: true
     git:
+      # tag: null
+      # branch: "main" 
       tag: null
-      branch: "main" #"renovate/ironbank"
+      branch: "renovate/ironbank"
     values:
       upstream:
         image:
