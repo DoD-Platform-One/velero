@@ -120,7 +120,7 @@ upstream:
 
   initContainers:
     - name: velero-plugin-for-aws
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.12.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.13.0
       imagePullPolicy: IfNotPresent
       volumeMounts:
         - mountPath: /target
