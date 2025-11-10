@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.16.1
+appVersion: 1.17.0
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 10.0.7-bb.5
+version: 11.1.1-bb.0
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -17,16 +17,16 @@ maintainers:
     email: yinw@vmware.com
 dependencies:
   - name: gluon
-    version: 0.9.5
+    version: 0.9.6
     repository: oci://registry1.dso.mil/bigbang
   - name: velero
     alias: upstream
-    version: 10.0.7
+    version: 11.1.1
     repository: https://vmware-tanzu.github.io/helm-charts
 annotations:
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
-    - Velero: 1.16.1
+    - Velero: 1.17.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     * [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
     * [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
@@ -41,11 +41,11 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.13.0
       condition: plugins.azure.enabled
     - name: velero
-      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.16.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.17.0
     - name: base
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: velero-tester
       condition: bbtests.enabled
       image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.0
     - name: ngnix
-      image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.2
+      image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.3

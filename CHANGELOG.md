@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [11.1.1-bb.0] - 2025-11-03
+
+### Updated
+
+- Update velero 10.0.7 -> 11.1.1
+- Update gluon 0.9.5 -> 0.9.6
+- Update ironbank/opensource/nginx/nginx 1.29.2 -> 1.29.3
+- Update registry1.dso.mil/ironbank/opensource/nginx/nginx 1.29.2 -> 1.29.3
+- Update registry1.dso.mil/ironbank/opensource/velero/velero v1.16.1 -> v1.17.0
+
 ## [10.0.7-bb.5] - 2025-10-27
 
 ### Updated

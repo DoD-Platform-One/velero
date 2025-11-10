@@ -86,7 +86,7 @@ bbtests:
 upstream:
   image:
     repository: registry1.dso.mil/ironbank/opensource/velero/velero
-    tag: v1.16.1
+    tag: v1.17.0
     pullPolicy: IfNotPresent
     imagePullSecrets:
       - private-registry

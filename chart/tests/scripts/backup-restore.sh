@@ -10,6 +10,12 @@ RETRY_DELAY=3       # Delay (in seconds) between retries
 CONNECT_TIMEOUT=120   # Maximum time (in seconds) to wait for a connection
 RETRY_MAX_TIME=120   # Maximum total time (in seconds) for retries
 
+# Variables used for logic to wait for backup storage location to be available
+BSL_RETRY_COUNT=0
+BSL_RETRY_MAX=20
+BSL_RETRY_DELAY=5
+BSL_STATUS=""
+
 echo "Setup 1: Ensuring MinIO endpoint up and available"
 if curl --retry $RETRY_COUNT \
         --retry-delay $RETRY_DELAY \
@@ -47,6 +53,32 @@ mc mb test/velero
 mc anonymous set public test/velero
 echo "Setup 2 Success: MinIO Bucket Created"
 
+echo "Waiting for BackupStorageLocation 'default' to become available..."
+
+until [ "$BSL_STATUS" == "Available" ]; do
+    BSL_RETRY_COUNT=$((BSL_RETRY_COUNT+1))
+
+    if [ $BSL_RETRY_COUNT -gt $BSL_RETRY_MAX ]; then
+        echo "❌ Error: Timed out waiting for BSL 'default' to become Available."
+        
+        # Get the final error message from the BSL
+        echo "Previous BSL status:"
+        kubectl get bsl default -n $NAMESPACE -o yaml | grep "message:"
+        
+        # Exit the script with an error
+        exit 1
+    fi
+    
+    # Query the .status.phase field.
+    # We add '|| true' to prevent the script from exiting if the 'get' command
+    # fails (e.g., if the BSL hasn't been created yet).
+    BSL_STATUS=$(kubectl get bsl default -n $NAMESPACE -o jsonpath='{.status.phase}' 2>/dev/null || true)
+
+    sleep $BSL_RETRY_DELAY
+done
+
+echo "Success: BackupStorageLocation 'default' is Available."
+
 echo "Setup 3: Creating test pod"
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -75,7 +107,7 @@ spec:
       imagePullSecrets:
         - name: private-registry
       containers:
-        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.2
+        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.3
           name: nginx
           ports:
           - containerPort: 80
@@ -127,6 +159,7 @@ kubectl delete --wait --timeout 10s -n $NAMESPACE Restores/test-backup || true
 echo "Waiting 15 seconds for delete to complete"
 sleep 15
 
+kubectl get bsl -n $NAMESPACE -o yaml
 echo "Creating Backup"
 velero backup create test-backup --namespace $NAMESPACE --wait --selector app=nginx --include-namespaces $NAMESPACE || export BACKUP_FAILED="true"
 

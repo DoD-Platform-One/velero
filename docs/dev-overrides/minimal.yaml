@@ -45,9 +45,6 @@ twistlock:
   enabled: false
 
 addons:
-  anchore:
-    enabled: false
-
   argocd:
     enabled: false
 
@@ -67,9 +64,6 @@ addons:
     enabled: false
 
   harbor:
-    enabled: false
-
-  holocron:
     enabled: false
 
   keycloak:
