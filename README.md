@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 10.0.7-bb.5](https://img.shields.io/badge/Version-10.0.7--bb.5-informational?style=flat-square) ![AppVersion: 1.16.1](https://img.shields.io/badge/AppVersion-1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 11.1.1-bb.0](https://img.shields.io/badge/Version-11.1.1--bb.0-informational?style=flat-square) ![AppVersion: 1.17.0](https://img.shields.io/badge/AppVersion-1.17.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -12,8 +12,8 @@ A Helm chart for velero
 
 ## Upstream Release Notes
 
-* [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
-* [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
+- [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
+- [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
 
 ## Learn More
 
