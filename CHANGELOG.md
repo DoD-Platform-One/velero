@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [11.1.1-bb.1] - 2025-11-13
+
+### Updated
+
+- Update registry1.dso.mil/ironbank/opensource/velero/velero v1.17.0 -> v1.17.1
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws 1.13.0 -> 1.13.1
+
 ## [11.1.1-bb.0] - 2025-11-03
 
 ### Updated
