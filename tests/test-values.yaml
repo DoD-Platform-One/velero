@@ -16,6 +16,8 @@ addons:
         enabled: false
   velero:
     enabled: true
+    values:
+      fullnameOverride: "velero"
 kyverno:
   values:
     bbtests:

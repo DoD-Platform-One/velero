@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 11.1.1-bb.0](https://img.shields.io/badge/Version-11.1.1--bb.0-informational?style=flat-square) ![AppVersion: 1.17.0](https://img.shields.io/badge/AppVersion-1.17.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 11.1.1-bb.1](https://img.shields.io/badge/Version-11.1.1--bb.1-informational?style=flat-square) ![AppVersion: 1.17.1](https://img.shields.io/badge/AppVersion-1.17.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -99,7 +99,7 @@ helm install velero chart/
 | upstream.upgradeJobResources.limits.cpu | string | `"100m"` |  |
 | upstream.upgradeJobResources.limits.memory | string | `"256Mi"` |  |
 | upstream.initContainers[0].name | string | `"velero-plugin-for-aws"` |  |
-| upstream.initContainers[0].image | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.13.0"` |  |
+| upstream.initContainers[0].image | string | `"registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.13.1"` |  |
 | upstream.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |
 | upstream.initContainers[0].volumeMounts[0].mountPath | string | `"/target"` |  |
 | upstream.initContainers[0].volumeMounts[0].name | string | `"plugins"` |  |
