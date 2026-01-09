@@ -3,7 +3,7 @@ appVersion: 1.17.1
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 11.1.1-bb.2
+version: 11.3.2-bb.0
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -17,11 +17,11 @@ maintainers:
     email: yinw@vmware.com
 dependencies:
   - name: gluon
-    version: 0.9.6
+    version: 0.9.7
     repository: oci://registry1.dso.mil/bigbang
   - name: velero
     alias: upstream
-    version: 11.1.1
+    version: 11.3.2
     repository: https://vmware-tanzu.github.io/helm-charts
 annotations:
   bigbang.dev/maintenanceTrack: bb_integrated
@@ -48,4 +48,4 @@ annotations:
       condition: bbtests.enabled
       image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.0
     - name: ngnix
-      image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.3
+      image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.4

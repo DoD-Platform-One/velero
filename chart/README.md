@@ -16,7 +16,7 @@ Kubernetes v1.16+, because this helm chart uses CustomResourceDefinition `apiext
 
 ### Velero version
 
-This helm chart installs Velero version v1.16 https://velero.io/docs/v1.16/. See the [#Upgrading](#upgrading) section for information on how to upgrade from other versions.
+This helm chart installs Velero version v1.16 https://velero.io/docs/v1.16/. See the [Upgrading](https://velero.io/docs/v1.16/upgrade-to-1.16/) section for information on how to upgrade from other versions.
 
 ### Provider credentials
 

@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 11.1.1-bb.2](https://img.shields.io/badge/Version-11.1.1--bb.2-informational?style=flat-square) ![AppVersion: 1.17.1](https://img.shields.io/badge/AppVersion-1.17.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 11.3.2-bb.0](https://img.shields.io/badge/Version-11.3.2--bb.0-informational?style=flat-square) ![AppVersion: 1.17.1](https://img.shields.io/badge/AppVersion-1.17.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -81,7 +81,7 @@ helm install velero chart/
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/home/devops-user/.mc"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"minio-volume"` |  |
 | upstream.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
-| upstream.image.tag | string | `"v1.16.1"` |  |
+| upstream.image.tag | string | `"v1.17.1"` |  |
 | upstream.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.image.imagePullSecrets[0] | string | `"private-registry"` |  |
 | upstream.nameOverride | string | `"velero"` |  |
