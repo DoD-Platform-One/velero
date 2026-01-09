@@ -107,7 +107,7 @@ spec:
       imagePullSecrets:
         - name: private-registry
       containers:
-        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.3
+        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.4
           name: nginx
           ports:
           - containerPort: 80
