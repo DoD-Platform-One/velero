@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 11.3.2-bb.0](https://img.shields.io/badge/Version-11.3.2--bb.0-informational?style=flat-square) ![AppVersion: 1.17.1](https://img.shields.io/badge/AppVersion-1.17.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 11.3.2-bb.1](https://img.shields.io/badge/Version-11.3.2--bb.1-informational?style=flat-square) ![AppVersion: 1.17.1](https://img.shields.io/badge/AppVersion-1.17.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -48,38 +48,28 @@ helm install velero chart/
 | openshift | bool | `false` |  |
 | domain | string | `"dev.bigbang.mil"` |  |
 | istio.enabled | bool | `false` |  |
-| istio.hardened.enabled | bool | `false` |  |
-| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
-| istio.hardened.customServiceEntries | list | `[]` |  |
-| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
-| istio.hardened.tempo.enabled | bool | `true` |  |
-| istio.hardened.tempo.namespaces[0] | string | `"tempo"` |  |
-| istio.hardened.tempo.principals[0] | string | `"cluster.local/ns/tempo/sa/tempo-tempo"` |  |
-| istio.hardened.monitoring.enabled | bool | `true` |  |
-| istio.mtls | object | `{"mode":"STRICT"}` | Default velero peer authentication |
-| istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
+| istio.sidecar.enabled | bool | `false` |  |
+| istio.sidecar.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
+| istio.serviceEntries.custom | list | `[]` |  |
+| istio.authorizationPolicies.enabled | bool | `false` |  |
+| istio.authorizationPolicies.custom | list | `[]` |  |
+| istio.mtls.mode | string | `"STRICT"` |  |
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.ingressLabels.app | string | `"istio-ingressgateway"` |  |
-| networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
-| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.additionalPolicies | list | `[]` |  |
+| networkPolicies.ingress.to.velero:8085.from.k8s.monitoring-monitoring-kube-prometheus@monitoring/prometheus | bool | `false` |  |
+| networkPolicies.egress.from.velero.to.k8s.tempo/tempo:9411 | bool | `false` |  |
+| networkPolicies.egress.from.velero.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.egress.from.velero-upgrade-crds.podSelector.matchLabels."batch.kubernetes.io/job-name" | string | `"velero-upgrade-crds"` |  |
+| networkPolicies.egress.from.velero-upgrade-crds.to.definition.kubeAPI | bool | `true` |  |
 | csi | object | `{"defaultClass":"true","driver":"ebs.csi.aws.com"}` | Velero csi plugin options |
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/big-bang/devops-tester:1.0"` |  |
-| bbtests.scripts.envs.MINIO_HOST | string | `"http://minio.minio.svc"` |  |
-| bbtests.scripts.envs.MINIO_USER | string | `"minio"` |  |
-| bbtests.scripts.envs.MINIO_PASS | string | `"minio123"` |  |
 | bbtests.scripts.envs.SCHEDULED_BACKUP_NAME | string | `"{{ include \"velero.fullname\" . \| trim }}-scheduled-backup"` |  |
 | bbtests.scripts.envs.SCHEDULED_TEST | string | `"false"` |  |
 | bbtests.scripts.secretEnvs[0].name | string | `"NAMESPACE"` |  |
 | bbtests.scripts.secretEnvs[0].valueFrom.fieldRef.fieldPath | string | `"metadata.namespace"` |  |
-| bbtests.scripts.additionalVolumes[0].name | string | `"minio-volume"` |  |
-| bbtests.scripts.additionalVolumes[0].emptyDir | object | `{}` |  |
-| bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/home/devops-user/.mc"` |  |
-| bbtests.scripts.additionalVolumeMounts[0].name | string | `"minio-volume"` |  |
 | upstream.image.repository | string | `"registry1.dso.mil/ironbank/opensource/velero/velero"` |  |
 | upstream.image.tag | string | `"v1.17.1"` |  |
 | upstream.image.pullPolicy | string | `"IfNotPresent"` |  |
