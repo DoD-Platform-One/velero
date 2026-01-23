@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [11.3.2-bb.1] - 2026-01-23
+
+### Updated
+
+- Added bb-common and replaced static resources with bb-common generated resources
+- Updated scripted test to remove unnecessary portions
+
 ## [11.3.2-bb.0] - 2026-01-07
 
 ### Updated

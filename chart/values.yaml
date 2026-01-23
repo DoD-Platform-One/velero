@@ -5,40 +5,22 @@ openshift: false
 domain: dev.bigbang.mil
 
 istio:
-  # Toggle istio integration
   enabled: false
-  hardened:
+
+  sidecar:
     enabled: false
     outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries:
-      []
-      # - name: "allow-google"
-      #   enabled: true
-      #   spec:
-      #     hosts:
-      #       - "www.google.com"
-      #       - "google.com"
-      #     location: MESH_EXTERNAL
-      #     ports:
-      #       - number: 443
-      #         protocol: TLS
-      #         name: https
-      #     resolution: DNS
-    customAuthorizationPolicies: []
-    # - name: "allow-nothing"
-    #   enabled: true
-    #   spec: {}
-    tempo:
-      enabled: true
-      namespaces:
-        - tempo
-      principals:
-        - cluster.local/ns/tempo/sa/tempo-tempo
-    monitoring:
-      enabled: true
-  # -- Default velero peer authentication
+
+  serviceEntries:
+    custom: []
+
+  authorizationPolicies:
+    enabled: false
+    custom: []
+
+  # Default velero peer authentication
   mtls:
-    # -- STRICT = Allow only mutual TLS traffic,
+    # STRICT = Allow only mutual TLS traffic
     # PERMISSIVE = Allow both plain text and mutual TLS traffic
     mode: STRICT
 
@@ -47,12 +29,27 @@ monitoring:
 
 networkPolicies:
   enabled: false
-  ingressLabels:
-    app: istio-ingressgateway
-    istio: ingressgateway
-  # See `kubectl cluster-info` and then resolve to IP
-  controlPlaneCidr: 0.0.0.0/0
-  additionalPolicies: []
+  ingress:
+    to:
+      velero:8085:
+        from:
+          k8s:
+            monitoring-monitoring-kube-prometheus@monitoring/prometheus: false
+  egress:
+    from:
+      velero:
+        to:
+          k8s:
+            tempo/tempo:9411: false
+          definition:
+            kubeAPI: true
+      velero-upgrade-crds:
+        podSelector:
+          matchLabels:
+            batch.kubernetes.io/job-name: velero-upgrade-crds
+        to:
+          definition:
+            kubeAPI: true
 
 # -- Velero csi plugin options
 csi:
@@ -66,9 +63,6 @@ bbtests:
   scripts:
     image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.0
     envs:
-      MINIO_HOST: http://minio.minio.svc
-      MINIO_USER: minio
-      MINIO_PASS: minio123
       SCHEDULED_BACKUP_NAME: '{{ include "velero.fullname" . | trim }}-scheduled-backup'
       SCHEDULED_TEST: "false"
     secretEnvs:
@@ -76,12 +70,6 @@ bbtests:
         valueFrom:
           fieldRef:
             fieldPath: metadata.namespace
-    additionalVolumes:
-      - name: minio-volume
-        emptyDir: {}
-    additionalVolumeMounts:
-      - mountPath: /home/devops-user/.mc
-        name: minio-volume
 
 upstream:
   image:

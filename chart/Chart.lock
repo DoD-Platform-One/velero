@@ -5,5 +5,8 @@ dependencies:
 - name: velero
   repository: https://vmware-tanzu.github.io/helm-charts
   version: 11.3.2
-digest: sha256:c0ec466dd35a5fdb601cd6878eed26ebd4b71b5059dfc3fe4d8b87734afced3c
-generated: "2026-01-07T07:40:19.621943943Z"
+- name: bb-common
+  repository: oci://registry1.dso.mil/bigbang
+  version: 0.13.0
+digest: sha256:8a0c6a4a6d635afb95786d1d9ff1e546e39859d413e6b946531483f7cc5c85fb
+generated: "2026-01-16T14:47:29.744791-06:00"

@@ -16,42 +16,7 @@ BSL_RETRY_MAX=20
 BSL_RETRY_DELAY=5
 BSL_STATUS=""
 
-echo "Setup 1: Ensuring MinIO endpoint up and available"
-if curl --retry $RETRY_COUNT \
-        --retry-delay $RETRY_DELAY \
-        --retry-connrefused \
-        --connect-timeout $CONNECT_TIMEOUT \
-        --max-time $RETRY_MAX_TIME \
-        -sIS "$MINIO_HOST" &>/dev/null; then
-  echo "Setup 1 Success: MinIO is up."
-else
-  echo "Setup 1 Failure: Cannot hit MinIO endpoint after $RETRY_COUNT attempts."
-  echo "Debug information (curl response):"
-  curl -v "${MINIO_HOST}"
-  exit 1
-fi
-echo "Setup 1 Success: MinIO is up."
-
-echo "Setup 2: Create MinIO Bucket"
-attempt_counter=0
-max_attempts=25
-until [ $(mc alias set test ${MINIO_HOST} ${MINIO_USER} ${MINIO_PASS} >/dev/null; echo $?) -eq 0 ]; do
-  if [ ${attempt_counter} -eq ${max_attempts} ];then
-    echo "Setup 2 Failure: Failed to Create MinIO Bucket"
-    exit 1
-  fi
-  attempt_counter=$(($attempt_counter+1))
-  sleep 10
-done
-
-if [ $(mc ls test/velero >/dev/null; echo $?) -eq 0 ]; then
-  echo "Setup 2 Success: MinIO Bucket Exists..Removing existing bucket"
-  mc rb --force test/velero || true
-fi
-
-mc mb test/velero
-mc anonymous set public test/velero
-echo "Setup 2 Success: MinIO Bucket Created"
+echo "Setup 1 Success: Default Backup Storage Location is Available"
 
 echo "Waiting for BackupStorageLocation 'default' to become available..."
 
@@ -79,7 +44,7 @@ done
 
 echo "Success: BackupStorageLocation 'default' is Available."
 
-echo "Setup 3: Creating test pod"
+echo "Setup 2: Creating test pod"
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
