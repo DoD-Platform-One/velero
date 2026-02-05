@@ -7,6 +7,6 @@ dependencies:
   version: 11.3.2
 - name: bb-common
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.13.0
-digest: sha256:8a0c6a4a6d635afb95786d1d9ff1e546e39859d413e6b946531483f7cc5c85fb
-generated: "2026-01-16T14:47:29.744791-06:00"
+  version: 0.14.0
+digest: sha256:6cfec4df1f266e490e24f6da93fd0c92d47270db505a69c4aa88770a0699682d
+generated: "2026-02-05T15:52:40.078741013Z"
