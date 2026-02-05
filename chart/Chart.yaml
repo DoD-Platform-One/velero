@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.17.1
+appVersion: 1.17.2
 kubeVersion: ">=1.16.0-0"
 description: A Helm chart for velero
 name: velero
-version: 11.3.2-bb.1
+version: 11.3.2-bb.2
 home: https://github.com/vmware-tanzu/velero
 icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
 sources:
@@ -24,12 +24,12 @@ dependencies:
     version: 11.3.2
     repository: https://vmware-tanzu.github.io/helm-charts
   - name: bb-common
-    version: 0.13.0
+    version: 0.14.0
     repository: "oci://registry1.dso.mil/bigbang"
 annotations:
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
-    - Velero: 1.17.1
+    - Velero: 1.17.2
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     * [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
     * [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
@@ -38,17 +38,17 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
       condition: plugins.csi.enabled
     - name: velero-plugin-for-aws
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.13.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.13.2
       condition: plugins.aws.enabled
     - name: velero-plugin-for-azure
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.13.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.13.2
       condition: plugins.azure.enabled
     - name: velero
-      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.17.1
+      image: registry1.dso.mil/ironbank/opensource/velero/velero:v1.17.2
     - name: base
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: velero-tester
       condition: bbtests.enabled
       image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.0
     - name: ngnix
-      image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.4
+      image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.5

@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [11.3.2-bb.2] - 2026-02-05
+
+### Updated
+
+- bb-common 0.13.0 -> 0.14.0
+- ironbank/opensource/nginx/nginx (source) 1.29.4 -> 1.29.5
+- registry1.dso.mil/ironbank/opensource/nginx/nginx (source) 1.29.4 -> 1.29.5
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) v1.17.1 -> v1.17.2
+- registry1.dso.mil/ironbank/opensource/velero/velero (source) 1.17.1 -> 1.17.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws (source) v1.13.1 -> v1.13.2
+- registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure (source) v1.13.1 -> v1.13.2
+
 ## [11.3.2-bb.1] - 2026-01-23
 
 ### Updated
