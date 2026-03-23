@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [11.3.2-bb.3] - 2026-03-23
+
+### Updated
+
+- bb-common 0.14.0 -> 0.14.1
+- Updated network policies for tempo and kube api egress
+
 ## [11.3.2-bb.2] - 2026-02-05
 
 ### Updated
