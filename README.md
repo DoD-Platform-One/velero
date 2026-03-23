@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # velero
 
-![Version: 11.3.2-bb.2](https://img.shields.io/badge/Version-11.3.2--bb.2-informational?style=flat-square) ![AppVersion: 1.17.2](https://img.shields.io/badge/AppVersion-1.17.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 11.3.2-bb.3](https://img.shields.io/badge/Version-11.3.2--bb.3-informational?style=flat-square) ![AppVersion: 1.17.2](https://img.shields.io/badge/AppVersion-1.17.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 A Helm chart for velero
 
@@ -12,8 +12,8 @@ A Helm chart for velero
 
 ## Upstream Release Notes
 
-- [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
-- [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
+* [Find our upstream chart's CHANGELOG here](https://github.com/vmware-tanzu/velero/blob/main/CHANGELOG.md)
+* [and our upstream application release notes here](https://github.com/vmware-tanzu/velero/releases)
 
 ## Learn More
 
@@ -57,10 +57,13 @@ helm install velero chart/
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.ingress.to.velero:8085.from.k8s.monitoring-monitoring-kube-prometheus@monitoring/prometheus | bool | `false` |  |
-| networkPolicies.egress.from.velero.to.k8s.tempo/tempo:9411 | bool | `false` |  |
-| networkPolicies.egress.from.velero.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.egress.from.*.to.k8s.tempo/tempo:9411 | bool | `false` |  |
+| networkPolicies.egress.from.*.to.definition.kubeAPI | bool | `true` |  |
 | networkPolicies.egress.from.velero-upgrade-crds.podSelector.matchLabels."batch.kubernetes.io/job-name" | string | `"velero-upgrade-crds"` |  |
-| networkPolicies.egress.from.velero-upgrade-crds.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.egress.from.velero-upgrade-crds.to.definition.kubeAPI.enabled | bool | `true` |  |
+| networkPolicies.egress.from.velero-upgrade-crds.to.definition.kubeAPI.metadata.annotations."helm.sh/hook" | string | `"pre-upgrade"` |  |
+| networkPolicies.egress.from.velero-upgrade-crds.to.definition.kubeAPI.metadata.annotations."helm.sh/hook-weight" | string | `"-10"` |  |
+| networkPolicies.egress.from.velero-upgrade-crds.to.definition.kubeAPI.metadata.annotations."helm.sh/hook-delete-policy" | string | `"hook-succeeded,hook-failed,before-hook-creation"` |  |
 | csi | object | `{"defaultClass":"true","driver":"ebs.csi.aws.com"}` | Velero csi plugin options |
 | csi.driver | string | `"ebs.csi.aws.com"` | Driver to use for Velero csi plugin. Default: "ebs.csi.aws.com" |
 | csi.defaultClass | string | `"true"` | Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false" |
