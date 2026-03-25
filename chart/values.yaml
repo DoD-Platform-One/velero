@@ -1,8 +1,6 @@
-##
+domain: dev.bigbang.mil
 
 openshift: false
-
-domain: dev.bigbang.mil
 
 istio:
   enabled: false
@@ -18,10 +16,7 @@ istio:
     enabled: false
     custom: []
 
-  # Default velero peer authentication
   mtls:
-    # STRICT = Allow only mutual TLS traffic
-    # PERMISSIVE = Allow both plain text and mutual TLS traffic
     mode: STRICT
 
 monitoring:
@@ -65,24 +60,11 @@ csi:
   # -- Set Velero VolumeSnapshotClass to default. Supported values: "true"/"false"
   defaultClass: "true"
 
-bbtests:
-  enabled: false
-  scripts:
-    image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.0
-    envs:
-      SCHEDULED_BACKUP_NAME: '{{ include "velero.fullname" . | trim }}-scheduled-backup'
-      SCHEDULED_TEST: "false"
-    secretEnvs:
-      - name: NAMESPACE
-        valueFrom:
-          fieldRef:
-            fieldPath: metadata.namespace
-
 upstream:
   image:
     repository: registry1.dso.mil/ironbank/opensource/velero/velero
-    tag: v1.17.1
-    pullPolicy: IfNotPresent
+    tag: v1.18.0
+    pullPolicy: Always
     imagePullSecrets:
       - private-registry
 
@@ -91,19 +73,11 @@ upstream:
 
   resources:
     requests:
-      cpu: 1000m
-      memory: 512Mi
+      cpu: 100m
+      memory: 100Mi
     limits:
       cpu: 1000m
       memory: 512Mi
-    # Resource requests/limits to specify for the upgradeCRDs job pod.
-    upgradeJob:
-      requests:
-        cpu: 100m
-        memory: 256Mi
-      limits:
-        cpu: 100m
-        memory: 256Mi
 
   upgradeJobResources:
     requests:
@@ -112,25 +86,6 @@ upstream:
     limits:
       cpu: 100m
       memory: 256Mi
-
-  initContainers:
-    - name: velero-plugin-for-aws
-      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.13.2
-      imagePullPolicy: IfNotPresent
-      volumeMounts:
-        - mountPath: /target
-          name: plugins
-      resources:
-        requests:
-          memory: 512Mi
-          cpu: 100m
-        limits:
-          memory: 512Mi
-          cpu: 100m
-      securityContext:
-        capabilities:
-          drop:
-            - ALL
 
   podSecurityContext:
     # BB fix.  The default docker image runs as uid:gid 65534:65534 -- set the values here for kyverno
@@ -143,6 +98,25 @@ upstream:
       drop:
         - ALL
     readOnlyRootFilesystem: true
+
+  initContainers:
+    - name: velero-plugin-for-aws
+      image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.14.0
+      imagePullPolicy: Always
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+      resources:
+        requests:
+          memory: 100Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+          cpu: 500m
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
 
   metrics:
     prometheusRule:
@@ -235,7 +209,7 @@ upstream:
           - ALL
     resources:
       requests:
-        memory: 256Mi
+        memory: 100Mi
         cpu: 100m
       limits:
         memory: 256Mi
@@ -243,51 +217,11 @@ upstream:
     annotations:
       sidecar.istio.io/inject: "false"
 
-  ##
-  ## End of deployment-related settings.
-  ##
-
-  configuration:
-    backupStorageLocation:
-      - name:
-        provider: ""
-        bucket: ""
-        caCert:
-        prefix:
-        default:
-        validationFrequency:
-        accessMode: ReadWrite
-        credential:
-          name:
-          key:
-        config:
-          region: us-gov-west-1
-
-        annotations: {}
-
-    volumeSnapshotLocation:
-      - name:
-        provider: ""
-        credential:
-          name:
-          key:
-        config:
-          region: us-gov-west-1
-        annotations: {}
-
-  ##
-  ## End of backup/snapshot location settings.
-  ##
-
-  ##
-  ## Settings for additional Velero resources.
-  ##
-
   nodeAgent:
     resources:
       requests:
-        cpu: 1000m
-        memory: 1024Mi
+        cpu: 100m
+        memory: 100Mi
       limits:
         cpu: 1000m
         memory: 1024Mi
@@ -301,6 +235,15 @@ upstream:
         drop:
           - ALL
 
-  ##
-  ## End of additional Velero resource settings.
-  ##
+bbtests:
+  enabled: false
+  scripts:
+    image: registry1.dso.mil/ironbank/big-bang/devops-tester:1.1
+    envs:
+      SCHEDULED_BACKUP_NAME: '{{ include "velero.fullname" . | trim }}-scheduled-backup'
+      SCHEDULED_TEST: "false"
+    secretEnvs:
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace

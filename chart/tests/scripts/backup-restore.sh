@@ -72,7 +72,7 @@ spec:
       imagePullSecrets:
         - name: private-registry
       containers:
-        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.5
+        - image: registry1.dso.mil/ironbank/opensource/nginx/nginx:1.29.6
           name: nginx
           ports:
           - containerPort: 80
@@ -116,13 +116,17 @@ kubectl wait --for=condition=available --timeout 600s -n $NAMESPACE deployment -
 kubectl wait --for=condition=ready --timeout 600s -n $NAMESPACE pods --all --field-selector status.phase=Running
 echo "Pods deployed"
 
+# hard-coded sleep to allow clean upgrades.  Once 11.3.2-bb.4 is in umbrella, we can remove this sleep
+echo "Hard-Coded sleep to allow Velero to re-create the test-backup Backup from s3 storage."
+echo "Remove Me Post 11.3.2-bb.4"
+sleep 90
+
 echo "Test 1: Create backup."
-echo "Cleaning up test backups"
-velero delete backup test-backup -n $NAMESPACE --confirm || true
-kubectl delete --wait --timeout 10s -n $NAMESPACE Backup/test-backup || true
-kubectl delete --wait --timeout 10s -n $NAMESPACE Restores/test-backup || true
-echo "Waiting 15 seconds for delete to complete"
-sleep 15
+echo "Cleaning up test backup and restore"
+velero backup delete test-backup --confirm || true
+velero restore delete test-backup --confirm || true
+kubectl delete --wait --timeout 30s -n $NAMESPACE Backup/test-backup || true
+kubectl delete --wait --timeout 30s -n $NAMESPACE Restores/test-backup || true
 
 kubectl get bsl -n $NAMESPACE -o yaml
 echo "Creating Backup"
@@ -158,10 +162,10 @@ echo "Test 1 Success: Created backup and backup from schedule."
 echo "State before disaster:"
 kubectl get all -n $NAMESPACE
 
-echo "Setup 3: Simulate disaster. Deleteing pod."
-kubectl delete --wait --timeout 30s deployment velero-backup-restore-test -n $NAMESPACE || export DELETE_FAILED="true"
-kubectl delete --wait --timeout 30s persistentvolumeclaim nginx-logs -n $NAMESPACE || export DELETE_FAILED="true"
-kubectl delete --wait --timeout 30s service my-nginx  -n $NAMESPACE || export DELETE_FAILED="true"
+echo "Setup 3: Simulate disaster. Deleting pod."
+kubectl delete --wait --timeout 90s deployment velero-backup-restore-test -n $NAMESPACE || export DELETE_FAILED="true"
+kubectl delete --wait --timeout 90s service my-nginx  -n $NAMESPACE || export DELETE_FAILED="true"
+kubectl delete --force  --grace-period=0 --wait --timeout 90s persistentvolumeclaim nginx-logs -n $NAMESPACE || export DELETE_FAILED="true"
 if [[ ${DELETE_FAILED} == "true" ]]; then
   echo "Setup 3 Failure: Could not delete test resources."
   exit 1
@@ -207,9 +211,11 @@ else
 fi
 
 echo "Removing test resources"
-mc rb --force test/velero || true
-kubectl delete --wait --timeout 10s -n $NAMESPACE Backup/test-backup || true
-kubectl delete --wait --timeout 10s -n $NAMESPACE Restores/test-backup || true
-kubectl delete --wait --timeout 30s deployment velero-backup-restore-test -n $NAMESPACE || true
-kubectl delete --wait --timeout 30s persistentvolumeclaim nginx-logs -n $NAMESPACE || true
-kubectl delete --wait --timeout 30s service my-nginx  -n $NAMESPACE || true
+# remove the backup and backing storage
+velero backup delete test-backup --confirm || true
+velero restore delete test-backup --confirm || true
+
+# clean up
+kubectl delete --wait --timeout 90s deployment velero-backup-restore-test -n $NAMESPACE || true
+kubectl delete --wait --timeout 90s persistentvolumeclaim nginx-logs -n $NAMESPACE || true
+kubectl delete --wait --timeout 90s service my-nginx  -n $NAMESPACE || true

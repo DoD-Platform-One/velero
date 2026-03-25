@@ -3,6 +3,36 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [12.0.0-bb.0] - 2026-03-25
+
+### Changed
+
+- Updated upstream velero chart 11.3.2 -> 12.0.0 (major)
+- Updated velero appVersion v1.17.2 -> v1.18.0
+- Updated gluon 0.9.7 -> 0.9.8
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws v1.13.2 -> v1.14.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure v1.13.2 -> v1.14.0
+- Updated registry1.dso.mil/ironbank/opensource/velero/velero v1.17.2 -> v1.18.0
+- Updated registry1.dso.mil/ironbank/big-bang/devops-tester 1.0 -> 1.1
+- Updated registry1.dso.mil/ironbank/opensource/nginx/nginx 1.29.5 -> 1.29.6
+- Removed `upstream.resources.upgradeJob` in favor of `upstream.upgradeJobResources` (fixes bigbang#3196)
+- Removed default `configuration.backupStorageLocation` and `configuration.volumeSnapshotLocation` overrides
+- Reduced default resource requests for velero container and nodeAgent
+- Changed `imagePullPolicy` from `IfNotPresent` to `Always`
+- Bumped `kubeVersion` constraint from >=1.16.0-0 to >=1.18.0-0
+- Added passthrough annotations (`bigbang.dev/passthrough`, `bigbang.dev/passthrough-toplevel-key`)
+
+### Removed
+
+- Removed `chart/values.schema.json`, `chart/OWNERS`, `chart/README.md`, `velero_sbom.json`
+- Removed `docs/istioHardened.md`, `docs/dev-overrides/minimal.yaml`
+
+### Fixed
+
+- Cleanup values and test-values overrides
+- Cleanup and update docs
+- Reorganized `docs/Backup-and-restore/` to `docs/backup/`
+
 
 ## [11.3.2-bb.3] - 2026-03-23
 

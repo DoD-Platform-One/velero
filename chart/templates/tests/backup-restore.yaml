@@ -15,5 +15,5 @@ metadata:
       app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
       app.kubernetes.io/managed-by: {{ .Release.Service }}
   spec:
-    serviceAccountName: {{ default "default" .Values.upstream.serviceAccount.server.name }}
+    serviceAccountName: {{ default "velero-server" .Values.upstream.serviceAccount.server.name }}
 {{- end }}
