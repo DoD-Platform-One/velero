@@ -8,10 +8,6 @@ addons:
       branch: "renovate/ironbank"
     values:
       upstream:
-        image:
-          imagePullSecrets:
-          - private-registry
-
         configuration:
           backupStorageLocation:
           - provider: aws

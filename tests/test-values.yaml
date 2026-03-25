@@ -1,6 +1,12 @@
+kyverno:
+  values:
+    bbtests:
+      enabled: false
+kyvernoPolicies:
+  values:
+    bbtests:
+      enabled: false
 addons:
-  # minioOperator:
-  #   enabled: false
 ########################
 # Required for package #
 ########################
@@ -16,13 +22,3 @@ addons:
         enabled: false
   velero:
     enabled: true
-    values:
-      fullnameOverride: "velero"
-kyverno:
-  values:
-    bbtests:
-      enabled: false
-kyvernoPolicies:
-  values:
-    bbtests:
-      enabled: false
